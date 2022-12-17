@@ -1,6 +1,6 @@
 %YAML 1.2
 ---
-yatage_world_version: 1
+version: 1
 name: Synacor Challenge
 description: |-
     Welcome to the Synacor Challenge!

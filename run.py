@@ -8,8 +8,7 @@ def run():
 
     args = arg_parser.parse_args()
 
-    game = Game()
-    game.load(args.file)
+    game = Game(args.file)
     game.run()
 
 
