@@ -19,10 +19,10 @@ class Game(cmd.Cmd):
     def do_look(self, subject: str) -> None:
         """You may merely 'look' to examine the room, or you may 'look <subject>' (such as 'look chair') to examine something specific."""
         if subject:
-            item = self.current_room.get_item(subject)
+            item_object = self.current_room.get_item(subject)
 
-            if item:
-                self.text(item.definition.textual())
+            if item_object:
+                self.text(item_object.definition.textual())
             else:
                 self.text('You see no such item.')
         else:
@@ -32,19 +32,51 @@ class Game(cmd.Cmd):
         """You may 'go <exit>' to travel in that direction (such as 'go west'), or you may merely '<exit>' (such as 'west')."""
         self.text('I don\'t understand; try \'help\' for instructions.')
 
-    def do_inv(self) -> None:
+    def do_inv(self, _: str) -> None:
         """To see the contents of your inventory, merely 'inv'."""
-        pass
+        text = [
+            'Your inventory:',
+        ]
 
-    def do_take(self, item: str) -> None:
+        for item in self.inventory:
+            text.append(f'- {item.definition.identifier}')
+
+        self.text('\n'.join(text))
+
+    def do_take(self, item_identifier: str) -> None:
         """You may 'take <item>' (such as 'take large rock')."""
-        pass
+        item_object = self.current_room.get_item(item_identifier)
 
-    def do_drop(self, item: str) -> None:
+        if item_object:
+            self.inventory.append(
+                self.current_room.items.pop(
+                    self.current_room.items.index(item_object)
+                )
+            )
+
+            self.text('Taken.')
+        else:
+            self.text('You see no such item.')
+
+    def do_drop(self, item_identifier: str) -> None:
         """To drop something in your inventory, you may 'drop <item>'."""
-        pass
+        item_object = next(
+            (item for item in self.inventory if item.definition.identifier == item_identifier),
+            None
+        )
 
-    def do_use(self, item: str) -> None:
+        if item_object:
+            self.current_room.items.append(
+                self.inventory.pop(
+                    self.inventory.index(item_object)
+                )
+            )
+
+            self.text('Dropped.')
+        else:
+            self.text('You can\'t find that in your pack.')
+
+    def do_use(self, item_identifier: str) -> None:
         """You may activate or otherwise apply an item with 'use <item>'."""
         pass
 
