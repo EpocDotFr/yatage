@@ -1,4 +1,5 @@
 from typing import Dict, Optional, Union, List, Any
+from copy import copy
 import dataclasses
 import yaml
 
@@ -9,10 +10,18 @@ class ItemUse:
 
 
 @dataclasses.dataclass
-class Item:
+class ItemDefinition:
     identifier: str
     look: str
     use: Optional[Union[str, ItemUse]] = None
+
+    def create_item(self): # TODO Typing
+        return Item(self)
+
+
+@dataclasses.dataclass
+class Item:
+    definition: ItemDefinition
 
 
 @dataclasses.dataclass
@@ -40,7 +49,7 @@ class Room:
             ))
 
             for item in self.items:
-                text.append(f'- {item.identifier}')
+                text.append(f'- {item.definition.identifier}')
 
         if self.exits:
             text.extend((
@@ -60,14 +69,14 @@ class World:
     name: str
     start: Optional[Room] = None
     rooms: Dict[str, Room] = dataclasses.field(default_factory=dict)
-    items: Dict[str, Item] = dataclasses.field(default_factory=dict)
+    items: Dict[str, ItemDefinition] = dataclasses.field(default_factory=dict)
     description: str = ''
     author: str = ''
 
     @classmethod
     def load(cls, world_filename: str): # TODO Typing
         with open(world_filename, 'rb') as f:
-            world_data = yaml.safe_load(f)
+            world_data = yaml.safe_load(f) # TODO Move to stream-based loading?
 
         ret = cls(
             world_data.get('version'),
@@ -91,7 +100,7 @@ class World:
                 room_data.get('description', ''),
                 room_data.get('name', '') or room_identifier,
                 [
-                    self.items.get(item_identifier) for item_identifier in room_data.get('items', [])
+                    self.items.get(item_identifier).create_item() for item_identifier in room_data.get('items', [])
                 ],
                 {
                     exit_name: self.rooms.get(exit_identifier) for exit_name, exit_identifier in room_data.get('exits', {}).items() if isinstance(exit_identifier, str) # TODO handle conditional exits
@@ -113,7 +122,7 @@ class World:
                     use_data.get('text')
                 )
 
-            self.items[item_identifier] = Item(
+            self.items[item_identifier] = ItemDefinition(
                 item_identifier,
                 item_data.get('look'),
                 use

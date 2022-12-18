@@ -3,7 +3,7 @@ from typing import Optional
 import cmd
 
 
-class Engine(cmd.Cmd):
+class Game(cmd.Cmd):
     prompt: str = '\nWhat do you do?\n> '
     current_room: Optional[Room] = None
 
@@ -17,9 +17,12 @@ class Engine(cmd.Cmd):
     def do_look(self, subject: str) -> None:
         """You may merely 'look' to examine the room, or you may 'look <subject>' (such as 'look chair') to examine something specific."""
         if subject:
-            return
+            item = self.current_room.items[subject] # TODO
 
-        self.text(self.current_room.textual())
+            if item:
+                self.text(item.textual())
+        else:
+            self.text(self.current_room.textual())
 
     def do_go(self, exit_: str) -> None:
         """You may 'go <exit>' to travel in that direction (such as 'go west'), or you may merely '<exit>' (such as 'west')."""

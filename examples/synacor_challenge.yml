@@ -3,6 +3,12 @@
 version: 1
 name: Synacor Challenge
 description: |-
+    -- Note --
+    This is almost a 1:1 reimplementation of the Synacor Challenge text
+    adventure game originally created by Eric Wastl.
+    You can find the original game here: https://challenge.synacor.com/
+    ----------
+    
     Welcome to the Synacor Challenge!
     Please record your progress by putting codes like
     this one into the challenge website: KDfTwYgxhJKC
