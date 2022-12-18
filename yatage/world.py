@@ -1,5 +1,4 @@
 from typing import Dict, Optional, Union, List, Any
-from copy import copy
 import dataclasses
 import yaml
 
@@ -18,6 +17,9 @@ class ItemDefinition:
     def create_item(self): # TODO Typing
         return Item(self)
 
+    def textual(self) -> str:
+        return self.look
+
 
 @dataclasses.dataclass
 class Item:
@@ -34,8 +36,6 @@ class Room:
 
     def textual(self) -> str:
         text = [
-            '',
-            '',
             f'== {self.name} ==',
         ]
 
@@ -61,6 +61,12 @@ class Room:
                 text.append(f'- {exit_name}')
 
         return '\n'.join(text)
+
+    def get_item(self, item_identifier) -> Optional[Item]:
+        return next(
+            (item for item in self.items if item.definition.identifier == item_identifier),
+            None
+        )
 
 
 @dataclasses.dataclass
@@ -95,16 +101,20 @@ class World:
 
     def load_rooms(self, world_data: dict) -> None:
         for room_identifier, room_data in world_data.get('rooms').items():
+            items = [
+                self.items.get(item_identifier).create_item() for item_identifier in room_data.get('items', [])
+            ]
+
+            exits = {
+                exit_name: self.rooms.get(exit_identifier) for exit_name, exit_identifier in room_data.get('exits', {}).items() if isinstance(exit_identifier, str) # TODO handle conditional exits
+            }
+
             self.rooms[room_identifier] = Room(
                 room_identifier,
                 room_data.get('description', ''),
                 room_data.get('name', '') or room_identifier,
-                [
-                    self.items.get(item_identifier).create_item() for item_identifier in room_data.get('items', [])
-                ],
-                {
-                    exit_name: self.rooms.get(exit_identifier) for exit_name, exit_identifier in room_data.get('exits', {}).items() if isinstance(exit_identifier, str) # TODO handle conditional exits
-                }
+                items,
+                exits
             )
 
         self.start = self.rooms.get(world_data.get('start'))
