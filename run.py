@@ -1,4 +1,4 @@
-from yatage.game import Game
+from yatage.engine import Engine
 import argparse
 
 
@@ -8,8 +8,8 @@ def run() -> None:
 
     args = arg_parser.parse_args()
 
-    game = Game(args.world)
-    game.run()
+    engine = Engine(args.world)
+    engine.run()
 
 
 if __name__ == '__main__':
