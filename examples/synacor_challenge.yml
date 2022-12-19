@@ -20,77 +20,65 @@ description: |-
     
     self-test complete, all tests pass
     The self-test completion code is: teJavuPYnIJs
-author: |-
-    Eric Wastl (http://was.tl/), Maxime "Epoc" G. (https://epoc.fr/)
+author: "Eric Wastl (http://was.tl/), Maxime \"Epoc\" G. (https://epoc.fr/)"
 start: Foothills
 rooms:
     Foothills:
-        description: |-
-            You find yourself standing at the base of an enormous mountain.  At its base to the north, there is a massive doorway.  A sign nearby reads "Keep out!  Definitely no treasure within!"
+        description: "You find yourself standing at the base of an enormous mountain.  At its base to the north, there is a massive doorway.  A sign nearby reads \"Keep out!  Definitely no treasure within!\""
         exits:
             doorway: Dark cave
             south: Foothills South
         items: [tablet]
     Foothills South:
         name: Foothills
-        description: |-
-            As you begin to leave, you feel the urge for adventure pulling you back...
+        description: As you begin to leave, you feel the urge for adventure pulling you back...
         exits:
             north: Foothills
     Dark cave:
-        description: |-
-            This seems to be the mouth of a deep cave.  As you peer north into the darkness, you think you hear the echoes of bats deeper within.
+        description: This seems to be the mouth of a deep cave.  As you peer north into the darkness, you think you hear the echoes of bats deeper within.
         exits:
             north: Dark cave narrow
             south: Foothills
     Dark cave narrow:
         name: Dark cave
-        description: |-
-            The cave is somewhat narrow here, and the light from the doorway to the south is quite dim.
+        description: The cave is somewhat narrow here, and the light from the doorway to the south is quite dim.
         exits:
             north: Dark cave chasm
             south: Dark cave
     Dark cave chasm:
         name: Dark cave
-        description: |-
-            The cave acoustics dramatically change as you find yourself at a legde above a large chasm.  There is barely enough light here to notice a rope bridge leading out into the dark emptiness.
+        description: The cave acoustics dramatically change as you find yourself at a legde above a large chasm.  There is barely enough light here to notice a rope bridge leading out into the dark emptiness.
         exits:
             bridge: Rope bridge
             south: Dark cave narrow
     Rope bridge:
-        description: |-
-            This rope bridge creaks as you walk along it.  You aren't sure how old it is, or whether it can even support your weight.
+        description: This rope bridge creaks as you walk along it.  You aren't sure how old it is, or whether it can even support your weight.
         exits:
             continue: Falling through the air!
             back: Dark cave chasm
     Falling through the air!:
-        description: |-
-            As you continue along the bridge, it snaps!  You try to grab the bridge, but it evades your grasp in the darkness.  You are plummeting quickly downward into the chasm...
+        description: As you continue along the bridge, it snaps!  You try to grab the bridge, but it evades your grasp in the darkness.  You are plummeting quickly downward into the chasm...
         exits:
             down: Moss cavern
     Moss cavern:
-        description: |-
-            You are standing in a large cavern full of bioluminescent moss.  It must have broken your fall!  The cavern extends to the east and west; at the west end, you think you see a passage leading out of the cavern.
+        description: You are standing in a large cavern full of bioluminescent moss.  It must have broken your fall!  The cavern extends to the east and west; at the west end, you think you see a passage leading out of the cavern.
         exits:
             west: Moss cavern to passage
             east: Moss cavern to lantern
     Moss cavern to lantern:
         name: Moss cavern
-        description: |-
-            You are standing in a large cavern full of bioluminescent moss.  The cavern extends to the west.
+        description: You are standing in a large cavern full of bioluminescent moss.  The cavern extends to the west.
         items: [empty lantern]
         exits:
             west: Moss cavern
     Moss cavern to passage:
         name: Moss cavern
-        description: |-
-            You are standing in a large cavern full of bioluminescent moss.  The cavern extends to the east.  There is a crevise in the rocks which opens into a passage.
+        description: You are standing in a large cavern full of bioluminescent moss.  The cavern extends to the east.  There is a crevise in the rocks which opens into a passage.
         exits:
             east: Moss cavern
             passage: Passage
     Passage:
-        description: |-
-            You are in a crevise on the west wall of the moss cavern.  A dark passage leads further west.  There is a ladder here which leads down into a smaller, moss-filled cavern below.
+        description: You are in a crevise on the west wall of the moss cavern.  A dark passage leads further west.  There is a ladder here which leads down into a smaller, moss-filled cavern below.
         exits:
             cavern: Moss cavern to passage
             # ladder: TODO
@@ -105,94 +93,70 @@ rooms:
                     success: Passage lantern
     Passage no lantern:
         name: Passage
-        description: |-
-            It is pitch black.  You are likely to be eaten by a grue.
+        description: It is pitch black.  You are likely to be eaten by a grue.
         exits:
             continue: Fumbling around in the darkness
             back: Passage
     Fumbling around in the darkness:
-        description: |-
-            Without a source of light, you have become hopelessly lost and are fumbling around in the darkness.
+        description: Without a source of light, you have become hopelessly lost and are fumbling around in the darkness.
         exits:
             forward: Fumbling around in the darkness growling
             back: Fumbling around in the darkness growling
     Fumbling around in the darkness growling:
-        description: |-
-            You can't seem to find your way.  However, you do think you hear low growling in the distance.
+        description: You can't seem to find your way.  However, you do think you hear low growling in the distance.
         exits:
             run: Panicked and lost
             investigate: Panicked and lost
     Panicked and lost:
-        description: |-
-            The growling is getting louder.  Did I mention there are Grues down here?
+        description: The growling is getting louder.  Did I mention there are Grues down here?
         exits:
             run:
-                game_over: |-
-                    You have been eaten by a grue.
+                game_over: You have been eaten by a grue.
             wait:
-                game_over: |-
-                    You have been eaten by a grue.
+                game_over: You have been eaten by a grue.
             hide:
-                game_over: |-
-                    You have been eaten by a grue.
+                game_over: You have been eaten by a grue.
     Passage lantern:
         name: Passage
-        description: |-
-            You feel that your light source is more than sufficient to keep grues away.
+        description: You feel that your light source is more than sufficient to keep grues away.
         exits:
             back: Passage
 items:
     tablet:
-        look: |-
-            The tablet seems appropriate for use as a writing surface but is unfortunately blank.  Perhaps you should USE it as a writing surface...
-        use: |-
-            You find yourself writing "tNXeWMvrJskW" on the tablet.  Perhaps it's some kind of code?
+        look: The tablet seems appropriate for use as a writing surface but is unfortunately blank.  Perhaps you should USE it as a writing surface...
+        use: "You find yourself writing \"tNXeWMvrJskW\" on the tablet.  Perhaps it's some kind of code?"
     can:
-        look: |-
-            This can is full of high-quality lantern oil.
+        look: This can is full of high-quality lantern oil.
         use:
             conditions:
                 has: [empty lantern]
             success:
-                text: |-
-                    You fill your lantern with oil.  It seems to cheer up!
+                text: You fill your lantern with oil.  It seems to cheer up!
                 remove: [self, empty lantern]
                 spawn: [lantern]
-            failure: |-
-                You'll have to find something to put the oil into first.
+            failure: You'll have to find something to put the oil into first.
     empty lantern:
-        look: |-
-            The lantern seems to have quite a bit of wear but appears otherwise functional.  It is, however, sad that it is out of oil.
-        use: |-
-            You aren't sure how to use that.
+        look: The lantern seems to have quite a bit of wear but appears otherwise functional.  It is, however, sad that it is out of oil.
+        use: You aren't sure how to use that.
     lantern:
-        look: |-
-            The lantern seems to have quite a bit of wear but appears otherwise functional.  It is off but happily full of oil.
+        look: The lantern seems to have quite a bit of wear but appears otherwise functional.  It is off but happily full of oil.
         use:
-            text: |-
-                You light your lantern.
+            text: You light your lantern.
             remove: [self]
             spawn: [lit lantern]
     lit lantern:
-        look: |-
-            The lantern seems to have quite a bit of wear.  It is lit and producing a bright light.
+        look: The lantern seems to have quite a bit of wear.  It is lit and producing a bright light.
         use:
-            text: |-
-                You douse your lantern.
+            text: You douse your lantern.
             remove: [self]
             spawn: [lantern]
     blue coin:
-        look: |-
-            This coin is made of a blue metal.  It has nine dots on one side.
+        look: This coin is made of a blue metal.  It has nine dots on one side.
     red coin:
-        look: |-
-            This coin is made of a red metal.  It has two dots on one side.
+        look: This coin is made of a red metal.  It has two dots on one side.
     shiny coin:
-        look: |-
-            This coin is somehow still quite shiny.  It has a pentagon on one side.
+        look: This coin is somehow still quite shiny.  It has a pentagon on one side.
     concave coin:
-        look: |-
-            This coin is slightly rounded, almost like a tiny bowl.  It has seven dots on one side.
+        look: This coin is slightly rounded, almost like a tiny bowl.  It has seven dots on one side.
     corroded coin:
-        look: |-
-            This coin is somewhat corroded.  It has a triangle on one side.
+        look: This coin is somewhat corroded.  It has a triangle on one side.
