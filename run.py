@@ -1,5 +1,5 @@
-from yatage.game import Game
 import argparse
+import yatage
 
 
 def run() -> None:
@@ -8,7 +8,7 @@ def run() -> None:
 
     args = arg_parser.parse_args()
 
-    game = Game(args.world)
+    game = yatage.Game(args.world)
     game.run()
 
 

@@ -62,12 +62,6 @@ class Room:
 
         return '\n'.join(text)
 
-    def get_item(self, item_identifier) -> Optional[Item]:
-        return next(
-            (item for item in self.items if item.definition.identifier == item_identifier),
-            None
-        )
-
 
 @dataclasses.dataclass
 class World:

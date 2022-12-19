@@ -1,12 +1,59 @@
-from yatage.world import World, Room, Item
-from typing import Optional, List
+from yatage.world import World, Room
+from collections import UserList
+from typing import Optional
+import yatage.utils
 import cmd
+
+
+class Inventory(UserList):
+    def __init__(self, game) -> None: # TODO Typing
+        super().__init__()
+
+        self.game = game
+
+    def textual(self) -> str:
+        text = [
+            'Your inventory:',
+        ]
+
+        for item in self:
+            text.append(f'- {item.definition.identifier}')
+
+        return '\n'.join(text)
+
+    def take(self, item_identifier: str) -> bool:
+        item = yatage.utils.get_item(self.game.current_room.items, item_identifier)
+
+        if not item:
+            return False
+
+        self.append(
+            self.game.current_room.items.pop(
+                self.game.current_room.items.index(item)
+            )
+        )
+
+        return True
+
+    def drop(self, item_identifier: str) -> bool:
+        item = yatage.utils.get_item(self, item_identifier)
+
+        if not item:
+            return False
+
+        self.game.current_room.items.append(
+            self.pop(
+                self.index(item)
+            )
+        )
+
+        return True
 
 
 class Game(cmd.Cmd):
     prompt: str = '\nWhat do you do?\n> '
     current_room: Optional[Room] = None
-    inventory: List[Item]
+    inventory: Inventory
 
     def __init__(self, world_filename: str) -> None:
         super().__init__()
@@ -14,7 +61,7 @@ class Game(cmd.Cmd):
         self.world = World.load(world_filename)
         self.current_room = self.world.start
         self.intro = self.world.description + '\n\n' + self.world.start.textual()
-        self.inventory = []
+        self.inventory = Inventory(self)
 
     def do_look(self, subject: str) -> None:
         """You may merely 'look' to examine the room, or you may 'look <subject>' (such as 'look chair') to examine something specific."""
@@ -34,44 +81,18 @@ class Game(cmd.Cmd):
 
     def do_inv(self, _: str) -> None:
         """To see the contents of your inventory, merely 'inv'."""
-        text = [
-            'Your inventory:',
-        ]
-
-        for item in self.inventory:
-            text.append(f'- {item.definition.identifier}')
-
-        self.text('\n'.join(text))
+        self.text(self.inventory.textual())
 
     def do_take(self, item_identifier: str) -> None:
         """You may 'take <item>' (such as 'take large rock')."""
-        item_object = self.current_room.get_item(item_identifier)
-
-        if item_object:
-            self.inventory.append(
-                self.current_room.items.pop(
-                    self.current_room.items.index(item_object)
-                )
-            )
-
+        if self.inventory.take(item_identifier):
             self.text('Taken.')
         else:
             self.text('You see no such item.')
 
     def do_drop(self, item_identifier: str) -> None:
         """To drop something in your inventory, you may 'drop <item>'."""
-        item_object = next(
-            (item for item in self.inventory if item.definition.identifier == item_identifier),
-            None
-        )
-
-        if item_object:
-            self.current_room.items.append(
-                self.inventory.pop(
-                    self.inventory.index(item_object)
-                )
-            )
-
+        if self.inventory.drop(item_identifier):
             self.text('Dropped.')
         else:
             self.text('You can\'t find that in your pack.')
