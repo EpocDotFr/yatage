@@ -4,7 +4,7 @@ import dataclasses
 
 @dataclasses.dataclass
 class ItemUse:
-    definition: Any # TODO Typing
+    definition: Any  # TODO Typing
     text: str
     remove: Optional[List[str]] = dataclasses.field(default_factory=list)
     spawn: Optional[List[str]] = dataclasses.field(default_factory=list)
@@ -25,23 +25,23 @@ class ItemUse:
 
 @dataclasses.dataclass
 class ItemConditionedUse:
-    definition: Any # TODO Typing
-    conditions: List # TODO Typing
+    definition: Any  # TODO Typing
+    conditions: List  # TODO Typing
     success: Optional[Union[str, ItemUse]] = None
     failure: Optional[Union[str, ItemUse]] = None
 
-    def do_use(self, item_instance) -> Optional[str]: # TODO Typing
+    def do_use(self, item_instance) -> Optional[str]:  # TODO Typing
         pass
 
 
 @dataclasses.dataclass
 class ItemDefinition:
-    world: Any # TODO Typing
+    world: Any  # TODO Typing
     identifier: str
     look: str
     use: Optional[Union[str, ItemUse, ItemConditionedUse]] = None
 
-    def create_item(self): # TODO Typing
+    def create_item(self):  # TODO Typing
         return Item(self)
 
 
@@ -59,6 +59,7 @@ class Item:
 
     def do_look(self) -> str:
         return self.definition.look
+
 
 __all__ = [
     'ItemUse',

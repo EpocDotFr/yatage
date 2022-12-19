@@ -5,12 +5,12 @@ import dataclasses
 
 @dataclasses.dataclass
 class Room:
-    world: Any # TODO Typing
+    world: Any  # TODO Typing
     identifier: str
     description: str
     name: Optional[str]
     items: List[Item] = dataclasses.field(default_factory=list)
-    exits: Dict[str, Any] = dataclasses.field(default_factory=dict) # TODO Typing
+    exits: Dict[str, Any] = dataclasses.field(default_factory=dict)  # TODO Typing
 
     def do_look(self) -> str:
         text = [
@@ -39,6 +39,7 @@ class Room:
                 text.append(f'- {exit_name}')
 
         return '\n'.join(text)
+
 
 __all__ = [
     'Room',

@@ -91,7 +91,7 @@ setup(
         ]
     },
     classifiers=[
-         'Development Status :: 4 - Beta',
+        'Development Status :: 4 - Beta',
         'Intended Audience :: Developers',
         'Topic :: Software Development :: Libraries',
         'Topic :: Games/Entertainment',

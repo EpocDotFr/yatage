@@ -1,9 +1,9 @@
 from yatage.inventory import Inventory
+from yatage.utils import get_item
 from yatage.world import World
 from yatage.room import Room
 from typing import Tuple
 from cmd import Cmd
-import yatage.utils
 
 
 class Game(Cmd):
@@ -23,7 +23,7 @@ class Game(Cmd):
     def do_look(self, subject: str) -> None:
         """You may merely 'look' to examine the room, or you may 'look <subject>' (such as 'look chair') to examine something specific."""
         if subject:
-            item = yatage.utils.get_item(self.current_room.items, subject) or yatage.utils.get_item(self.inventory, subject)
+            item = get_item(self.current_room.items, subject) or get_item(self.inventory, subject)
 
             if item:
                 self.text(item.do_look())
@@ -61,7 +61,7 @@ class Game(Cmd):
 
     def do_use(self, item_identifier: str) -> None:
         """You may activate or otherwise apply an item with 'use <item>'."""
-        item = yatage.utils.get_item(self.inventory, item_identifier)
+        item = get_item(self.inventory, item_identifier)
 
         if item:
             use_result = item.do_use()
@@ -91,6 +91,7 @@ class Game(Cmd):
             self.cmdloop()
         except KeyboardInterrupt:
             pass
+
 
 __all__ = [
     'Game',

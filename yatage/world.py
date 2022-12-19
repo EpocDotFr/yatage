@@ -7,7 +7,7 @@ import yaml
 
 @dataclasses.dataclass
 class World:
-    game: Any # TODO Typing
+    game: Any  # TODO Typing
     version: int
     name: str
     start: Optional[Room] = None
@@ -17,9 +17,9 @@ class World:
     author: str = ''
 
     @classmethod
-    def load(cls, game, world_filename: str): # TODO Typing
+    def load(cls, game, world_filename: str):  # TODO Typing
         with open(world_filename, 'rb') as f:
-            world_data = yaml.safe_load(f) # TODO Move to stream-based loading?
+            world_data = yaml.safe_load(f)  # TODO Move to stream-based loading?
 
         ret = cls(
             game,
@@ -62,7 +62,8 @@ class World:
             exits_data = room_data.get('exits', {})
 
             self.rooms.get(room_identifier).exits = {
-                exit_name: self.rooms.get(exit_identifier) for exit_name, exit_identifier in exits_data.items() if isinstance(exit_identifier, str) # TODO handle conditional exits
+                exit_name: self.rooms.get(exit_identifier) for exit_name, exit_identifier in exits_data.items() if
+                isinstance(exit_identifier, str)  # TODO handle conditional exits
             }
 
     def load_items(self, world_data: dict) -> None:
@@ -91,6 +92,7 @@ class World:
                     )
 
             self.items.get(item_identifier).use = use
+
 
 __all__ = [
     'World',

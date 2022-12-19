@@ -3,7 +3,7 @@ import yatage.utils
 
 
 class Inventory(UserList):
-    def __init__(self, game) -> None: # TODO Typing
+    def __init__(self, game) -> None:  # TODO Typing
         super().__init__()
 
         self.game = game
@@ -55,6 +55,7 @@ class Inventory(UserList):
         self.remove(item)
 
         return True
+
 
 __all__ = [
     'Inventory',
