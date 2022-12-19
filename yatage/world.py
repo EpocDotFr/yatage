@@ -30,13 +30,13 @@ class Item:
 class Room:
     identifier: str
     description: str
-    name: str
+    name: Optional[str]
     items: List[Item] = dataclasses.field(default_factory=list)
     exits: Dict[str, Any] = dataclasses.field(default_factory=dict) # TODO Typing
 
     def textual(self) -> str:
         text = [
-            f'== {self.name} ==',
+            f'== {self.name or self.identifier} ==',
         ]
 
         if self.description:
@@ -99,17 +99,22 @@ class World:
                 self.items.get(item_identifier).create_item() for item_identifier in room_data.get('items', [])
             ]
 
-            exits = {
-                exit_name: self.rooms.get(exit_identifier) for exit_name, exit_identifier in room_data.get('exits', {}).items() if isinstance(exit_identifier, str) # TODO handle conditional exits
-            }
-
             self.rooms[room_identifier] = Room(
                 room_identifier,
                 room_data.get('description', ''),
-                room_data.get('name', '') or room_identifier,
-                items,
-                exits
+                room_data.get('name'),
+                items
             )
+
+        for room_identifier, room_data in world_data.get('rooms').items():
+            exits_data = room_data.get('exits', {})
+
+            if not exits_data:
+                continue
+
+            self.rooms[room_identifier].exits = {
+                exit_name: self.rooms.get(exit_identifier) for exit_name, exit_identifier in exits_data.items() if isinstance(exit_identifier, str) # TODO handle conditional exits
+            }
 
         self.start = self.rooms.get(world_data.get('start'))
 

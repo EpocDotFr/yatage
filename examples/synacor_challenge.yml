@@ -3,11 +3,14 @@
 version: 1
 name: Synacor Challenge
 description: |-
-    -- Note --
-    This is almost a 1:1 reimplementation of the Synacor Challenge text
-    adventure game originally created by Eric Wastl.
+    == Note ==
+    This is almost a 1:1 reimplementation of the Synacor
+    Challenge text adventure game originally created by
+    Eric Wastl to be ran by YATAGE.
     You can find the original game here: https://challenge.synacor.com/
-    ----------
+    (you however have to implement it by yourself or use
+    my implementation: https://github.com/EpocDotFr/synacor-challenge)
+    ==========
     
     Welcome to the Synacor Challenge!
     Please record your progress by putting codes like

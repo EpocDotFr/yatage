@@ -1,8 +1,7 @@
 from yatage.world import World, Room
 from collections import UserList
-from typing import Optional
 import yatage.utils
-import cmd
+from cmd import Cmd
 
 
 class Inventory(UserList):
@@ -50,9 +49,9 @@ class Inventory(UserList):
         return True
 
 
-class Game(cmd.Cmd):
+class Game(Cmd):
     prompt: str = '\nWhat do you do?\n> '
-    current_room: Optional[Room] = None
+    current_room: Room
     inventory: Inventory
 
     def __init__(self, world_filename: str) -> None:
@@ -60,16 +59,16 @@ class Game(cmd.Cmd):
 
         self.world = World.load(world_filename)
         self.current_room = self.world.start
-        self.intro = self.world.description + '\n\n' + self.world.start.textual()
+        self.intro = self.world.description + '\n\n' + self.current_room.textual()
         self.inventory = Inventory(self)
 
     def do_look(self, subject: str) -> None:
         """You may merely 'look' to examine the room, or you may 'look <subject>' (such as 'look chair') to examine something specific."""
         if subject:
-            item_object = self.current_room.get_item(subject)
+            item = yatage.utils.get_item(self.current_room.items, subject) or yatage.utils.get_item(self.inventory, subject)
 
-            if item_object:
-                self.text(item_object.definition.textual())
+            if item:
+                self.text(item.definition.textual())
             else:
                 self.text('You see no such item.')
         else:
@@ -77,7 +76,12 @@ class Game(cmd.Cmd):
 
     def do_go(self, exit_: str) -> None:
         """You may 'go <exit>' to travel in that direction (such as 'go west'), or you may merely '<exit>' (such as 'west')."""
-        self.text('I don\'t understand; try \'help\' for instructions.')
+        if exit_ in self.current_room.exits:
+            self.current_room = self.current_room.exits.get(exit_)
+
+            self.text(self.current_room.textual())
+        else:
+            self.text('I don\'t understand; try \'help\' for instructions.')
 
     def do_inv(self, _: str) -> None:
         """To see the contents of your inventory, merely 'inv'."""
