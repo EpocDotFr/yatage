@@ -10,7 +10,7 @@ class Inventory(UserList):
 
         self.game = game
 
-    def textual(self) -> str:
+    def do_look(self) -> str:
         text = [
             'Your inventory:',
         ]
@@ -48,6 +48,16 @@ class Inventory(UserList):
 
         return True
 
+    def destroy(self, item_identifier: str) -> bool:
+        item = yatage.utils.get_item(self, item_identifier)
+
+        if not item:
+            return False
+
+        self.remove(item)
+
+        return True
+
 
 class Game(Cmd):
     prompt: str = '\nWhat do you do?\n> '
@@ -57,9 +67,9 @@ class Game(Cmd):
     def __init__(self, world_filename: str) -> None:
         super().__init__()
 
-        self.world = World.load(world_filename)
+        self.world = World.load(self, world_filename)
         self.current_room = self.world.start
-        self.intro = self.world.description + '\n\n' + self.current_room.textual()
+        self.intro = self.world.description + '\n\n' + self.current_room.do_look()
         self.inventory = Inventory(self)
 
     def do_look(self, subject: str) -> None:
@@ -68,24 +78,24 @@ class Game(Cmd):
             item = yatage.utils.get_item(self.current_room.items, subject) or yatage.utils.get_item(self.inventory, subject)
 
             if item:
-                self.text(item.definition.textual())
+                self.text(item.do_look())
             else:
                 self.text('You see no such item.')
         else:
-            self.text(self.current_room.textual())
+            self.text(self.current_room.do_look())
 
     def do_go(self, exit_: str) -> None:
         """You may 'go <exit>' to travel in that direction (such as 'go west'), or you may merely '<exit>' (such as 'west')."""
         if exit_ in self.current_room.exits:
             self.current_room = self.current_room.exits.get(exit_)
 
-            self.text(self.current_room.textual())
+            self.text(self.current_room.do_look())
         else:
             self.text('I don\'t understand; try \'help\' for instructions.')
 
     def do_inv(self, _: str) -> None:
         """To see the contents of your inventory, merely 'inv'."""
-        self.text(self.inventory.textual())
+        self.text(self.inventory.do_look())
 
     def do_take(self, item_identifier: str) -> None:
         """You may 'take <item>' (such as 'take large rock')."""
@@ -103,7 +113,15 @@ class Game(Cmd):
 
     def do_use(self, item_identifier: str) -> None:
         """You may activate or otherwise apply an item with 'use <item>'."""
-        pass
+        item = yatage.utils.get_item(self.inventory, item_identifier)
+
+        if item:
+            use_result = item.do_use()
+
+            if isinstance(use_result, str):
+                self.text(use_result)
+        else:
+            self.text('You can\'t find that in your pack.')
 
     def default(self, line: str) -> None:
         self.do_go(line)

@@ -127,17 +127,14 @@ rooms:
             The growling is getting louder.  Did I mention there are Grues down here?
         exits:
             run:
-                text: |-
+                game_over: |-
                     You have been eaten by a grue.
-                game_over: true
             wait:
-                text: |-
+                game_over: |-
                     You have been eaten by a grue.
-                game_over: true
             hide:
-                text: |-
+                game_over: |-
                     You have been eaten by a grue.
-                game_over: true
     Passage lantern:
         name: Passage
         description: |-
@@ -174,16 +171,16 @@ items:
         use:
             text: |-
                 You light your lantern.
-            transform:
-                self: lit lantern
+            remove: [self]
+            spawn: [lit lantern]
     lit lantern:
         look: |-
             The lantern seems to have quite a bit of wear.  It is lit and producing a bright light.
         use:
             text: |-
                 You douse your lantern.
-            transform:
-                self: lantern
+            remove: [self]
+            spawn: [lantern]
     blue coin:
         look: |-
             This coin is made of a blue metal.  It has nine dots on one side.
