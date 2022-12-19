@@ -2,7 +2,7 @@ import argparse
 import yatage
 
 
-def run() -> None:
+def cli() -> None:
     arg_parser = argparse.ArgumentParser()
     arg_parser.add_argument('world', help='Path to the YATAGE world file to load')
 
@@ -10,7 +10,3 @@ def run() -> None:
 
     game = yatage.Game(args.world)
     game.run()
-
-
-if __name__ == '__main__':
-    run()

@@ -1,7 +1,7 @@
 from yatage.world import World, Room
 from collections import UserList
-import yatage.utils
 from cmd import Cmd
+import yatage.utils
 
 
 class Inventory(UserList):
