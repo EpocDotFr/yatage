@@ -1,5 +1,6 @@
 from yatage.world import World, Room
 from collections import UserList
+from typing import Tuple
 from cmd import Cmd
 import yatage.utils
 
@@ -63,6 +64,7 @@ class Game(Cmd):
     prompt: str = '\nWhat do you do?\n> '
     current_room: Room
     inventory: Inventory
+    hidden_commands: Tuple = ('do_EOF',)
 
     def __init__(self, world_filename: str) -> None:
         super().__init__()
@@ -131,6 +133,9 @@ class Game(Cmd):
 
     def do_EOF(self, line: str) -> bool:
         return True
+
+    def get_names(self):
+        return [m for m in super().get_names() if m not in self.hidden_commands]
 
     def text(self, text: str, start: str = '\n\n', end: str = '\n') -> None:
         self.stdout.write(f'{start}{text}{end}')
