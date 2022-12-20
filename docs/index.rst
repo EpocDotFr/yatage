@@ -1,5 +1,5 @@
 YATAGE documentation
-======================
+====================
 
 Welcome! This documentation is about YATAGE, Yet Another Text Adventure Game Engine.
 

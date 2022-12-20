@@ -19,8 +19,8 @@ REQUIRED = [
 
 EXTRAS = {
     'dev': {
-        'Sphinx',
-        'twine',
+        'Sphinx~=5.3',
+        'twine~=4.0',
     }
 }
 
