@@ -26,12 +26,37 @@ class ItemUse:
 @dataclasses.dataclass
 class ItemConditionedUse:
     definition: Any  # TODO Typing
-    conditions: List  # TODO Typing
+    conditions: Any  # TODO Typing
     success: Optional[Union[str, ItemUse]] = None
     failure: Optional[Union[str, ItemUse]] = None
 
     def do_use(self, item_instance) -> Optional[str]:  # TODO Typing
-        pass
+        result_attr = self.success if self.conditions.are_met() else self.failure
+
+        if isinstance(result_attr, str):
+            return result_attr
+        elif isinstance(result_attr, ItemUse):
+            return result_attr.do_use(item_instance)
+
+
+@dataclasses.dataclass
+class ItemConditions:
+    world: Any  # TODO Typing
+    has: Optional[List[str]] = dataclasses.field(default_factory=list)
+    has_not: Optional[List[str]] = dataclasses.field(default_factory=list)
+
+    def are_met(self) -> bool:
+        results = []
+
+        results.extend([
+            self.world.game.inventory.has(item_identifier) for item_identifier in self.has
+        ])
+
+        results.extend([
+            not self.world.game.inventory.has(item_identifier) for item_identifier in self.has_not
+        ])
+
+        return False not in results
 
 
 @dataclasses.dataclass
@@ -64,6 +89,7 @@ class Item:
 __all__ = [
     'ItemUse',
     'ItemConditionedUse',
+    'ItemConditions',
     'ItemDefinition',
     'Item',
 ]

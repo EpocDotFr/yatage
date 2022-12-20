@@ -18,6 +18,11 @@ class Inventory(UserList):
 
         return '\n'.join(text)
 
+    def has(self, item_identifier: str) -> bool:
+        item = yatage.utils.get_item(self, item_identifier)
+
+        return True if item else False
+
     def take(self, item_identifier: str) -> bool:
         item = yatage.utils.get_item(self.game.current_room.items, item_identifier)
 
