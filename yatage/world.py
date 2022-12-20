@@ -13,12 +13,12 @@ class World:
     start: Optional[Room] = None
     rooms: Dict[str, Room] = dataclasses.field(default_factory=dict)
     items: Dict[str, ItemDefinition] = dataclasses.field(default_factory=dict)
-    description: str = ''
-    author: str = ''
+    description: Optional[str] = None
+    author: Optional[str] = None
 
     @classmethod
-    def load(cls, game, world_filename: str):  # TODO Typing
-        with open(world_filename, 'rb') as f:
+    def load(cls, game):  # TODO Typing
+        with open(game.world_filename, 'rb') as f:
             world_data = yaml.safe_load(f)  # TODO Move to stream-based loading?
 
         ret = cls(
@@ -40,8 +40,8 @@ class World:
         return ret
 
     def load_metadata(self, world_data: dict) -> None:
-        self.description = world_data.get('description', '')
-        self.author = world_data.get('author', '')
+        self.description = world_data.get('description')
+        self.author = world_data.get('author')
 
     def load_rooms(self, world_data: dict) -> None:
         for room_identifier, room_data in world_data.get('rooms').items():

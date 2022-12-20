@@ -3,7 +3,8 @@
 version: 1
 name: Synacor Challenge
 description: |-
-    == Note ==
+    Note
+    ----
 
     This is a (almost) 1:1 reimplementation of the Synacor
     Challenge text adventure game originally created by
@@ -16,10 +17,10 @@ description: |-
     As mentioned above, some parts have indeed not been
     implemented here because it's outside of the scope
     of YATAGE. A note (like this one) will be displayed
-    to give further indiactions when such case is encountered.
+    to give further indication when such case is encountered.
 
-    ==========
-    
+    ----
+
     Welcome to the Synacor Challenge!
     Please record your progress by putting codes like
     this one into the challenge website: KDfTwYgxhJKC

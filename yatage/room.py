@@ -13,8 +13,12 @@ class Room:
     exits: Dict[str, Any] = dataclasses.field(default_factory=dict)  # TODO Typing
 
     def do_look(self) -> str:
+        name = self.name or self.identifier
+
         text = [
-            f'== {self.name or self.identifier} ==',
+            name,
+            '-' * len(name),
+            '',
         ]
 
         if self.description:

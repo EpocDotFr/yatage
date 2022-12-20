@@ -7,18 +7,24 @@ from cmd import Cmd
 
 
 class Game(Cmd):
-    prompt: str = '\nWhat do you do?\n> '
+    prompt: str = '\nWhat do you do?\n^^^^^^^^^^^^^^^\n> '
+    ruler: str = '^'
+    hidden_commands: Tuple = ('do_EOF',)
+
+    world_filename: str
+    world: World
     current_room: Room
     inventory: Inventory
-    hidden_commands: Tuple = ('do_EOF',)
 
     def __init__(self, world_filename: str) -> None:
         super().__init__()
 
-        self.world = World.load(self, world_filename)
+        self.world_filename = world_filename
+        self.world = World.load(self)
         self.current_room = self.world.start
-        self.intro = self.world.description + '\n\n' + self.current_room.do_look()
         self.inventory = Inventory(self)
+
+        self.intro = self.create_intro()
 
     def do_look(self, subject: str) -> None:
         """You may merely 'look' to examine the room, or you may 'look <subject>' (such as 'look chair') to examine something specific."""
@@ -83,7 +89,32 @@ class Game(Cmd):
     def get_names(self):
         return [m for m in super().get_names() if m not in self.hidden_commands]
 
-    def text(self, text: str, start: str = '\n\n', end: str = '\n') -> None:
+    def create_intro(self) -> str:
+        text = [
+            self.world.name,
+            '=' * len(self.world.name),
+        ]
+
+        if self.world.author:
+            text.extend((
+                '',
+                f'By {self.world.author}',
+            ))
+
+        if self.world.description:
+            text.extend((
+                '',
+                self.world.description,
+            ))
+
+        text.extend((
+            '',
+            self.current_room.do_look(),
+        ))
+
+        return '\n'.join(text)
+
+    def text(self, text: str, start: str = '\n', end: str = '\n') -> None:
         self.stdout.write(f'{start}{text}{end}')
 
     def run(self) -> None:
