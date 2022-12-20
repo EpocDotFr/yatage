@@ -6,24 +6,15 @@ description: |-
     Note
     ----
 
-    This is a (almost) 1:1 reimplementation of the Synacor
-    Challenge text adventure game originally created by
-    Eric Wastl able to be ran by YATAGE. You can find the
-    original game here: https://challenge.synacor.com/.
-    You however have to implement the virtual machine
-    needed to run it by yourself, or use my implementation:
-    https://github.com/EpocDotFr/synacor-challenge
+    This is a (almost) 1:1 reimplementation of the Synacor Challenge text adventure game originally created by Eric Wastl able to be ran by YATAGE. You can find the original game here: https://challenge.synacor.com/.
+    You however have to implement the virtual machine needed to run it by yourself, or use my implementation: https://github.com/EpocDotFr/synacor-challenge
 
-    As mentioned above, some parts have indeed not been
-    implemented here because it's outside of the scope
-    of YATAGE. A note (like this one) will be displayed
-    to give further indication when such case is encountered.
+    As mentioned above, some parts have indeed not been implemented here because it's outside of the scope of YATAGE. A note (like this one) will be displayed to give further indication when such case is encountered.
 
     ----
 
     Welcome to the Synacor Challenge!
-    Please record your progress by putting codes like
-    this one into the challenge website: KDfTwYgxhJKC
+    Please record your progress by putting codes like this one into the challenge website: KDfTwYgxhJKC
     
     Executing self-test...
     
@@ -92,14 +83,10 @@ rooms:
             cavern: Moss cavern to passage
             # ladder: TODO
             darkness:
-                -
-                    conditions:
-                        has_not: [lit lantern]
-                    success: Passage no lantern
-                -
-                    conditions:
-                        has: [lit lantern]
-                    success: Passage lantern
+                conditions:
+                    has: [lit lantern]
+                success: Passage lantern
+                failure: Passage no lantern
     Passage no lantern:
         name: Passage
         description: It is pitch black. You are likely to be eaten by a grue.

@@ -6,6 +6,21 @@ import yaml
 
 
 @dataclasses.dataclass
+class ItemConditionedExit:
+    conditions: ItemConditions
+    success: Room
+    failure: Room
+
+    def do_exit(self) -> Room:
+        return self.success if self.conditions.are_met() else self.failure
+
+
+@dataclasses.dataclass
+class GameOverExit:
+    text: str
+
+
+@dataclasses.dataclass
 class World:
     game: Any  # TODO Typing
     version: int
@@ -60,11 +75,37 @@ class World:
     def load_rooms_exits(self, world_data: dict) -> None:
         for room_identifier, room_data in world_data.get('rooms').items():
             exits_data = room_data.get('exits', {})
+            exits = {}
 
-            self.rooms.get(room_identifier).exits = {
-                exit_name: self.rooms.get(exit_identifier) for exit_name, exit_identifier in exits_data.items() if
-                isinstance(exit_identifier, str)  # TODO handle conditional exits
-            }
+            for exit_name, exit_data in exits_data.items():
+                exit_ = None
+
+                if isinstance(exit_data, str):
+                    exit_ = self.rooms.get(exit_data)
+                elif isinstance(exit_data, dict):
+                    if 'conditions' in exit_data:
+                        conditions = exit_data.get('conditions')
+
+                        exit_ = ItemConditionedExit(
+                            ItemConditions(
+                                self,
+                                conditions.get('has', []),
+                                conditions.get('has_not', [])
+                            ),
+                            self.rooms.get(exit_data.get('success')),
+                            self.rooms.get(exit_data.get('failure'))
+                        )
+                    elif 'game_over' in exit_data:
+                        exit_ = GameOverExit(
+                            exit_data.get('game_over')
+                        )
+
+                if not exit_:
+                    continue;
+
+                exits[exit_name] = exit_
+
+            self.rooms.get(room_identifier).exits = exits
 
     def load_items(self, world_data: dict) -> None:
         for item_identifier, item_data in world_data.get('items').items():
@@ -77,19 +118,19 @@ class World:
     def load_items_uses(self, world_data: dict) -> None:
         for item_identifier, item_data in world_data.get('items').items():
             use_data = item_data.get('use')
-            use = self.load_item_use_or_str(item_identifier, use_data)
+            use = self.load_item_use_or_str( use_data)
 
             if not use:
-                use = self.load_item_conditioned_use(item_identifier, use_data)
+                use = self.load_item_conditioned_use(use_data)
 
             self.items.get(item_identifier).use = use
 
-    def load_item_use_or_str(self, item_identifier: str, use_data: Union[str, Dict]) -> Optional[Union[str, ItemUse]]:
+    def load_item_use_or_str(self, use_data: Union[str, Dict]) -> Optional[Union[str, ItemUse]]:
         if isinstance(use_data, str):
             return use_data
         elif isinstance(use_data, dict) and 'text' in use_data:
             return ItemUse(
-                self.items.get(item_identifier),
+                self,
                 use_data.get('text'),
                 use_data.get('remove', []),
                 use_data.get('spawn', [])
@@ -97,19 +138,18 @@ class World:
 
         return None
 
-    def load_item_conditioned_use(self, item_identifier: str, use_data: Union[str, Dict]) -> Optional[Union[str, ItemConditionedUse]]:
+    def load_item_conditioned_use(self, use_data: Union[str, Dict]) -> Optional[Union[str, ItemConditionedUse]]:
         if isinstance(use_data, dict) and 'conditions' in use_data:
             conditions = use_data.get('conditions')
 
             return ItemConditionedUse(
-                self.items.get(item_identifier),
                 ItemConditions(
                     self,
                     conditions.get('has', []),
                     conditions.get('has_not', [])
                 ),
-                self.load_item_use_or_str(item_identifier, use_data.get('success')),
-                self.load_item_use_or_str(item_identifier, use_data.get('failure'))
+                self.load_item_use_or_str(use_data.get('success')),
+                self.load_item_use_or_str(use_data.get('failure'))
             )
 
         return None
