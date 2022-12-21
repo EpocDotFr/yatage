@@ -38,6 +38,8 @@ class Game(Loop):
         else:
             self.line(self.current_room.do_look())
 
+        return
+
     def do_go(self, exit_: str) -> Optional[bool]:
         """You may 'go <exit>' to travel in that direction (such as 'go west'), or you may merely '<exit>' (such as 'west')."""
         if exit_ in self.current_room.exits:
@@ -58,9 +60,13 @@ class Game(Loop):
         else:
             self.line('I don\'t understand; try \'help\' for instructions.')
 
+        return
+
     def do_inv(self, _: str) -> Optional[bool]:
         """To see the contents of your inventory, merely 'inv'."""
         self.line(self.inventory.do_look())
+
+        return
 
     def do_take(self, item_identifier: str) -> Optional[bool]:
         """You may 'take <item>' (such as 'take large rock')."""
@@ -69,12 +75,16 @@ class Game(Loop):
         else:
             self.line('You see no such item.')
 
+        return
+
     def do_drop(self, item_identifier: str) -> Optional[bool]:
         """To drop something in your inventory, you may 'drop <item>'."""
         if self.inventory.drop(item_identifier):
             self.line('Dropped.')
         else:
             self.line('You can\'t find that in your pack.')
+
+        return
 
     def do_use(self, item_identifier: str) -> Optional[bool]:
         """You may activate or otherwise apply an item with 'use <item>'."""
@@ -87,6 +97,8 @@ class Game(Loop):
                 self.line(use_result)
         else:
             self.line('You can\'t find that in your pack.')
+
+        return
 
     def default(self, line: str) -> Optional[bool]:
         return self.do_go(line)

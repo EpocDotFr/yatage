@@ -1,4 +1,5 @@
 # These are the automated actions to perform in the Synacor Challenge game (see associated .yml file) to complete the game.
+# Must be used like: yatage examples/synacor_challenge.yml --actions examples/synacor_challenge_actions.txt
 
 take tablet
 use tablet

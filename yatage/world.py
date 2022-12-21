@@ -101,7 +101,7 @@ class World:
                         )
 
                 if not exit_:
-                    continue;
+                    continue
 
                 exits[exit_name] = exit_
 
@@ -118,7 +118,7 @@ class World:
     def load_items_uses(self, world_data: dict) -> None:
         for item_identifier, item_data in world_data.get('items').items():
             use_data = item_data.get('use')
-            use = self.load_item_use_or_str( use_data)
+            use = self.load_item_use_or_str(use_data)
 
             if not use:
                 use = self.load_item_conditioned_use(use_data)
@@ -154,6 +154,9 @@ class World:
 
         return None
 
+
 __all__ = [
     'World',
+    'GameOverExit',
+    'ItemConditionedExit',
 ]

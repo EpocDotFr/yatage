@@ -114,12 +114,12 @@ rooms:
         exits:
             north: Twisty passages
     Twisty passages 3:
-        name: Twisty passages 2
+        name: Twisty passages
         description: You are in a maze of alike twisty passages, all little.
         exits:
             north: Twisty passages
     Twisty passages 4:
-        name: Twisty passages 2
+        name: Twisty passages
         description: You are in a little maze of twisty passages, all alike.
         exits:
             north: Twisty passages
