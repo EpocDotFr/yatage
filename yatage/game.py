@@ -8,19 +8,23 @@ from typing import Optional
 
 class Game(Loop):
     world_filename: str
+    actions_filename: Optional[str]
     world: World
     current_room: Room
     inventory: Inventory
 
-    def __init__(self, world_filename: str) -> None:
+    def __init__(self, world_filename: str, actions_filename: Optional[str]) -> None:
         super().__init__()
 
         self.world_filename = world_filename
+        self.actions_filename = actions_filename
         self.world = World.load(self)
         self.current_room = self.world.start
         self.inventory = Inventory(self)
 
         self.intro = self.create_intro()
+
+        self.load_actions()
 
     def do_look(self, subject: str) -> Optional[bool]:
         """You may merely 'look' to examine the room, or you may 'look <subject>' (such as 'look chair') to examine something specific."""
@@ -114,6 +118,13 @@ class Game(Loop):
         ))
 
         return '\n'.join(text)
+
+    def load_actions(self) -> None:
+        if not self.actions_filename:
+            return
+
+        with open(self.actions_filename, 'r') as f:
+            self.cmdqueue = [line.strip() for line in f if line.strip() and not line.strip().startswith('#')]
 
 
 __all__ = [

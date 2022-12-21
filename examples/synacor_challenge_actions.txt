@@ -1,0 +1,53 @@
+# These are the automated actions to perform in the Synacor Challenge game (see associated .yml file) to complete the game.
+
+take tablet
+use tablet
+doorway
+north
+north
+bridge
+continue
+down
+east
+take empty lantern
+west
+west
+passage
+ladder
+west
+south
+north
+take can
+west
+ladder
+darkness
+use can
+use lantern
+continue
+west
+west
+west
+west
+north
+take red coin
+north
+west
+take blue coin
+up
+take shiny coin
+down
+east
+east
+take concave coin
+down
+take corroded coin
+up
+west
+use blue coin
+use red coin
+use shiny coin
+use concave coin
+use corroded coin
+north
+take teleporter
+use teleporter
