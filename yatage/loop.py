@@ -3,7 +3,7 @@ from cmd import Cmd
 
 
 class Loop(Cmd):
-    prompt: str = '\nWhat do you do?\n^^^^^^^^^^^^^^^\n> '
+    prompt: str = '\nWhat do you do?\n===============\n> '
     ruler: str = '^'
     hidden_commands: Tuple = ('do_EOF',)
 

@@ -81,7 +81,7 @@ rooms:
         description: You are in a crevise on the west wall of the moss cavern. A dark passage leads further west. There is a ladder here which leads down into a smaller, moss-filled cavern below.
         exits:
             cavern: Moss cavern to passage
-            # ladder: TODO
+            ladder: Twisty passages
             darkness:
                 conditions:
                     has: [lit lantern]
@@ -93,6 +93,41 @@ rooms:
         exits:
             continue: Fumbling around in the darkness
             back: Passage
+    Twisty passages:
+        description: You are in a maze of twisty little passages, all dimly lit by more bioluminescent moss. There is a ladder here leading up.
+        exits:
+            ladder: Passage
+            north: Twisty passages 1
+            south: Twisty passages 1
+            east: Twisty passages east
+            # west: Passage
+    Twisty passages 1:
+        name: Twisty passages
+        description: You are in a twisty maze of little passages, all alike.
+        exits:
+            north: Twisty passages north 2
+    Twisty passages 2:
+        name: Twisty passages
+        description: You are in a maze of little twisty passages, all alike.
+        exits:
+            north: Twisty passages
+    Twisty passages 3:
+        name: Twisty passages 2
+        description: You are in a maze of alike twisty passages, all little.
+        exits:
+            north: Twisty passages
+    Twisty passages east:
+        name: Twisty passages
+        description: |-
+            You are in a maze of alike little passages, all twisty.
+
+            The passage to the east looks very dark; you think you hear a Grue.
+        exits:
+            east:
+                conditions:
+                    has: [lit lantern]
+                success: Twisty passages 1
+                failure: Fumbling around in the darkness
     Fumbling around in the darkness:
         description: Without a source of light, you have become hopelessly lost and are fumbling around in the darkness.
         exits:

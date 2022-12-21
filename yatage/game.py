@@ -88,9 +88,12 @@ class Game(Loop):
         return self.do_go(line)
 
     def create_intro(self) -> str:
+        header = '#' * len(self.world.name)
+
         text = [
+            header,
             self.world.name,
-            '=' * len(self.world.name),
+            header,
         ]
 
         if self.world.author:

@@ -11,6 +11,7 @@ class Inventory(UserList):
     def do_look(self) -> str:
         text = [
             'Your inventory:',
+            '---------------',
         ]
 
         for item in self:

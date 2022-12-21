@@ -14,10 +14,12 @@ class Room:
 
     def do_look(self) -> str:
         name = self.name or self.identifier
+        header = '*' * len(name)
 
         text = [
+            header,
             name,
-            '-' * len(name),
+            header,
             '',
         ]
 
@@ -28,15 +30,19 @@ class Room:
             text.extend((
                 '',
                 'Things of interest here:',
+                '------------------------',
             ))
 
             for item in self.items:
                 text.append(f'- {item.definition.identifier}')
 
         if self.exits:
+            exits_text = f'There are {len(self.exits)} exits:'
+
             text.extend((
                 '',
-                f'There are {len(self.exits)} exits:',
+                exits_text,
+                '-' * len(exits_text),
             ))
 
             for exit_name in self.exits.keys():
