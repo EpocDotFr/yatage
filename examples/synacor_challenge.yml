@@ -398,7 +398,15 @@ items:
                     jKPupWlItgvk
 
                 After a few moments, you find yourself back on solid ground and a little disoriented.
+            remove: [self]
+            spawn: [teleporter2]
             teleport: Synacor Headquarters
+    teleporter2:
+        look: This small device has a button on it and reads "teleporter" on the side.
+        use:
+            text: |
+                TODO
+            teleport: TODO
     business card:
         look: This business card has "synacor.com" printed in red on one side.
     strange book:
@@ -446,3 +454,11 @@ items:
             now-bypassed confirmation mechanism will not protect you!
 
             Of course, since teleportation is impossible, this is all totally ridiculous.
+            
+            Note
+            ----
+
+            After using the teleporter once, a new item, teleporter2, will spawn into your inventory. Use it instead of
+            solving this challenge (see introduction note).
+
+            ----
