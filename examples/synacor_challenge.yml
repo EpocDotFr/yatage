@@ -247,8 +247,20 @@ rooms:
             You stand in the massive central hall of these ruins. The walls are crumbling, and vegetation has clearly taken over. Rooms are attached in all directions. There is a strange monument in the center of the hall with circular slots and unusual symbols. It reads:
 
             _ + _ * _^2 + _^3 - _ = 399
+
+            Note
+            ----
+
+            Coins usage order doesn't matter (see introduction note).
+
+            ----
         exits:
-            north: Ruins teleporter
+            north:
+                items_conditions:
+                    has_used: [blue coin, red coin, shiny coin, concave coin, corroded coin]
+                success: Ruins teleporter
+                failure:
+                    text: That door is locked.
             south: Ruins red coin
             east: Ruins concave coin
             west: Ruins blue coin
@@ -326,14 +338,49 @@ items:
             spawn: [lantern]
     blue coin:
         look: This coin is made of a blue metal. It has nine dots on one side.
+        use:
+            room_conditions:
+                in: [Ruins central hall]
+            success:
+                text: You place the blue coin into the leftmost open slot.
+                mark_used: [self]
+            failure: You're not sure what to do with the coin.
     red coin:
         look: This coin is made of a red metal. It has two dots on one side.
+        use:
+            room_conditions:
+                in: [Ruins central hall]
+            success:
+                text: You place the red coin into the leftmost open slot.
+                mark_used: [self]
+            failure: You're not sure what to do with the coin.
     shiny coin:
         look: This coin is somehow still quite shiny. It has a pentagon on one side.
+        use:
+            room_conditions:
+                in: [Ruins central hall]
+            success:
+                text: You place the shiny coin into the leftmost open slot.
+                mark_used: [self]
+            failure: You're not sure what to do with the coin.
     concave coin:
         look: This coin is slightly rounded, almost like a tiny bowl. It has seven dots on one side.
+        use:
+            room_conditions:
+                in: [Ruins central hall]
+            success:
+                text: You place the concave coin into the leftmost open slot.
+                mark_used: [self]
+            failure: You're not sure what to do with the coin.
     corroded coin:
         look: This coin is somewhat corroded. It has a triangle on one side.
+        use:
+            room_conditions:
+                in: [Ruins central hall]
+            success:
+                text: You place the corroded coin into the leftmost open slot.
+                mark_used: [self]
+            failure: You're not sure what to do with the coin.
     teleporter:
         look: This small device has a button on it and reads "teleporter" on the side.
         use:
