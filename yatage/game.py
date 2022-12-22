@@ -30,6 +30,7 @@ class Game(Loop):
 
         if self.debug:
             self.do_spawn = self.spawn
+            self.do_tp = self.tp
 
     def do_look(self, subject: str) -> Optional[bool]:
         """You may merely 'look' to examine the room, or you may 'look <subject>' (such as 'look chair') to examine something specific."""
@@ -125,6 +126,19 @@ class Game(Loop):
             self.line('Spawned.')
         else:
             self.line('Unknown item.')
+
+        return
+
+    def tp(self, room_identifier: str) -> Optional[bool]:
+        """Debug: Teleport to the given room with 'tp <room>'."""
+        if room_identifier not in self.world.rooms:
+            self.line('Unknown room.')
+
+            return
+
+        self.current_room = self.world.rooms.get(room_identifier)
+
+        self.line(self.current_room.do_look())
 
         return
 
