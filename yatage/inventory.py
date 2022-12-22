@@ -15,7 +15,7 @@ class Inventory(UserList):
         ]
 
         for item in self:
-            text.append(f'- {item.definition.identifier}')
+            text.append(f'  - {item.definition.identifier}')
 
         return '\n'.join(text)
 

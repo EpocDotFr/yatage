@@ -98,8 +98,8 @@ rooms:
         exits:
             ladder: Passage
             north: Twisty passages 1
-            south: Twisty passages 1
-            east: Twisty passages east
+            south: Twisty passages 2
+            east: Twisty passages grue 1
             west: Twisty passages 4
     Twisty passages 1:
         name: Twisty passages
@@ -113,17 +113,23 @@ rooms:
         description: You are in a maze of little twisty passages, all alike.
         exits:
             north: Twisty passages
+            south: Twisty passages 1
+            east: Twisty passages 2
     Twisty passages 3:
         name: Twisty passages
         description: You are in a maze of alike twisty passages, all little.
         exits:
             north: Twisty passages
+            east: Twisty passages 1
+            south: Twisty passages 3
     Twisty passages 4:
         name: Twisty passages
         description: You are in a little maze of twisty passages, all alike.
         exits:
-            north: Twisty passages
-    Twisty passages east:
+            north: Twisty passages 4
+            south: Twisty passages grue 2
+            east: Twisty passages
+    Twisty passages grue 1:
         name: Twisty passages
         description: |-
             You are in a maze of alike little passages, all twisty.
@@ -131,11 +137,41 @@ rooms:
             The passage to the east looks very dark; you think you hear a Grue.
         exits:
             north: Twisty passages 3
+            south: Twisty passages grue 1
+            west: Twisty passages
             east:
                 conditions:
                     has: [lit lantern]
                 success: Twisty passages 1
                 failure: Fumbling around in the darkness
+    Twisty passages grue 2:
+        name: Twisty passages
+        description: |-
+            You are in a twisty alike of little passages, all maze.
+
+            The east passage appears very dark; you feel likely to be eaten by a Grue.
+        exits:
+            north:
+                text: |
+                    Chiseled on the wall of one of the passageways, you see:
+
+                        jgDYBUhWlqLC
+
+                    You take note of this and keep walking.
+                exit: Twisty passages can
+            south: Twisty passages 1
+            west: Twisty passages 2
+            east:
+                conditions:
+                    has: [lit lantern]
+                success: Twisty passages 1
+                failure: Fumbling around in the darkness
+    Twisty passages can:
+        name: Twisty passages
+        description: You are in a maze of twisty little passages, all alike.
+        exits:
+            west: Twisty passages
+        items: [can]
     Fumbling around in the darkness:
         description: Without a source of light, you have become hopelessly lost and are fumbling around in the darkness.
         exits:

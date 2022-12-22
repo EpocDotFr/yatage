@@ -21,6 +21,12 @@ class GameOverExit:
 
 
 @dataclasses.dataclass
+class TextExit:
+    text: str
+    exit: Room
+
+
+@dataclasses.dataclass
 class World:
     game: Any  # TODO Typing
     version: int
@@ -99,6 +105,11 @@ class World:
                         exit_ = GameOverExit(
                             exit_data.get('game_over')
                         )
+                    elif 'text' in exit_data:
+                        exit_ = TextExit(
+                            exit_data.get('text'),
+                            self.rooms.get(exit_data.get('exit'))
+                        )
 
                 if not exit_:
                     continue
@@ -156,7 +167,8 @@ class World:
 
 
 __all__ = [
-    'World',
-    'GameOverExit',
     'ItemConditionedExit',
+    'GameOverExit',
+    'TextExit',
+    'World',
 ]

@@ -34,7 +34,7 @@ class Room:
             ))
 
             for item in self.items:
-                text.append(f'- {item.definition.identifier}')
+                text.append(f'  - {item.definition.identifier}')
 
         if self.exits:
             exits_text = f'There are {len(self.exits)} exits:'
@@ -46,7 +46,7 @@ class Room:
             ))
 
             for exit_name in self.exits.keys():
-                text.append(f'- {exit_name}')
+                text.append(f'  - {exit_name}')
 
         return '\n'.join(text)
 

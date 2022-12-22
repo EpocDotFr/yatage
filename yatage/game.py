@@ -1,4 +1,4 @@
-from yatage.world import World, GameOverExit, ItemConditionedExit
+from yatage.world import World, GameOverExit, ItemConditionedExit, TextExit
 from yatage.inventory import Inventory
 from yatage.utils import get_item
 from yatage.room import Room
@@ -43,20 +43,34 @@ class Game(Loop):
     def do_go(self, exit_: str) -> Optional[bool]:
         """You may 'go <exit>' to travel in that direction (such as 'go west'), or you may merely '<exit>' (such as 'west')."""
         if exit_ in self.current_room.exits:
+            look_room = False
+            game_over = False
             exit_data = self.current_room.exits.get(exit_)
 
             if isinstance(exit_data, Room):
                 self.current_room = self.current_room.exits.get(exit_)
 
-                self.line(self.current_room.do_look())
+                look_room = True
             elif isinstance(exit_data, GameOverExit):
                 self.line(exit_data.text)
 
-                return True
+                game_over = True
+            elif isinstance(exit_data, TextExit):
+                self.line(exit_data.text)
+
+                self.current_room = exit_data.exit
+
+                look_room = True
             elif isinstance(exit_data, ItemConditionedExit):
                 self.current_room = exit_data.do_exit()
 
+                look_room = True
+
+            if look_room:
                 self.line(self.current_room.do_look())
+
+            if game_over:
+                return True
         else:
             self.line('I don\'t understand; try \'help\' for instructions.')
 
