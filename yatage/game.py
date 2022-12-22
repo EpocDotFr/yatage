@@ -126,6 +126,8 @@ class Game(Loop):
         else:
             self.line('Unknown item.')
 
+        return
+
     def default(self, line: str) -> Optional[bool]:
         return self.do_go(line)
 
