@@ -14,16 +14,25 @@ class ItemConditionedExit:
     def do_exit(self) -> Room:
         return self.success if self.conditions.are_met() else self.failure
 
+    def __str__(self) -> str:
+        return f'{self.success} if ({self.conditions}) or {self.failure}'
+
 
 @dataclasses.dataclass
 class GameOverExit:
     text: str
+
+    def __str__(self) -> str:
+        return 'Text then game over'
 
 
 @dataclasses.dataclass
 class TextExit:
     text: str
     exit: Room
+
+    def __str__(self) -> str:
+        return f'Text then {self.exit}'
 
 
 @dataclasses.dataclass

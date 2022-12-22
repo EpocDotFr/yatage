@@ -57,6 +57,20 @@ class ItemConditions:
 
         return False not in results
 
+    def __str__(self) -> str:
+        conditions = ''
+
+        if self.has:
+            conditions += 'has {}'.format(', '.join(self.has))
+
+        if self.has and self.has_not:
+            conditions += ' and '
+
+        if self.has_not:
+            conditions += 'has not {}'.format(', '.join(self.has_not))
+
+        return conditions
+
 
 @dataclasses.dataclass
 class ItemDefinition:

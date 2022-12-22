@@ -62,6 +62,16 @@ class Inventory(UserList):
 
         return True
 
+    def spawn(self, item_identifier: str) -> bool:
+        item_definition = self.game.world.items.get(item_identifier)
+
+        if not item_definition:
+            return False
+
+        self.append(item_definition.create_item())
+
+        return True
+
 
 __all__ = [
     'Inventory',

@@ -13,7 +13,7 @@ class Room:
     exits: Dict[str, Any] = dataclasses.field(default_factory=dict)  # TODO Typing
 
     def do_look(self) -> str:
-        name = self.name or self.identifier
+        name = str(self)
         header = '*' * len(name)
 
         text = [
@@ -45,10 +45,21 @@ class Room:
                 '-' * len(exits_text),
             ))
 
-            for exit_name in self.exits.keys():
+            for exit_name, exit_ in self.exits.items():
+                if self.world.game.debug:
+                    exit_name += f' ({exit_})'
+
                 text.append(f'  - {exit_name}')
 
         return '\n'.join(text)
+
+    def __str__(self) -> str:
+        name = self.name or self.identifier
+
+        if self.world.game.debug and self.name and self.name != self.identifier:
+            name += f' [{self.identifier}]'
+
+        return name
 
 
 __all__ = [

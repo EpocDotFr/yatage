@@ -9,15 +9,17 @@ from typing import Optional
 class Game(Loop):
     world_filename: str
     actions_filename: Optional[str]
+    debug: bool
     world: World
     current_room: Room
     inventory: Inventory
 
-    def __init__(self, world_filename: str, actions_filename: Optional[str]) -> None:
+    def __init__(self, world_filename: str, actions_filename: Optional[str] = None, debug: bool = False) -> None:
         super().__init__()
 
         self.world_filename = world_filename
         self.actions_filename = actions_filename
+        self.debug = debug
         self.world = World.load(self)
         self.current_room = self.world.start
         self.inventory = Inventory(self)
@@ -25,6 +27,9 @@ class Game(Loop):
         self.intro = self.create_intro()
 
         self.load_actions()
+
+        if self.debug:
+            self.do_spawn = self.spawn
 
     def do_look(self, subject: str) -> Optional[bool]:
         """You may merely 'look' to examine the room, or you may 'look <subject>' (such as 'look chair') to examine something specific."""
@@ -114,6 +119,13 @@ class Game(Loop):
 
         return
 
+    def spawn(self, item_identifier: str) -> Optional[bool]:
+        """Debug: Spawn an item into inventory with 'spawn <item>'."""
+        if self.inventory.spawn(item_identifier):
+            self.line('Spawned.')
+        else:
+            self.line('Unknown item.')
+
     def default(self, line: str) -> Optional[bool]:
         return self.do_go(line)
 
@@ -125,6 +137,14 @@ class Game(Loop):
             self.world.name,
             header,
         ]
+
+        if self.debug:
+            text.extend((
+                '',
+                f'World file version: {self.world.version}',
+                f'Rooms: {len(self.world.rooms)}',
+                f'Items: {len(self.world.items)}',
+            ))
 
         if self.world.author:
             text.extend((

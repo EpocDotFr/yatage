@@ -19,7 +19,7 @@ class Loop(Cmd):
         return True
 
     def get_names(self) -> List:
-        return [m for m in super().get_names() if m not in self.hidden_commands]
+        return [m for m in dir(self) if m not in self.hidden_commands]
 
     def line(self, text: str, end: str = '\n') -> None:
         self.stdout.write(f'{text}{end}')
