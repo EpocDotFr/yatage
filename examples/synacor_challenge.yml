@@ -9,7 +9,7 @@ description: |-
     This is a (almost) 1:1 reimplementation of the Synacor Challenge text adventure game originally created by Eric Wastl able to be ran by YATAGE. You can find the original game here: https://challenge.synacor.com/.
     You however have to implement the virtual machine needed to run it by yourself, or use my implementation: https://github.com/EpocDotFr/synacor-challenge
 
-    As mentioned above, some parts have indeed not been implemented here because it's outside of the scope of YATAGE. A note (like this one) will be displayed to give further indication when such case is encountered.
+    As mentioned above, some parts have indeed not been implemented here because it's outside of the scope of YATAGE, or because exactly replicating the Synacor Challenge behavior would be tricky. A note (like this one) will be displayed to give further indication when such case is encountered.
 
     ----
 
@@ -83,7 +83,15 @@ rooms:
             passage: Passage
     # Passage
     Passage:
-        description: You are in a crevise on the west wall of the moss cavern. A dark passage leads further west. There is a ladder here which leads down into a smaller, moss-filled cavern below.
+        description: |-
+            You are in a crevise on the west wall of the moss cavern. A dark passage leads further west. There is a ladder here which leads down into a smaller, moss-filled cavern below.
+
+            Note
+            ----
+
+            Use the item that you're supposed to use BEFORE going into darkness (see introduction note).
+
+            ----
         exits:
             cavern: Moss cavern to passage
             ladder: Twisty passages
