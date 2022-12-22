@@ -21,9 +21,10 @@ north
 take can
 west
 ladder
-darkness
+# TODO Move these two after darkness below once the issue with item and conditions is solved
 use can
 use lantern
+darkness
 continue
 west
 west

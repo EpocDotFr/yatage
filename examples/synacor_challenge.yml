@@ -23,6 +23,7 @@ description: |-
 author: "Eric Wastl (http://was.tl/), Maxime \"Epoc\" G. (https://epoc.fr/)"
 start: Foothills
 rooms:
+    # Foothills
     Foothills:
         description: "You find yourself standing at the base of an enormous mountain. At its base to the north, there is a massive doorway. A sign nearby reads \"Keep out! Definitely no treasure within!\""
         exits:
@@ -34,6 +35,7 @@ rooms:
         description: As you begin to leave, you feel the urge for adventure pulling you back...
         exits:
             north: Foothills
+    # Dark cave
     Dark cave:
         description: This seems to be the mouth of a deep cave. As you peer north into the darkness, you think you hear the echoes of bats deeper within.
         exits:
@@ -51,6 +53,7 @@ rooms:
         exits:
             bridge: Rope bridge
             south: Dark cave narrow
+    # Rope bridge
     Rope bridge:
         description: This rope bridge creaks as you walk along it. You aren't sure how old it is, or whether it can even support your weight.
         exits:
@@ -60,6 +63,7 @@ rooms:
         description: As you continue along the bridge, it snaps! You try to grab the bridge, but it evades your grasp in the darkness. You are plummeting quickly downward into the chasm...
         exits:
             down: Moss cavern
+    # Moss cavern
     Moss cavern:
         description: You are standing in a large cavern full of bioluminescent moss. It must have broken your fall! The cavern extends to the east and west; at the west end, you think you see a passage leading out of the cavern.
         exits:
@@ -77,13 +81,14 @@ rooms:
         exits:
             east: Moss cavern
             passage: Passage
+    # Passage
     Passage:
         description: You are in a crevise on the west wall of the moss cavern. A dark passage leads further west. There is a ladder here which leads down into a smaller, moss-filled cavern below.
         exits:
             cavern: Moss cavern to passage
             ladder: Twisty passages
             darkness:
-                conditions:
+                items_conditions:
                     has: [lit lantern]
                 success: Passage lantern
                 failure: Passage no lantern
@@ -93,6 +98,7 @@ rooms:
         exits:
             continue: Fumbling around in the darkness
             back: Passage
+    # Twisty passages
     Twisty passages:
         description: You are in a maze of twisty little passages, all dimly lit by more bioluminescent moss. There is a ladder here leading up.
         exits:
@@ -140,7 +146,7 @@ rooms:
             south: Twisty passages grue 1
             west: Twisty passages
             east:
-                conditions:
+                items_conditions:
                     has: [lit lantern]
                 success: Twisty passages 1
                 failure: Fumbling around in the darkness
@@ -162,7 +168,7 @@ rooms:
             south: Twisty passages 1
             west: Twisty passages 2
             east:
-                conditions:
+                items_conditions:
                     has: [lit lantern]
                 success: Twisty passages 1
                 failure: Fumbling around in the darkness
@@ -172,6 +178,7 @@ rooms:
         exits:
             west: Twisty passages
         items: [can]
+    # Lost in darkness
     Fumbling around in the darkness:
         description: Without a source of light, you have become hopelessly lost and are fumbling around in the darkness.
         exits:
@@ -195,7 +202,85 @@ rooms:
         name: Passage
         description: You feel that your light source is more than sufficient to keep grues away.
         exits:
+            continue: Dark passage
             back: Passage
+    # Dark passage
+    Dark passage:
+        description: You are in a narrow passage. There is darkness to the west, but you can barely see a glowing opening to the east.
+        exits:
+            west: Dark passage 2
+            east: Passage lantern
+    Dark passage 2:
+        name: Dark passage
+        description: You are in a dark, narrow passage.
+        exits:
+            west: Dark passage 3
+            east: Dark passage
+    Dark passage 3:
+        name: Dark passage
+        description: You are in a dark, narrow passage.
+        exits:
+            west: Dark passage end
+            east: Dark passage 2
+    Dark passage end:
+        name: Dark passage
+        description: You are in a dark, narrow passage. To the west, you spot some vegetation where the passage expands.
+        exits:
+            east: Dark passage 3
+            west: Ruins
+    # Ruins
+    Ruins:
+        description: You stand in a large cavern with a huge ruin to the north, overgrown by plant life. There is a large stone archway to the north acting as the doorway to the ruined complex. A crevice in the rock to the east leads to an alarmingly dark passageway.
+        exits:
+            east: Dark passage end
+            north: Ruins red coin
+    Ruins red coin:
+        name: Ruins
+        description: You are in the once-opulent foyer of a massive ruined complex. There is a door to the south leading to the overgrowth outside and stairs to the north which lead into a larger hall.
+        items: [red coin]
+        exits:
+            north: Ruins central hall
+            south: Ruins
+    Ruins central hall:
+        name: Ruins
+        description: |-
+            You stand in the massive central hall of these ruins. The walls are crumbling, and vegetation has clearly taken over. Rooms are attached in all directions. There is a strange monument in the center of the hall with circular slots and unusual symbols. It reads:
+
+            _ + _ * _^2 + _^3 - _ = 399
+        exits:
+            north: Ruins door
+            south: Ruins red coin
+            east: Ruins concave coin
+            west: Ruins blue coin
+    Ruins concave coin:
+        name: Ruins
+        description: You stand in what seems to have once been a dining hall; broken tables and pottery are scattered everywhere. A staircase here leads down.
+        items: [concave coin]
+        exits:
+            down: Ruins corroded coin
+            west: Ruins central hall
+    Ruins corroded coin:
+        name: Ruins
+        description: This seems to be a kitchen; there are brick stoves and shelves along the wall. Everything here has fallen into disrepair.
+        items: [corroded coin]
+        exits:
+            up: Ruins concave coin
+    Ruins blue coin:
+        name: Ruins
+        description: You find yourself in what was once the living quarters for the complex. Many smaller rooms which once had walls to divide them now lay in disarray. There is a staircase up here.
+        items: [blue coin]
+        exits:
+            up: Ruins shiny coin
+            east: Ruins central hall
+    Ruins shiny coin:
+        name: Ruins
+        description: This was long ago a lavish throne room. Dried-up fountains and crumbling statues line the walls, and the carved stone throne in the center of the room is falling apart.
+        items: [shiny coin]
+        exits:
+            down: Ruins blue coin
+    Ruins door:
+        name: Ruins
+        description: TODO
 items:
     tablet:
         look: The tablet seems appropriate for use as a writing surface but is unfortunately blank. Perhaps you should USE it as a writing surface...
@@ -203,7 +288,7 @@ items:
     can:
         look: This can is full of high-quality lantern oil.
         use:
-            conditions:
+            items_conditions:
                 has: [empty lantern]
             success:
                 text: You fill your lantern with oil. It seems to cheer up!

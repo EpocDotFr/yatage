@@ -98,14 +98,14 @@ class World:
                 if isinstance(exit_data, str):
                     exit_ = self.rooms.get(exit_data)
                 elif isinstance(exit_data, dict):
-                    if 'conditions' in exit_data:
-                        conditions = exit_data.get('conditions')
+                    if 'items_conditions' in exit_data:
+                        items_conditions = exit_data.get('items_conditions')
 
                         exit_ = ItemConditionedExit(
                             ItemConditions(
                                 self,
-                                conditions.get('has', []),
-                                conditions.get('has_not', [])
+                                items_conditions.get('has', []),
+                                items_conditions.get('has_not', [])
                             ),
                             self.rooms.get(exit_data.get('success')),
                             self.rooms.get(exit_data.get('failure'))
@@ -159,14 +159,14 @@ class World:
         return None
 
     def load_item_conditioned_use(self, use_data: Union[str, Dict]) -> Optional[Union[str, ItemConditionedUse]]:
-        if isinstance(use_data, dict) and 'conditions' in use_data:
-            conditions = use_data.get('conditions')
+        if isinstance(use_data, dict) and 'items_conditions' in use_data:
+            items_conditions = use_data.get('items_conditions')
 
             return ItemConditionedUse(
                 ItemConditions(
                     self,
-                    conditions.get('has', []),
-                    conditions.get('has_not', [])
+                    items_conditions.get('has', []),
+                    items_conditions.get('has_not', [])
                 ),
                 self.load_item_use_or_str(use_data.get('success')),
                 self.load_item_use_or_str(use_data.get('failure'))
