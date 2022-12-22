@@ -8,8 +8,9 @@ class ItemUse:
     text: str
     remove: Optional[List[str]] = dataclasses.field(default_factory=list)
     spawn: Optional[List[str]] = dataclasses.field(default_factory=list)
+    teleport: Optional[Any] = None  # TODO Typing
 
-    def do_use(self, item_instance) -> Optional[str]:
+    def do_use(self, item_instance) -> str:
         for item_identifier in self.remove:
             self.world.game.inventory.destroy(
                 item_instance.definition.identifier if item_identifier == 'self' else item_identifier
@@ -36,6 +37,8 @@ class ItemConditionedUse:
             return result_attr
         elif isinstance(result_attr, ItemUse):
             return result_attr.do_use(item_instance)
+
+        return None
 
 
 @dataclasses.dataclass
@@ -87,13 +90,23 @@ class ItemDefinition:
 class Item:
     definition: ItemDefinition
 
-    def do_use(self) -> Optional[str]:
-        if isinstance(self.definition.use, str):
-            return self.definition.use
-        elif isinstance(self.definition.use, (ItemUse, ItemConditionedUse)):
-            return self.definition.use.do_use(self)
+    def do_use(self) -> None:
+        text = None
 
-        return None
+        if isinstance(self.definition.use, str):
+            text = self.definition.use
+        elif isinstance(self.definition.use, (ItemUse, ItemConditionedUse)):
+            text = self.definition.use.do_use(self)
+
+        if text:
+            self.definition.world.game.line(text)
+
+        if isinstance(self.definition.use, ItemUse) and self.definition.use.teleport:
+            self.definition.world.game.current_room = self.definition.use.teleport
+
+            self.definition.world.game.line(
+                self.definition.world.game.current_room.do_look()
+            )
 
     def do_look(self) -> str:
         return self.definition.look

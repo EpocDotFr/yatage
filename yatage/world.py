@@ -60,10 +60,9 @@ class World:
         ret.load_metadata(world_data)
 
         ret.load_items(world_data)
-        ret.load_items_uses(world_data)
-
         ret.load_rooms(world_data)
         ret.load_rooms_exits(world_data)
+        ret.load_items_uses(world_data)
 
         ret.start = ret.rooms.get(world_data.get('start'))
 
@@ -153,7 +152,8 @@ class World:
                 self,
                 use_data.get('text'),
                 use_data.get('remove', []),
-                use_data.get('spawn', [])
+                use_data.get('spawn', []),
+                self.rooms.get(use_data.get('teleport')) if 'teleport' in use_data else None
             )
 
         return None

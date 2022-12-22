@@ -111,10 +111,7 @@ class Game(Loop):
         item = get_item(self.inventory, item_identifier)
 
         if item:
-            use_result = item.do_use()
-
-            if isinstance(use_result, str):
-                self.line(use_result)
+            item.do_use()
         else:
             self.line('You can\'t find that in your pack.')
 
