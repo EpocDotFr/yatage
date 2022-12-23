@@ -1,4 +1,4 @@
-from yatage.item import ItemDefinition, ItemUse, ItemConditionedUse, ItemConditions
+from yatage.item import ItemDefinition, ItemUse, ItemConditionedUse, ItemConditions, RoomConditions
 from typing import Dict, Optional, Any, Union
 from yatage.room import Room
 import dataclasses
@@ -110,30 +110,26 @@ class World:
             self.rooms.get(room_identifier).exits = exits
 
     def load_room_exit_room_or_game_over_or_text(self, exit_data: Union[str, Dict]) -> Optional[Union[Room, GameOverExit, TextExit]]:
-        exit_ = None
-
         if isinstance(exit_data, str):
-            exit_ = self.rooms.get(exit_data)
+            return self.rooms.get(exit_data)
         elif isinstance(exit_data, dict):
             if 'game_over' in exit_data:
-                exit_ = GameOverExit(
+                return GameOverExit(
                     exit_data.get('game_over')
                 )
             elif 'text' in exit_data:
-                exit_ = TextExit(
+                return TextExit(
                     exit_data.get('text'),
                     self.rooms.get(exit_data.get('exit')) if 'exit' in exit_data else None
                 )
 
-        return exit_
+        return None
 
     def load_room_item_conditioned_exit(self, exit_data: Union[str, Dict]) -> Optional[ItemConditionedExit]:
-        exit_ = None
-
         if isinstance(exit_data, dict) and 'items_conditions' in exit_data:
             items_conditions = exit_data.get('items_conditions')
 
-            exit_ = ItemConditionedExit(
+            return ItemConditionedExit(
                 ItemConditions(
                     self,
                     items_conditions.get('has', []),
@@ -145,7 +141,7 @@ class World:
                 self.load_room_exit_room_or_game_over_or_text(exit_data.get('failure')) if 'failure' in exit_data else None
             )
 
-        return exit_
+        return None
 
     def load_items(self, world_data: dict) -> None:
         for item_identifier, item_data in world_data.get('items').items():
@@ -162,7 +158,7 @@ class World:
             use = self.load_item_use_or_str(use_data)
 
             if not use:
-                use = self.load_item_conditioned_use(use_data)
+                use = self.load_item_or_room_conditioned_use(use_data)
 
             if not use:
                 continue
@@ -184,20 +180,33 @@ class World:
 
         return None
 
-    def load_item_conditioned_use(self, use_data: Union[str, Dict]) -> Optional[ItemConditionedUse]:
-        if isinstance(use_data, dict) and 'items_conditions' in use_data:
-            items_conditions = use_data.get('items_conditions')
+    def load_item_or_room_conditioned_use(self, use_data: Union[str, Dict]) -> Optional[ItemConditionedUse]:
+        if isinstance(use_data, dict):
+            if 'items_conditions' in use_data:
+                items_conditions = use_data.get('items_conditions')
 
-            return ItemConditionedUse(
-                ItemConditions(
+                conditions = ItemConditions(
                     self,
                     items_conditions.get('has', []),
                     items_conditions.get('has_not', []),
                     items_conditions.get('has_used', []),
                     items_conditions.get('has_not_used', [])
-                ),
-                self.load_item_use_or_str(use_data.get('success')),
-                self.load_item_use_or_str(use_data.get('failure'))
+                )
+            elif 'room_conditions' in use_data:
+                room_conditions = use_data.get('room_conditions')
+
+                conditions = RoomConditions(
+                    self,
+                    room_conditions.get('in', []),
+                    room_conditions.get('not_in', []),
+                )
+            else:
+                return None
+
+            return ItemConditionedUse(
+                conditions,
+                self.load_item_use_or_str(use_data.get('success')) if 'success' in use_data else None,
+                self.load_item_use_or_str(use_data.get('failure')) if 'failure' in use_data else None
             )
 
         return None

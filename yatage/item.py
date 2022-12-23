@@ -53,6 +53,37 @@ class ItemConditionedUse:
 
 
 @dataclasses.dataclass
+class RoomConditions:
+    world: Any  # TODO Typing
+    in_: List[str] = dataclasses.field(default_factory=list)
+    not_in: List[str] = dataclasses.field(default_factory=list)
+
+    def are_met(self) -> bool:
+        results = []
+
+        results.extend([
+            self.world.game.current_room == self.world.rooms.get(room_identifier) for room_identifier in self.in_ if room_identifier in self.world.rooms
+        ])
+
+        results.extend([
+            not self.world.game.current_room == self.world.rooms.get(room_identifier) for room_identifier in self.not_in if room_identifier in self.world.rooms
+        ])
+
+        return False not in results
+
+    def __str__(self) -> str:
+        conditions = []
+
+        if self.in_:
+            conditions.append('in {}'.format(', '.join(self.in_)))
+
+        if self.not_in:
+            conditions.append('not in {}'.format(', '.join(self.not_in)))
+
+        return ' and '.join(conditions)
+
+
+@dataclasses.dataclass
 class ItemConditions:
     world: Any  # TODO Typing
     has: List[str] = dataclasses.field(default_factory=list)
@@ -145,6 +176,7 @@ class Item:
 __all__ = [
     'ItemUse',
     'ItemConditionedUse',
+    'RoomConditions',
     'ItemConditions',
     'ItemDefinition',
     'Item',

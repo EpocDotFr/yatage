@@ -15,7 +15,19 @@ class Inventory(UserList):
         ]
 
         for item in self:
-            text.append(f'  - {item.definition.alias_or_identifier}')
+            if not self.game.debug and item.used:
+                continue
+
+            name = item.definition.alias_or_identifier
+
+            if self.game.debug:
+                if item.used:
+                    name += ' [used]'
+
+                if item.definition.alias:
+                    name += f' [alias of {item.definition.identifier}]'
+
+            text.append(f'  - {name}')
 
         return '\n'.join(text)
 
