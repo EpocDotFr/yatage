@@ -1,4 +1,5 @@
 from typing import Optional, List, Any, Union
+import yatage.utils
 import dataclasses
 
 
@@ -6,8 +7,9 @@ import dataclasses
 class ItemUse:
     world: Any  # TODO Typing
     text: str
-    remove: Optional[List[str]] = dataclasses.field(default_factory=list)
-    spawn: Optional[List[str]] = dataclasses.field(default_factory=list)
+    remove: List[str] = dataclasses.field(default_factory=list)
+    spawn: List[str] = dataclasses.field(default_factory=list)
+    mark_used: List[str] = dataclasses.field(default_factory=list)
     teleport: Optional[Any] = None  # TODO Typing
 
     def do_use(self, item_instance) -> str:
@@ -20,6 +22,15 @@ class ItemUse:
             self.world.game.inventory.append(
                 self.world.items.get(item_identifier).create_item()
             )
+
+        for item_identifier in self.mark_used:
+            item = yatage.utils.get_item(
+                self.world.game.inventory,
+                item_instance.definition.identifier if item_identifier == 'self' else item_identifier
+            )
+
+            if item:
+                item.used = True
 
         return self.text
 
@@ -44,8 +55,10 @@ class ItemConditionedUse:
 @dataclasses.dataclass
 class ItemConditions:
     world: Any  # TODO Typing
-    has: Optional[List[str]] = dataclasses.field(default_factory=list)
-    has_not: Optional[List[str]] = dataclasses.field(default_factory=list)
+    has: List[str] = dataclasses.field(default_factory=list)
+    has_not: List[str] = dataclasses.field(default_factory=list)
+    has_used: List[str] = dataclasses.field(default_factory=list)
+    has_not_used: List[str] = dataclasses.field(default_factory=list)
 
     def are_met(self) -> bool:
         results = []
@@ -58,21 +71,32 @@ class ItemConditions:
             not self.world.game.inventory.has(item_identifier) for item_identifier in self.has_not
         ])
 
+        results.extend([
+            yatage.utils.get_item(self.world.game.inventory, item_identifier).used for item_identifier in self.has_used if self.world.game.inventory.has(item_identifier)
+        ])
+
+        results.extend([
+            not yatage.utils.get_item(self.world.game.inventory, item_identifier).used for item_identifier in self.has_not_used if self.world.game.inventory.has(item_identifier)
+        ])
+
         return False not in results
 
     def __str__(self) -> str:
-        conditions = ''
+        conditions = []
 
         if self.has:
-            conditions += 'has {}'.format(', '.join(self.has))
-
-        if self.has and self.has_not:
-            conditions += ' and '
+            conditions.append('has {}'.format(', '.join(self.has)))
 
         if self.has_not:
-            conditions += 'has not {}'.format(', '.join(self.has_not))
+            conditions.append('has not {}'.format(', '.join(self.has_not)))
 
-        return conditions
+        if self.has_used:
+            conditions.append('has used {}'.format(', '.join(self.has_used)))
+
+        if self.has_not_used:
+            conditions.append('has not used {}'.format(', '.join(self.has_not_used)))
+
+        return ' and '.join(conditions)
 
 
 @dataclasses.dataclass
@@ -94,6 +118,7 @@ class ItemDefinition:
 @dataclasses.dataclass
 class Item:
     definition: ItemDefinition
+    used: bool = False
 
     def do_use(self) -> None:
         text = None

@@ -8,7 +8,7 @@ class Room:
     world: Any  # TODO Typing
     identifier: str
     description: str
-    name: Optional[str]
+    name: Optional[str] = None
     items: List[Item] = dataclasses.field(default_factory=list)
     exits: Dict[str, Any] = dataclasses.field(default_factory=dict)  # TODO Typing
 

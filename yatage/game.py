@@ -1,8 +1,8 @@
 from yatage.world import World, GameOverExit, ItemConditionedExit, TextExit
 from yatage.inventory import Inventory
+from typing import Optional, Union
 from yatage.room import Room
 from yatage.loop import Loop
-from typing import Optional
 import yatage.utils
 
 
@@ -49,39 +49,35 @@ class Game(Loop):
     def do_go(self, exit_: str) -> Optional[bool]:
         """You may 'go <exit>' to travel in that direction (such as 'go west'), or you may merely '<exit>' (such as 'west')."""
         if exit_ in self.current_room.exits:
-            look_room = False
-            game_over = False
             exit_data = self.current_room.exits.get(exit_)
 
-            if isinstance(exit_data, Room):
-                self.current_room = self.current_room.exits.get(exit_)
-
-                look_room = True
-            elif isinstance(exit_data, GameOverExit):
-                self.line(exit_data.text)
-
-                game_over = True
-            elif isinstance(exit_data, TextExit):
-                self.line(exit_data.text)
-
-                if exit_data.exit:
-                    self.current_room = exit_data.exit
-
-                    look_room = True
-            elif isinstance(exit_data, ItemConditionedExit):
-                self.current_room = exit_data.do_exit()
-
-                look_room = True
-
-            if look_room:
-                self.line(self.current_room.do_look())
-
-            if game_over:
-                return True
+            if isinstance(exit_data, ItemConditionedExit):
+                return self.handle_exit_room_or_game_over_or_text(exit_data.do_exit())
+            else:
+                return self.handle_exit_room_or_game_over_or_text(exit_data)
         else:
             self.line('I don\'t understand; try \'help\' for instructions.')
 
         return
+
+    def handle_exit_room_or_game_over_or_text(self, exit_data: Optional[Union[Room, GameOverExit, TextExit]]) -> Optional[bool]:
+        if isinstance(exit_data, Room):
+            self.current_room = exit_data
+
+            self.line(self.current_room.do_look())
+        elif isinstance(exit_data, GameOverExit):
+            self.line(exit_data.text)
+
+            return True
+        elif isinstance(exit_data, TextExit):
+            self.line(exit_data.text)
+
+            if exit_data.exit:
+                self.current_room = exit_data.exit
+
+                self.line(self.current_room.do_look())
+
+        return None
 
     def do_inv(self, _: str) -> Optional[bool]:
         """To see the contents of your inventory, merely 'inv'."""

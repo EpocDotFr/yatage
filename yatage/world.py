@@ -137,7 +137,9 @@ class World:
                 ItemConditions(
                     self,
                     items_conditions.get('has', []),
-                    items_conditions.get('has_not', [])
+                    items_conditions.get('has_not', []),
+                    items_conditions.get('has_used', []),
+                    items_conditions.get('has_not_used', [])
                 ),
                 self.load_room_exit_room_or_game_over_or_text(exit_data.get('success')) if 'success' in exit_data else None,
                 self.load_room_exit_room_or_game_over_or_text(exit_data.get('failure')) if 'failure' in exit_data else None
@@ -176,6 +178,7 @@ class World:
                 use_data.get('text'),
                 use_data.get('remove', []),
                 use_data.get('spawn', []),
+                use_data.get('mark_used', []),
                 self.rooms.get(use_data.get('teleport')) if 'teleport' in use_data else None
             )
 
@@ -189,7 +192,9 @@ class World:
                 ItemConditions(
                     self,
                     items_conditions.get('has', []),
-                    items_conditions.get('has_not', [])
+                    items_conditions.get('has_not', []),
+                    items_conditions.get('has_used', []),
+                    items_conditions.get('has_not_used', [])
                 ),
                 self.load_item_use_or_str(use_data.get('success')),
                 self.load_item_use_or_str(use_data.get('failure'))

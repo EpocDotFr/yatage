@@ -44,11 +44,3 @@ down
 take corroded coin
 up
 west
-use blue coin
-use red coin
-use shiny coin
-use concave coin
-use corroded coin
-north
-take teleporter
-use teleporter
