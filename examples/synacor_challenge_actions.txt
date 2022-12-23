@@ -52,3 +52,4 @@ use corroded coin
 north
 take teleporter
 use teleporter
+use teleporter
