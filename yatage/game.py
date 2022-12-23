@@ -64,9 +64,10 @@ class Game(Loop):
             elif isinstance(exit_data, TextExit):
                 self.line(exit_data.text)
 
-                self.current_room = exit_data.exit
+                if exit_data.exit:
+                    self.current_room = exit_data.exit
 
-                look_room = True
+                    look_room = True
             elif isinstance(exit_data, ItemConditionedExit):
                 self.current_room = exit_data.do_exit()
 

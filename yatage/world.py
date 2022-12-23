@@ -8,8 +8,8 @@ import yaml
 @dataclasses.dataclass
 class ItemConditionedExit:
     conditions: ItemConditions
-    success: Room
-    failure: Room
+    success: Any  # TODO Typing
+    failure: Any  # TODO Typing
 
     def do_exit(self) -> Room:
         return self.success if self.conditions.are_met() else self.failure
@@ -29,10 +29,15 @@ class GameOverExit:
 @dataclasses.dataclass
 class TextExit:
     text: str
-    exit: Room
+    exit: Optional[Room] = None
 
     def __str__(self) -> str:
-        return f'Text then {self.exit}'
+        text = 'Text'
+
+        if self.exit:
+            text += f' then {self.exit}'
+
+        return text
 
 
 @dataclasses.dataclass
@@ -92,32 +97,10 @@ class World:
             exits = {}
 
             for exit_name, exit_data in exits_data.items():
-                exit_ = None
+                exit_ = self.load_room_exit_room_or_game_over_or_text(exit_data)
 
-                if isinstance(exit_data, str):
-                    exit_ = self.rooms.get(exit_data)
-                elif isinstance(exit_data, dict):
-                    if 'items_conditions' in exit_data:
-                        items_conditions = exit_data.get('items_conditions')
-
-                        exit_ = ItemConditionedExit(
-                            ItemConditions(
-                                self,
-                                items_conditions.get('has', []),
-                                items_conditions.get('has_not', [])
-                            ),
-                            self.rooms.get(exit_data.get('success')),
-                            self.rooms.get(exit_data.get('failure'))
-                        )
-                    elif 'game_over' in exit_data:
-                        exit_ = GameOverExit(
-                            exit_data.get('game_over')
-                        )
-                    elif 'text' in exit_data:
-                        exit_ = TextExit(
-                            exit_data.get('text'),
-                            self.rooms.get(exit_data.get('exit'))
-                        )
+                if not exit_:
+                    exit_ = self.load_room_item_conditioned_exit(exit_data)
 
                 if not exit_:
                     continue
@@ -125,6 +108,42 @@ class World:
                 exits[exit_name] = exit_
 
             self.rooms.get(room_identifier).exits = exits
+
+    def load_room_exit_room_or_game_over_or_text(self, exit_data: Union[str, Dict]) -> Optional[Union[Room, GameOverExit, TextExit]]:
+        exit_ = None
+
+        if isinstance(exit_data, str):
+            exit_ = self.rooms.get(exit_data)
+        elif isinstance(exit_data, dict):
+            if 'game_over' in exit_data:
+                exit_ = GameOverExit(
+                    exit_data.get('game_over')
+                )
+            elif 'text' in exit_data:
+                exit_ = TextExit(
+                    exit_data.get('text'),
+                    self.rooms.get(exit_data.get('exit')) if 'exit' in exit_data else None
+                )
+
+        return exit_
+
+    def load_room_item_conditioned_exit(self, exit_data: Union[str, Dict]) -> Optional[ItemConditionedExit]:
+        exit_ = None
+
+        if isinstance(exit_data, dict) and 'items_conditions' in exit_data:
+            items_conditions = exit_data.get('items_conditions')
+
+            exit_ = ItemConditionedExit(
+                ItemConditions(
+                    self,
+                    items_conditions.get('has', []),
+                    items_conditions.get('has_not', [])
+                ),
+                self.load_room_exit_room_or_game_over_or_text(exit_data.get('success')) if 'success' in exit_data else None,
+                self.load_room_exit_room_or_game_over_or_text(exit_data.get('failure')) if 'failure' in exit_data else None
+            )
+
+        return exit_
 
     def load_items(self, world_data: dict) -> None:
         for item_identifier, item_data in world_data.get('items').items():
@@ -143,6 +162,9 @@ class World:
             if not use:
                 use = self.load_item_conditioned_use(use_data)
 
+            if not use:
+                continue
+
             self.items.get(item_identifier).use = use
 
     def load_item_use_or_str(self, use_data: Union[str, Dict]) -> Optional[Union[str, ItemUse]]:
@@ -159,7 +181,7 @@ class World:
 
         return None
 
-    def load_item_conditioned_use(self, use_data: Union[str, Dict]) -> Optional[Union[str, ItemConditionedUse]]:
+    def load_item_conditioned_use(self, use_data: Union[str, Dict]) -> Optional[ItemConditionedUse]:
         if isinstance(use_data, dict) and 'items_conditions' in use_data:
             items_conditions = use_data.get('items_conditions')
 
