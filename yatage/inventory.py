@@ -15,7 +15,7 @@ class Inventory(UserList):
         ]
 
         for item in self:
-            text.append(f'  - {item.definition.identifier}')
+            text.append(f'  - {item.definition.alias_or_identifier}')
 
         return '\n'.join(text)
 
@@ -24,8 +24,18 @@ class Inventory(UserList):
 
         return True if item else False
 
+    def use(self, item_identifier: str) -> bool:
+        item = yatage.utils.get_item(self, item_identifier, 'alias_or_identifier')
+
+        if not item:
+            return False
+
+        item.do_use()
+
+        return True
+
     def take(self, item_identifier: str) -> bool:
-        item = yatage.utils.get_item(self.game.current_room.items, item_identifier)
+        item = yatage.utils.get_item(self.game.current_room.items, item_identifier, 'alias_or_identifier')
 
         if not item:
             return False
@@ -39,7 +49,7 @@ class Inventory(UserList):
         return True
 
     def drop(self, item_identifier: str) -> bool:
-        item = yatage.utils.get_item(self, item_identifier)
+        item = yatage.utils.get_item(self, item_identifier, 'alias_or_identifier')
 
         if not item:
             return False

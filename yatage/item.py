@@ -81,9 +81,14 @@ class ItemDefinition:
     identifier: str
     look: str
     use: Optional[Union[str, ItemUse, ItemConditionedUse]] = None
+    alias: Optional[str] = None
 
     def create_item(self):  # TODO Typing
         return Item(self)
+
+    @property
+    def alias_or_identifier(self) -> str:
+        return self.alias or self.identifier
 
 
 @dataclasses.dataclass

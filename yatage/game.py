@@ -1,9 +1,9 @@
 from yatage.world import World, GameOverExit, ItemConditionedExit, TextExit
 from yatage.inventory import Inventory
-from yatage.utils import get_item
 from yatage.room import Room
 from yatage.loop import Loop
 from typing import Optional
+import yatage.utils
 
 
 class Game(Loop):
@@ -35,7 +35,7 @@ class Game(Loop):
     def do_look(self, subject: str) -> Optional[bool]:
         """You may merely 'look' to examine the room, or you may 'look <subject>' (such as 'look chair') to examine something specific."""
         if subject:
-            item = get_item(self.current_room.items, subject) or get_item(self.inventory, subject)
+            item = yatage.utils.get_item(self.current_room.items, subject) or yatage.utils.get_item(self.inventory, subject)
 
             if item:
                 self.line(item.do_look())
@@ -108,11 +108,7 @@ class Game(Loop):
 
     def do_use(self, item_identifier: str) -> Optional[bool]:
         """You may activate or otherwise apply an item with 'use <item>'."""
-        item = get_item(self.inventory, item_identifier)
-
-        if item:
-            item.do_use()
-        else:
+        if not self.inventory.use(item_identifier):
             self.line('You can\'t find that in your pack.')
 
         return

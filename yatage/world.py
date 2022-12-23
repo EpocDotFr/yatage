@@ -131,7 +131,8 @@ class World:
             self.items[item_identifier] = ItemDefinition(
                 self,
                 item_identifier,
-                item_data.get('look')
+                item_data.get('look'),
+                alias=item_data.get('alias')
             )
 
     def load_items_uses(self, world_data: dict) -> None:

@@ -34,7 +34,7 @@ class Room:
             ))
 
             for item in self.items:
-                text.append(f'  - {item.definition.identifier}')
+                text.append(f'  - {item.definition.alias_or_identifier}')
 
         if self.exits:
             exits_text = f'There are {len(self.exits)} exits:'
@@ -53,8 +53,12 @@ class Room:
 
         return '\n'.join(text)
 
+    @property
+    def name_or_identifier(self) -> str:
+        return self.name or self.identifier
+
     def __str__(self) -> str:
-        name = self.name or self.identifier
+        name = self.name_or_identifier
 
         if self.world.game.debug and self.name and self.name != self.identifier:
             name += f' [{self.identifier}]'

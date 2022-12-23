@@ -315,6 +315,9 @@ rooms:
         description: It's a warm, sunny day! While the breeze from Lake Erie is certainly refreshing, you don't see anything here that will help you with your quest.
         exits:
             inside: Synacor Headquarters
+    # Beach
+    Beach:
+        description: TODO
 items:
     tablet:
         look: The tablet seems appropriate for use as a writing surface but is unfortunately blank. Perhaps you should USE it as a writing surface...
@@ -402,11 +405,17 @@ items:
             spawn: [teleporter2]
             teleport: Synacor Headquarters
     teleporter2:
+        alias: teleporter
         look: This small device has a button on it and reads "teleporter" on the side.
         use:
             text: |
-                TODO
-            teleport: TODO
+                You wake up on a sandy beach with a slight headache. The last thing you remember is activating that teleporter... but now you can't find it anywhere in your pack. Someone seems to have drawn a message in the sand here:
+
+                    lVfSqITLZkYK
+                
+                It begins to rain. The message washes away. You take a deep breath and feel firmly grounded in reality as the effects of the teleportation wear off.
+            remove: [self]
+            teleport: Beach
     business card:
         look: This business card has "synacor.com" printed in red on one side.
     strange book:
@@ -458,7 +467,7 @@ items:
             Note
             ----
 
-            After using the teleporter once, a new item, teleporter2, will spawn into your inventory. Use it instead of
-            solving this challenge (see introduction note).
+            After using the teleporter once, just use it a second time instead of solving this unimplemented challenge
+            (see introduction note).
 
             ----
