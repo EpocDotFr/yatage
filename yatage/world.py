@@ -182,12 +182,28 @@ class World:
 
     def load_items(self, items_data: dict) -> None:
         for item_identifier, item_data in items_data.items():
+            look = item_data.get('look')
+
+            if not look:
+                raise WorldReadError(f'"look" is missing in item "{item_identifier}"')
+
             self.items[item_identifier] = ItemDefinition(
                 self,
                 item_identifier,
-                item_data.get('look'),
+                look,
                 alias=item_data.get('alias')
             )
+
+        items_aliases = [
+            item.alias for item in self.items.values() if item.alias
+        ]
+
+        for item in self.items.values():
+            if not item.alias:
+                continue
+
+            if item.alias in items_aliases:
+                raise WorldReadError(f'Alias "{item.alias}" in item "{item.identifier}" is already in use')
 
     def load_items_uses(self, items_data: dict) -> None:
         for item_identifier, item_data in items_data.items():
