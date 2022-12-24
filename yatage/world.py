@@ -1,5 +1,7 @@
+from __future__ import annotations
 from yatage.item import ItemDefinition, ItemUse, ItemConditionedUse, ItemConditions, RoomConditions
-from typing import Dict, Optional, Any, Union
+from typing import Dict, Optional, Any, Union, Tuple
+from yatage.exceptions import WorldReadError
 from yatage.room import Room
 import dataclasses
 import yaml
@@ -51,34 +53,69 @@ class World:
     description: Optional[str] = None
     author: Optional[str] = None
 
+    SUPPORTED_VERSIONS: Tuple[int] = (1, )
+
     @classmethod
-    def load(cls, game):  # TODO Typing
+    def load(cls, game) -> World:  # TODO Typing
         with open(game.world_filename, 'rb') as f:
             world_data = yaml.safe_load(f)  # TODO Move to stream-based loading?
 
+        version = world_data.get('version')
+
+        if not version:
+            raise WorldReadError('Top level "version" is required')
+        elif not isinstance(version, int):
+            raise WorldReadError('Top level "version" must be an integer')
+        elif version not in World.SUPPORTED_VERSIONS:
+            raise WorldReadError('Invalid top level "version"')
+
+        name = world_data.get('name')
+
+        if not name:
+            raise WorldReadError('Top level "name" is required')
+
+        start = world_data.get('start')
+
+        if not start:
+            raise WorldReadError('Top level "start" is required')
+
         ret = cls(
             game,
-            world_data.get('version'),
-            world_data.get('name')
+            version,
+            name
         )
 
-        ret.load_metadata(world_data)
+        ret.description = world_data.get('description')
+        ret.author = world_data.get('author')
 
-        ret.load_items(world_data)
-        ret.load_rooms(world_data)
-        ret.load_rooms_exits(world_data)
-        ret.load_items_uses(world_data)
+        items_data = world_data.get('items', {})
 
-        ret.start = ret.rooms.get(world_data.get('start'))
+        if items_data and not isinstance(items_data, dict):
+            raise WorldReadError('Invalid top level "items": must be defined as a map')
+
+        ret.load_items(items_data)
+
+        rooms_data = world_data.get('rooms', {})
+
+        if not rooms_data:
+            raise WorldReadError('Top level "rooms" is required and must contain at least one valid room')
+        elif not isinstance(rooms_data, dict):
+            raise WorldReadError('Invalid top level "rooms": must be defined as a map')
+
+        ret.load_rooms(rooms_data)
+        ret.load_rooms_exits(rooms_data)
+
+        ret.load_items_uses(items_data)
+
+        if start not in ret.rooms:
+            raise WorldReadError(f'Invalid top level "start": room not found')
+
+        ret.start = ret.rooms.get(start)
 
         return ret
 
-    def load_metadata(self, world_data: dict) -> None:
-        self.description = world_data.get('description')
-        self.author = world_data.get('author')
-
-    def load_rooms(self, world_data: dict) -> None:
-        for room_identifier, room_data in world_data.get('rooms').items():
+    def load_rooms(self, rooms_data: dict) -> None:
+        for room_identifier, room_data in rooms_data.items():
             items = [
                 self.items.get(item_identifier).create_item() for item_identifier in room_data.get('items', [])
             ]
@@ -91,8 +128,8 @@ class World:
                 items
             )
 
-    def load_rooms_exits(self, world_data: dict) -> None:
-        for room_identifier, room_data in world_data.get('rooms').items():
+    def load_rooms_exits(self, rooms_data: dict) -> None:
+        for room_identifier, room_data in rooms_data.items():
             exits_data = room_data.get('exits', {})
             exits = {}
 
@@ -143,8 +180,8 @@ class World:
 
         return None
 
-    def load_items(self, world_data: dict) -> None:
-        for item_identifier, item_data in world_data.get('items').items():
+    def load_items(self, items_data: dict) -> None:
+        for item_identifier, item_data in items_data.items():
             self.items[item_identifier] = ItemDefinition(
                 self,
                 item_identifier,
@@ -152,8 +189,8 @@ class World:
                 alias=item_data.get('alias')
             )
 
-    def load_items_uses(self, world_data: dict) -> None:
-        for item_identifier, item_data in world_data.get('items').items():
+    def load_items_uses(self, items_data: dict) -> None:
+        for item_identifier, item_data in items_data.items():
             use_data = item_data.get('use')
             use = self.load_item_use_or_str(use_data)
 
