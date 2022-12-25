@@ -90,7 +90,7 @@ class World:
 
         items_data = world_data.get('items', {})
 
-        if items_data and not isinstance(items_data, dict):
+        if not isinstance(items_data, dict):
             raise WorldReadError('Invalid top level "items": must be defined as a map')
 
         ret.load_items(items_data)
@@ -108,7 +108,7 @@ class World:
         ret.load_items_uses(items_data)
 
         if start not in ret.rooms:
-            raise WorldReadError(f'Invalid top level "start": room not found')
+            raise WorldReadError('Invalid top level "start": room not found')
 
         ret.start = ret.rooms.get(start)
 
@@ -116,14 +116,28 @@ class World:
 
     def load_rooms(self, rooms_data: dict) -> None:
         for room_identifier, room_data in rooms_data.items():
-            items = [
-                self.items.get(item_identifier).create_item() for item_identifier in room_data.get('items', [])
-            ]
+            items_data = room_data.get('items', [])
+
+            if not isinstance(items_data, list):
+                raise WorldReadError(f'Invalid "items" in room "{room_identifier}": must be defined as an array')
+
+            items = []
+
+            for item_identifier in items_data:
+                if item_identifier not in self.items:
+                    raise WorldReadError(f'Item "{item_identifier}" in room "{room_identifier}" does not exist')
+
+                items.append(self.items.get(item_identifier).create_item())
+
+            description = room_data.get('description')
+
+            if not description:
+                raise WorldReadError(f'"description" is missing in room "{room_identifier}"')
 
             self.rooms[room_identifier] = Room(
                 self,
                 room_identifier,
-                room_data.get('description', ''),
+                description,
                 room_data.get('name'),
                 items
             )
@@ -131,6 +145,10 @@ class World:
     def load_rooms_exits(self, rooms_data: dict) -> None:
         for room_identifier, room_data in rooms_data.items():
             exits_data = room_data.get('exits', {})
+
+            if not isinstance(exits_data, dict):
+                raise WorldReadError(f'Invalid "exits" in room "{room_identifier}": must be defined as a map')
+
             exits = {}
 
             for exit_name, exit_data in exits_data.items():
@@ -194,16 +212,18 @@ class World:
                 alias=item_data.get('alias')
             )
 
-        items_aliases = [
-            item.alias for item in self.items.values() if item.alias
-        ]
-
         for item in self.items.values():
             if not item.alias:
                 continue
 
+            items_aliases = {
+                item_for_alias.alias: item_for_alias.identifier for item_for_alias in self.items.values() if item_for_alias.alias and item_for_alias.identifier != item.identifier
+            }
+
             if item.alias in items_aliases:
-                raise WorldReadError(f'Alias "{item.alias}" in item "{item.identifier}" is already in use')
+                used_by = items_aliases.get(item.alias)
+
+                raise WorldReadError(f'Alias "{item.alias}" in item "{item.identifier}" is already in use by item "{used_by}"')
 
     def load_items_uses(self, items_data: dict) -> None:
         for item_identifier, item_data in items_data.items():
