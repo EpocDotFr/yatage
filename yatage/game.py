@@ -1,4 +1,5 @@
-from yatage.world import World, GameOverExit, ItemConditionedExit, TextExit
+from yatage.room import GameOverExit, TextExit, ItemConditionedExit
+from yatage.world import World
 from yatage.inventory import Inventory
 from typing import Optional, Union
 from yatage.room import Room
