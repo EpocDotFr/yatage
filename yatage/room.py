@@ -4,6 +4,41 @@ import dataclasses
 
 
 @dataclasses.dataclass
+class ItemConditionedExit:
+    conditions: Any  # TODO Typing
+    success: Any  # TODO Typing
+    failure: Any  # TODO Typing
+
+    def do_exit(self):  # TODO Typing
+        return self.success if self.conditions.are_met() else self.failure
+
+    def __str__(self) -> str:
+        return f'{self.success} if ({self.conditions}) or {self.failure}'
+
+
+@dataclasses.dataclass
+class GameOverExit:
+    text: str
+
+    def __str__(self) -> str:
+        return 'Text then game over'
+
+
+@dataclasses.dataclass
+class TextExit:
+    text: str
+    exit: Optional[Any] = None  # TODO Typing
+
+    def __str__(self) -> str:
+        text = 'Text'
+
+        if self.exit:
+            text += f' then {self.exit}'
+
+        return text
+
+
+@dataclasses.dataclass
 class Room:
     world: Any  # TODO Typing
     identifier: str
@@ -67,5 +102,8 @@ class Room:
 
 
 __all__ = [
+    'ItemConditionedExit',
+    'GameOverExit',
+    'TextExit',
     'Room',
 ]

@@ -1,45 +1,10 @@
 from __future__ import annotations
 from yatage.item import ItemDefinition, ItemUse, ItemConditionedUse, ItemConditions, RoomConditions
+from yatage.room import Room, GameOverExit, TextExit, ItemConditionedExit
 from typing import Dict, Optional, Any, Union, Tuple
 from yatage.exceptions import WorldReadError
-from yatage.room import Room
 import dataclasses
 import yaml
-
-
-@dataclasses.dataclass
-class ItemConditionedExit:
-    conditions: ItemConditions
-    success: Any  # TODO Typing
-    failure: Any  # TODO Typing
-
-    def do_exit(self) -> Room:
-        return self.success if self.conditions.are_met() else self.failure
-
-    def __str__(self) -> str:
-        return f'{self.success} if ({self.conditions}) or {self.failure}'
-
-
-@dataclasses.dataclass
-class GameOverExit:
-    text: str
-
-    def __str__(self) -> str:
-        return 'Text then game over'
-
-
-@dataclasses.dataclass
-class TextExit:
-    text: str
-    exit: Optional[Room] = None
-
-    def __str__(self) -> str:
-        text = 'Text'
-
-        if self.exit:
-            text += f' then {self.exit}'
-
-        return text
 
 
 @dataclasses.dataclass
@@ -73,11 +38,15 @@ class World:
 
         if not name:
             raise WorldReadError('Top level "name" is required')
+        elif not isinstance(name, str):
+            raise WorldReadError('Top level "name" must be a string')
 
         start = world_data.get('start')
 
         if not start:
             raise WorldReadError('Top level "start" is required')
+        elif not isinstance(start, str):
+            raise WorldReadError('Top level "start" must be a string')
 
         ret = cls(
             game,
@@ -85,8 +54,19 @@ class World:
             name
         )
 
-        ret.description = world_data.get('description')
-        ret.author = world_data.get('author')
+        description = world_data.get('description')
+
+        if description and not isinstance(description, str):
+            raise WorldReadError('Top level "description" must be a string')
+
+        ret.description = description
+
+        author = world_data.get('author')
+
+        if author and not isinstance(author, str):
+            raise WorldReadError('Top level "description" must be a string')
+
+        ret.author = author
 
         items_data = world_data.get('items', {})
 
@@ -104,7 +84,6 @@ class World:
 
         ret.load_rooms(rooms_data)
         ret.load_rooms_exits(rooms_data)
-
         ret.load_items_uses(items_data)
 
         if start not in ret.rooms:
@@ -133,17 +112,27 @@ class World:
 
             if not description:
                 raise WorldReadError(f'"description" is missing in room "{room_identifier}"')
+            elif not isinstance(description, str):
+                raise WorldReadError(f'"description" in room "{room_identifier}" must be a string')
+
+            name = room_data.get('name')
+
+            if name and not isinstance(name, str):
+                raise WorldReadError(f'"name" in room "{room_identifier}" must be a string')
 
             self.rooms[room_identifier] = Room(
                 self,
                 room_identifier,
                 description,
-                room_data.get('name'),
+                name,
                 items
             )
 
     def load_rooms_exits(self, rooms_data: dict) -> None:
         for room_identifier, room_data in rooms_data.items():
+            if 'exits' not in room_data:
+                continue
+
             exits_data = room_data.get('exits', {})
 
             if not isinstance(exits_data, dict):
@@ -152,13 +141,10 @@ class World:
             exits = {}
 
             for exit_name, exit_data in exits_data.items():
-                exit_ = self.load_room_exit_room_or_game_over_or_text(exit_data)
+                exit_ = self.load_room_exit_room_or_game_over_or_text(exit_data) or self.load_room_item_conditioned_exit(exit_data)
 
                 if not exit_:
-                    exit_ = self.load_room_item_conditioned_exit(exit_data)
-
-                if not exit_:
-                    continue
+                    raise WorldReadError(f'Invalid "exits" in room "{room_identifier}": unknown exit type')
 
                 exits[exit_name] = exit_
 
@@ -204,12 +190,19 @@ class World:
 
             if not look:
                 raise WorldReadError(f'"look" is missing in item "{item_identifier}"')
+            elif not isinstance(look, str):
+                raise WorldReadError(f'"look" in item "{item_identifier}" must be a string')
+
+            alias = item_data.get('alias')
+
+            if alias and not isinstance(alias, str):
+                raise WorldReadError(f'"alias" in item "{item_identifier}" must be a string')
 
             self.items[item_identifier] = ItemDefinition(
                 self,
                 item_identifier,
                 look,
-                alias=item_data.get('alias')
+                alias=alias
             )
 
         for item in self.items.values():
@@ -227,14 +220,14 @@ class World:
 
     def load_items_uses(self, items_data: dict) -> None:
         for item_identifier, item_data in items_data.items():
-            use_data = item_data.get('use')
-            use = self.load_item_use_or_str(use_data)
-
-            if not use:
-                use = self.load_item_or_room_conditioned_use(use_data)
-
-            if not use:
+            if 'use' not in item_data:
                 continue
+
+            use_data = item_data.get('use')
+            use = self.load_item_use_or_str(use_data) or self.load_item_or_room_conditioned_use(use_data)
+
+            if not use:
+                raise WorldReadError(f'Invalid "use" in item "{item_identifier}": unknown use type')
 
             self.items.get(item_identifier).use = use
 
@@ -286,8 +279,5 @@ class World:
 
 
 __all__ = [
-    'ItemConditionedExit',
-    'GameOverExit',
-    'TextExit',
     'World',
 ]
