@@ -144,7 +144,7 @@ class World:
                 exit_ = self.load_room_exit_room_or_game_over_or_text(exit_data) or self.load_room_item_conditioned_exit(exit_data)
 
                 if not exit_:
-                    raise WorldReadError(f'Invalid "exits" in room "{room_identifier}": unknown exit type')
+                    raise WorldReadError(f'Invalid exit "{exit_name}" in room "{room_identifier}": unknown exit type')
 
                 exits[exit_name] = exit_
 
