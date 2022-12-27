@@ -18,7 +18,7 @@ class World:
     description: Optional[str] = None
     author: Optional[str] = None
 
-    SUPPORTED_VERSIONS: Tuple[int] = (1, )
+    SUPPORTED_VERSIONS: Tuple[int] = (1,)
 
     @classmethod
     def load(cls, game) -> World:  # TODO Typing
@@ -71,7 +71,7 @@ class World:
         items_data = world_data.get('items', {})
 
         if not isinstance(items_data, dict):
-            raise WorldReadError('Invalid top level "items": must be defined as a map')
+            raise WorldReadError('Invalid top level "items": must be a map')
 
         ret.load_items(items_data)
 
@@ -80,7 +80,7 @@ class World:
         if not rooms_data:
             raise WorldReadError('Top level "rooms" is required and must contain at least one valid room')
         elif not isinstance(rooms_data, dict):
-            raise WorldReadError('Invalid top level "rooms": must be defined as a map')
+            raise WorldReadError('Invalid top level "rooms": must be a map')
 
         ret.load_rooms(rooms_data)
         ret.load_rooms_exits(rooms_data)
@@ -98,7 +98,7 @@ class World:
             items_data = room_data.get('items', [])
 
             if not isinstance(items_data, list):
-                raise WorldReadError(f'Invalid "items" in room "{room_identifier}": must be defined as an array')
+                raise WorldReadError(f'Invalid "items" in room "{room_identifier}": must be an array')
 
             items = []
 
@@ -136,7 +136,7 @@ class World:
             exits_data = room_data.get('exits', {})
 
             if not isinstance(exits_data, dict):
-                raise WorldReadError(f'Invalid "exits" in room "{room_identifier}": must be defined as a map')
+                raise WorldReadError(f'Invalid "exits" in room "{room_identifier}": must be a map')
 
             exits = {}
 
@@ -234,41 +234,81 @@ class World:
     def load_item_use_or_str(self, use_data: Union[str, Dict]) -> Optional[Union[str, ItemUse]]:
         if isinstance(use_data, str):
             return use_data
-        elif isinstance(use_data, dict) and 'text' in use_data:
+
+        if isinstance(use_data, dict) and 'text' in use_data:
+            text = use_data.get('text')
+
+            if not text:
+                raise WorldReadError(f'"text" is missing in "use"')  # TODO Elaborate
+            elif not isinstance(text, str):
+                raise WorldReadError(f'"text" in "use" must be a string')  # TODO Elaborate
+
+            remove = use_data.get('remove', [])
+
+            if not isinstance(remove, list):
+                raise WorldReadError(f'Invalid "remove" in "use": must be an array')  # TODO Elaborate
+
+            spawn = use_data.get('spawn', [])
+
+            if not isinstance(spawn, list):
+                raise WorldReadError(f'Invalid "spawn" in "use": must be an array')  # TODO Elaborate
+
+            mark_used = use_data.get('mark_used', [])
+
+            if not isinstance(mark_used, list):
+                raise WorldReadError(f'Invalid "mark_used" in "use": must be an array')  # TODO Elaborate
+
+            teleport = use_data.get('teleport')
+
+            if teleport:
+                if not isinstance(teleport, str):
+                    raise WorldReadError(f'"teleport" in "use" must be a string')  # TODO Elaborate
+                elif teleport not in self.rooms:
+                    raise WorldReadError('Invalid "teleport" in "use": room not found')  # TODO Elaborate
+
             return ItemUse(
                 self,
-                use_data.get('text'),
-                use_data.get('remove', []),
-                use_data.get('spawn', []),
-                use_data.get('mark_used', []),
-                self.rooms.get(use_data.get('teleport')) if 'teleport' in use_data else None
+                text,
+                remove,
+                spawn,
+                mark_used,
+                self.rooms.get(teleport) if teleport else None
             )
 
         return None
 
     def load_item_or_room_conditioned_use(self, use_data: Union[str, Dict]) -> Optional[ItemConditionedUse]:
-        if isinstance(use_data, dict):
-            if 'items_conditions' in use_data:
-                items_conditions = use_data.get('items_conditions')
+        if not isinstance(use_data, dict):
+            return None
 
-                conditions = ItemConditions(
-                    self,
-                    items_conditions.get('has', []),
-                    items_conditions.get('has_not', []),
-                    items_conditions.get('has_used', []),
-                    items_conditions.get('has_not_used', [])
-                )
-            elif 'room_conditions' in use_data:
-                room_conditions = use_data.get('room_conditions')
+        conditions = None
 
-                conditions = RoomConditions(
-                    self,
-                    room_conditions.get('in', []),
-                    room_conditions.get('not_in', []),
-                )
-            else:
-                return None
+        if 'items_conditions' in use_data:
+            items_conditions = use_data.get('items_conditions', {})
 
+            if not isinstance(items_conditions, dict):
+                raise WorldReadError(f'Invalid "items_conditions" in "use": must be a map')  # TODO Elaborate
+
+            conditions = ItemConditions(
+                self,
+                items_conditions.get('has', []),
+                items_conditions.get('has_not', []),
+                items_conditions.get('has_used', []),
+                items_conditions.get('has_not_used', [])
+            )
+        elif 'room_conditions' in use_data:
+            room_conditions = use_data.get('room_conditions', {})
+
+            if not isinstance(room_conditions, dict):
+                raise WorldReadError(f'Invalid "room_conditions" in "use": must be a map')  # TODO Elaborate
+
+            conditions = RoomConditions(
+                self,
+                room_conditions.get('in', []),
+                room_conditions.get('not_in', []),
+            )
+
+        if conditions:
             return ItemConditionedUse(
                 conditions,
                 self.load_item_use_or_str(use_data.get('success')) if 'success' in use_data else None,
