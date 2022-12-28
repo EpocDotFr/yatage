@@ -224,7 +224,11 @@ class World:
                 continue
 
             use_data = item_data.get('use')
-            use = self.load_item_use_or_str(use_data) or self.load_item_or_room_conditioned_use(use_data)
+
+            try:
+                use = self.load_item_use_or_str(use_data) or self.load_item_or_room_conditioned_use(use_data)
+            except WorldReadError as e:
+                raise WorldReadError(f'Invalid "use" in item "{item_identifier}": {e}') from e
 
             if not use:
                 raise WorldReadError(f'Invalid "use" in item "{item_identifier}": unknown use type')
@@ -239,32 +243,52 @@ class World:
             text = use_data.get('text')
 
             if not text:
-                raise WorldReadError(f'"text" is missing in "use"')  # TODO Elaborate
+                raise WorldReadError('"text" must not be empty if present')
             elif not isinstance(text, str):
-                raise WorldReadError(f'"text" in "use" must be a string')  # TODO Elaborate
+                raise WorldReadError('"text" must be a string')
+
+            items_identifiers = list(self.items.keys())
+            items_identifiers_with_self = items_identifiers + ['self']
 
             remove = use_data.get('remove', [])
 
             if not isinstance(remove, list):
-                raise WorldReadError(f'Invalid "remove" in "use": must be an array')  # TODO Elaborate
+                raise WorldReadError('"remove" must be an array')
+            elif remove:
+                invalid_removes = [i for i in remove if i not in items_identifiers_with_self]
+
+                if invalid_removes:
+                    raise WorldReadError('"remove" contains invalid items: {}'.format(', '.join(invalid_removes)))
 
             spawn = use_data.get('spawn', [])
 
             if not isinstance(spawn, list):
-                raise WorldReadError(f'Invalid "spawn" in "use": must be an array')  # TODO Elaborate
+                raise WorldReadError('"spawn" must be an array')
+            elif spawn:
+                invalid_spawns = [i for i in spawn if i not in items_identifiers]
+
+                if invalid_spawns:
+                    raise WorldReadError('"spawn" contains invalid items: {}'.format(', '.join(invalid_spawns)))
 
             mark_used = use_data.get('mark_used', [])
 
             if not isinstance(mark_used, list):
-                raise WorldReadError(f'Invalid "mark_used" in "use": must be an array')  # TODO Elaborate
+                raise WorldReadError('"mark_used" must be an array')
+            elif mark_used:
+                invalid_mark_used = [i for i in mark_used if i not in items_identifiers_with_self]
+
+                if invalid_mark_used:
+                    raise WorldReadError('"mark_used" contains invalid items: {}'.format(', '.join(invalid_mark_used)))
 
             teleport = use_data.get('teleport')
 
             if teleport:
                 if not isinstance(teleport, str):
-                    raise WorldReadError(f'"teleport" in "use" must be a string')  # TODO Elaborate
+                    raise WorldReadError('"teleport" must be a string')
                 elif teleport not in self.rooms:
-                    raise WorldReadError('Invalid "teleport" in "use": room not found')  # TODO Elaborate
+                    raise WorldReadError('Invalid "teleport": room not found')
+                else:
+                    teleport = self.rooms.get(teleport)
 
             return ItemUse(
                 self,
@@ -272,7 +296,7 @@ class World:
                 remove,
                 spawn,
                 mark_used,
-                self.rooms.get(teleport) if teleport else None
+                teleport
             )
 
         return None
@@ -287,25 +311,55 @@ class World:
             items_conditions = use_data.get('items_conditions', {})
 
             if not isinstance(items_conditions, dict):
-                raise WorldReadError(f'Invalid "items_conditions" in "use": must be a map')  # TODO Elaborate
+                raise WorldReadError('"items_conditions" must be a map')
+
+            has = items_conditions.get('has', [])
+
+            if not isinstance(has, list):
+                raise WorldReadError('"has" must be an array')
+
+            has_not = items_conditions.get('has_not', [])
+
+            if not isinstance(has_not, list):
+                raise WorldReadError('"has_not" must be an array')
+
+            has_used = items_conditions.get('has_used', [])
+
+            if not isinstance(has_used, list):
+                raise WorldReadError('"has_used" must be an array')
+
+            has_not_used = items_conditions.get('has_not_used', [])
+
+            if not isinstance(has_not_used, list):
+                raise WorldReadError('"has_not_used" must be an array')
 
             conditions = ItemConditions(
                 self,
-                items_conditions.get('has', []),
-                items_conditions.get('has_not', []),
-                items_conditions.get('has_used', []),
-                items_conditions.get('has_not_used', [])
+                has,
+                has_not,
+                has_used,
+                has_not_used
             )
         elif 'room_conditions' in use_data:
             room_conditions = use_data.get('room_conditions', {})
 
             if not isinstance(room_conditions, dict):
-                raise WorldReadError(f'Invalid "room_conditions" in "use": must be a map')  # TODO Elaborate
+                raise WorldReadError('"room_conditions" must be a map')
+
+            in_ = room_conditions.get('in', [])
+
+            if not isinstance(in_, list):
+                raise WorldReadError('"in" must be an array')
+
+            not_in = room_conditions.get('not_in', [])
+
+            if not isinstance(not_in, list):
+                raise WorldReadError('"not_in" must be an array')
 
             conditions = RoomConditions(
                 self,
-                room_conditions.get('in', []),
-                room_conditions.get('not_in', []),
+                in_,
+                not_in
             )
 
         if conditions:

@@ -1,10 +1,17 @@
 from yatage.room import GameOverExit, TextExit, ItemConditionedExit, Room
+from yatage.inventory import Inventory
 from typing import List, Optional
+from yatage.world import World
 from yatage.loop import Loop
 import yatage.utils
 
 
 class Commands(Loop):
+    debug: bool
+    current_room: Room
+    inventory: Inventory
+    world: World
+
     commands: List[str] = [
         'look',
         'go',
