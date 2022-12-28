@@ -15,7 +15,7 @@ class Loop(Cmd):
 
         return line
 
-    def do_EOF(self, line: str) -> Optional[bool]:
+    def do_EOF(self, _: str) -> Optional[bool]:
         return True
 
     def get_names(self) -> List:

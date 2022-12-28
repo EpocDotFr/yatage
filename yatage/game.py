@@ -1,13 +1,11 @@
-from yatage.room import GameOverExit, TextExit, ItemConditionedExit
-from yatage.world import World
 from yatage.inventory import Inventory
-from typing import Optional, Union
+from yatage.commands import Commands
+from yatage.world import World
 from yatage.room import Room
-from yatage.loop import Loop
-import yatage.utils
+from typing import Optional
 
 
-class Game(Loop):
+class Game(Commands):
     world_filename: str
     actions_filename: Optional[str]
     debug: bool
@@ -16,8 +14,6 @@ class Game(Loop):
     inventory: Inventory
 
     def __init__(self, world_filename: str, actions_filename: Optional[str] = None, debug: bool = False) -> None:
-        super().__init__()
-
         self.world_filename = world_filename
         self.actions_filename = actions_filename
         self.debug = debug
@@ -25,116 +21,11 @@ class Game(Loop):
         self.current_room = self.world.start
         self.inventory = Inventory(self)
 
+        super().__init__()
+
         self.intro = self.create_intro()
 
         self.load_actions()
-
-        if self.debug:
-            self.do_spawn = self.spawn
-            self.do_tp = self.tp
-
-    def do_look(self, subject: str) -> Optional[bool]:
-        """You may merely 'look' to examine the room, or you may 'look <subject>' (such as 'look chair') to examine something specific."""
-        if subject:
-            item = yatage.utils.get_item(self.current_room.items, subject) or yatage.utils.get_item(self.inventory, subject)
-
-            if item:
-                self.line(item.do_look())
-            else:
-                self.line('You see no such item.')
-        else:
-            self.line(self.current_room.do_look())
-
-        return
-
-    def do_go(self, exit_: str) -> Optional[bool]:
-        """You may 'go <exit>' to travel in that direction (such as 'go west'), or you may merely '<exit>' (such as 'west')."""
-        if exit_ in self.current_room.exits:
-            exit_data = self.current_room.exits.get(exit_)
-
-            if isinstance(exit_data, ItemConditionedExit):
-                return self.handle_exit_room_or_game_over_or_text(exit_data.do_exit())
-            else:
-                return self.handle_exit_room_or_game_over_or_text(exit_data)
-        else:
-            self.line('I don\'t understand; try \'help\' for instructions.')
-
-        return
-
-    def handle_exit_room_or_game_over_or_text(self, exit_data: Optional[Union[Room, GameOverExit, TextExit]]) -> Optional[bool]:
-        if isinstance(exit_data, Room):
-            self.current_room = exit_data
-
-            self.line(self.current_room.do_look())
-        elif isinstance(exit_data, GameOverExit):
-            self.line(exit_data.text)
-
-            return True
-        elif isinstance(exit_data, TextExit):
-            self.line(exit_data.text)
-
-            if exit_data.exit:
-                self.current_room = exit_data.exit
-
-                self.line(self.current_room.do_look())
-
-        return None
-
-    def do_inv(self, _: str) -> Optional[bool]:
-        """To see the contents of your inventory, merely 'inv'."""
-        self.line(self.inventory.do_look())
-
-        return
-
-    def do_take(self, item_identifier: str) -> Optional[bool]:
-        """You may 'take <item>' (such as 'take large rock')."""
-        if self.inventory.take(item_identifier):
-            self.line('Taken.')
-        else:
-            self.line('You see no such item.')
-
-        return
-
-    def do_drop(self, item_identifier: str) -> Optional[bool]:
-        """To drop something in your inventory, you may 'drop <item>'."""
-        if self.inventory.drop(item_identifier):
-            self.line('Dropped.')
-        else:
-            self.line('You can\'t find that in your pack.')
-
-        return
-
-    def do_use(self, item_identifier: str) -> Optional[bool]:
-        """You may activate or otherwise apply an item with 'use <item>'."""
-        if not self.inventory.use(item_identifier):
-            self.line('You can\'t find that in your pack.')
-
-        return
-
-    def spawn(self, item_identifier: str) -> Optional[bool]:
-        """Debug: Spawn an item into inventory with 'spawn <item>'."""
-        if self.inventory.spawn(item_identifier):
-            self.line('Spawned.')
-        else:
-            self.line('Unknown item.')
-
-        return
-
-    def tp(self, room_identifier: str) -> Optional[bool]:
-        """Debug: Teleport to the given room with 'tp <room>'."""
-        if room_identifier not in self.world.rooms:
-            self.line('Unknown room.')
-
-            return
-
-        self.current_room = self.world.rooms.get(room_identifier)
-
-        self.line(self.current_room.do_look())
-
-        return
-
-    def default(self, line: str) -> Optional[bool]:
-        return self.do_go(line)
 
     def create_intro(self) -> str:
         header = '#' * len(self.world.name)
