@@ -23,7 +23,10 @@ class World:
     @classmethod
     def load(cls, game) -> World:  # TODO Typing
         with open(game.world_filename, 'rb') as f:
-            world_data = yaml.safe_load(f)  # TODO Move to stream-based loading?
+            try:
+                world_data = yaml.safe_load(f)  # TODO Move to stream-based loading?
+            except yaml.YAMLError as e:
+                raise WorldReadError(f'Could not parse world file: {e}') from e
 
         version = world_data.get('version')
 
@@ -141,7 +144,10 @@ class World:
             exits = {}
 
             for exit_name, exit_data in exits_data.items():
-                exit_ = self.load_room_exit_room_or_game_over_or_text(exit_data) or self.load_room_item_conditioned_exit(exit_data)
+                try:
+                    exit_ = self.load_room_exit_room_or_game_over_or_text(exit_data) or self.load_room_item_conditioned_exit(exit_data)
+                except WorldReadError as e:
+                    raise WorldReadError(f'Invalid exit "{exit_name}" in room "{room_identifier}": {e}') from e
 
                 if not exit_:
                     raise WorldReadError(f'Invalid exit "{exit_name}" in room "{room_identifier}": unknown exit type')
@@ -152,16 +158,44 @@ class World:
 
     def load_room_exit_room_or_game_over_or_text(self, exit_data: Union[str, Dict]) -> Optional[Union[Room, GameOverExit, TextExit]]:
         if isinstance(exit_data, str):
+            if exit_data not in self.rooms:
+                raise WorldReadError('Invalid "exit_data": room not found')
+
             return self.rooms.get(exit_data)
-        elif isinstance(exit_data, dict):
+
+        if isinstance(exit_data, dict):
             if 'game_over' in exit_data:
+                game_over = exit_data.get('game_over')
+
+                if not game_over:
+                    raise WorldReadError('"game_over" must not be empty')
+                elif not isinstance(game_over, str):
+                    raise WorldReadError('"game_over" must be a string')
+
                 return GameOverExit(
-                    exit_data.get('game_over')
+                    game_over
                 )
             elif 'text' in exit_data:
+                text = exit_data.get('text')
+
+                if not text:
+                    raise WorldReadError('"text" must not be empty')
+                elif not isinstance(text, str):
+                    raise WorldReadError('"text" must be a string')
+
+                exit_ = exit_data.get('exit')
+
+                if exit_:
+                    if not isinstance(exit_, str):
+                        raise WorldReadError('"exit" must be a string')
+                    elif exit_ not in self.rooms:
+                        raise WorldReadError('Invalid "exit": room not found')
+                    else:
+                        exit_ = self.rooms.get(exit_)
+
                 return TextExit(
-                    exit_data.get('text'),
-                    self.rooms.get(exit_data.get('exit')) if 'exit' in exit_data else None
+                    text,
+                    exit_
                 )
 
         return None
@@ -243,7 +277,7 @@ class World:
             text = use_data.get('text')
 
             if not text:
-                raise WorldReadError('"text" must not be empty if present')
+                raise WorldReadError('"text" must not be empty')
             elif not isinstance(text, str):
                 raise WorldReadError('"text" must be a string')
 
@@ -333,6 +367,9 @@ class World:
             if not isinstance(has_not_used, list):
                 raise WorldReadError('"has_not_used" must be an array')
 
+            if not has and not has_not and not has_used and not has_not_used:
+                raise WorldReadError('At least one condition must be defined')
+
             conditions = ItemConditions(
                 self,
                 has,
@@ -356,6 +393,9 @@ class World:
             if not isinstance(not_in, list):
                 raise WorldReadError('"not_in" must be an array')
 
+            if not in_ and not not_in:
+                raise WorldReadError('At least one condition must be defined')
+
             conditions = RoomConditions(
                 self,
                 in_,
@@ -363,10 +403,16 @@ class World:
             )
 
         if conditions:
+            success = self.load_item_use_or_str(use_data.get('success'))
+            failure = self.load_item_use_or_str(use_data.get('failure'))
+
+            if not success and not failure:
+                raise WorldReadError('At least one valid condition result must be defined')
+
             return ItemConditionedUse(
                 conditions,
-                self.load_item_use_or_str(use_data.get('success')) if 'success' in use_data else None,
-                self.load_item_use_or_str(use_data.get('failure')) if 'failure' in use_data else None
+                success,
+                failure
             )
 
         return None
