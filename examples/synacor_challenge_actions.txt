@@ -21,9 +21,9 @@ north
 take can
 west
 ladder
-use can
-use lantern
-darkness
+use can     # Conditioned exits in YATAGE (like the "darkness" exit below) must have all of its conditions met BEFORE
+use lantern # going into that exit, as opposed to the Synacor Challenge implementation, which allows the player to go
+darkness    # into that exit, make it so conditions are met and then dynamically update the current room.
 continue
 west
 west
@@ -44,12 +44,12 @@ down
 take corroded coin
 up
 west
-use blue coin
-use red coin
-use shiny coin
-use concave coin
-use corroded coin
+use blue coin     #
+use red coin      # Coins must be used in the proper room, however the YATAGE implementation doesn't enforce usage order
+use shiny coin    # as it would require significant out-of-scope work.
+use concave coin  #
+use corroded coin #
 north
 take teleporter
-use teleporter
-use teleporter
+use teleporter # For obvious reasons, YATAGE don't implement the teleporter challenge, so another item aliased to the
+use teleporter # same name is spawned after the teleporter is used. This last must simply be used to go ahead.

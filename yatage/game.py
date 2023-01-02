@@ -68,7 +68,15 @@ class Game(Commands):
             return
 
         with open(self.actions_filename, 'r') as f:
-            self.cmdqueue = [line.strip() for line in f if line.strip() and not line.strip().startswith('#')]
+            for line in f:
+                line = line.strip()
+
+                if not line or line.startswith('#'):
+                    continue
+
+                line = line.split('#', maxsplit=1)[0].strip()
+
+                self.cmdqueue.append(line)
 
 
 __all__ = [
