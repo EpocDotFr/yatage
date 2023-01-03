@@ -146,11 +146,11 @@ class World:
             for exit_name, exit_data in exits_data.items():
                 try:
                     exit_ = self.load_room_exit_room_or_game_over_or_text(exit_data) or self.load_room_item_conditioned_exit(exit_data)
+
+                    if not exit_:
+                        raise WorldReadError('Unknown, unhandled or empty exit')
                 except WorldReadError as e:
                     raise WorldReadError(f'Invalid exit "{exit_name}" in room "{room_identifier}": {e}') from e
-
-                if not exit_:
-                    raise WorldReadError(f'Invalid exit "{exit_name}" in room "{room_identifier}": unknown exit type')
 
                 exits[exit_name] = exit_
 
@@ -202,18 +202,18 @@ class World:
 
     def load_room_item_conditioned_exit(self, exit_data: Union[str, Dict]) -> Optional[ItemConditionedExit]:
         if isinstance(exit_data, dict) and 'items_conditions' in exit_data:
-            items_conditions = exit_data.get('items_conditions')
+            item_conditions = self.load_item_conditions(exit_data)
+
+            success = self.load_room_exit_room_or_game_over_or_text(exit_data.get('success'))
+            failure = self.load_room_exit_room_or_game_over_or_text(exit_data.get('failure'))
+
+            if not success and not failure:
+                raise WorldReadError('At least one valid condition result must be defined')
 
             return ItemConditionedExit(
-                ItemConditions(
-                    self,
-                    items_conditions.get('has', []),
-                    items_conditions.get('has_not', []),
-                    items_conditions.get('has_used', []),
-                    items_conditions.get('has_not_used', [])
-                ),
-                self.load_room_exit_room_or_game_over_or_text(exit_data.get('success')) if 'success' in exit_data else None,
-                self.load_room_exit_room_or_game_over_or_text(exit_data.get('failure')) if 'failure' in exit_data else None
+                item_conditions,
+                success,
+                failure
             )
 
         return None
@@ -261,11 +261,11 @@ class World:
 
             try:
                 use = self.load_item_use_or_str(use_data) or self.load_item_or_room_conditioned_use(use_data)
+
+                if not use:
+                    raise WorldReadError('Unknown, unhandled or empty "use"')
             except WorldReadError as e:
                 raise WorldReadError(f'Invalid "use" in item "{item_identifier}": {e}') from e
-
-            if not use:
-                raise WorldReadError(f'Invalid "use" in item "{item_identifier}": unknown use type')
 
             self.items.get(item_identifier).use = use
 
@@ -342,41 +342,7 @@ class World:
         conditions = None
 
         if 'items_conditions' in use_data:
-            items_conditions = use_data.get('items_conditions', {})
-
-            if not isinstance(items_conditions, dict):
-                raise WorldReadError('"items_conditions" must be a map')
-
-            has = items_conditions.get('has', [])
-
-            if not isinstance(has, list):
-                raise WorldReadError('"has" must be an array')
-
-            has_not = items_conditions.get('has_not', [])
-
-            if not isinstance(has_not, list):
-                raise WorldReadError('"has_not" must be an array')
-
-            has_used = items_conditions.get('has_used', [])
-
-            if not isinstance(has_used, list):
-                raise WorldReadError('"has_used" must be an array')
-
-            has_not_used = items_conditions.get('has_not_used', [])
-
-            if not isinstance(has_not_used, list):
-                raise WorldReadError('"has_not_used" must be an array')
-
-            if not has and not has_not and not has_used and not has_not_used:
-                raise WorldReadError('At least one condition must be defined')
-
-            conditions = ItemConditions(
-                self,
-                has,
-                has_not,
-                has_used,
-                has_not_used
-            )
+            conditions = self.load_item_conditions(use_data)
         elif 'room_conditions' in use_data:
             room_conditions = use_data.get('room_conditions', {})
 
@@ -416,6 +382,43 @@ class World:
             )
 
         return None
+
+    def load_item_conditions(self, data: dict) -> ItemConditions:
+        items_conditions = data.get('items_conditions', {})
+
+        if not isinstance(items_conditions, dict):
+            raise WorldReadError('"items_conditions" must be a map')
+
+        has = items_conditions.get('has', [])
+
+        if not isinstance(has, list):
+            raise WorldReadError('"has" must be an array')
+
+        has_not = items_conditions.get('has_not', [])
+
+        if not isinstance(has_not, list):
+            raise WorldReadError('"has_not" must be an array')
+
+        has_used = items_conditions.get('has_used', [])
+
+        if not isinstance(has_used, list):
+            raise WorldReadError('"has_used" must be an array')
+
+        has_not_used = items_conditions.get('has_not_used', [])
+
+        if not isinstance(has_not_used, list):
+            raise WorldReadError('"has_not_used" must be an array')
+
+        if not has and not has_not and not has_used and not has_not_used:
+            raise WorldReadError('At least one condition must be defined')
+
+        return ItemConditions(
+            self,
+            has,
+            has_not,
+            has_used,
+            has_not_used
+        )
 
 
 __all__ = [

@@ -206,13 +206,13 @@ rooms:
                 game_over: You have been eaten by a grue.
             hide:
                 game_over: You have been eaten by a grue.
+    # Dark passage
     Passage lantern:
         name: Passage
         description: You feel that your light source is more than sufficient to keep grues away.
         exits:
             continue: Dark passage
             back: Passage
-    # Dark passage
     Dark passage:
         description: You are in a narrow passage. There is darkness to the west, but you can barely see a glowing opening to the east.
         exits:
