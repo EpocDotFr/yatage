@@ -1,3 +1,4 @@
+from yatage.exceptions import WorldReadError
 from yatage.game import Game
 import argparse
 
@@ -10,5 +11,9 @@ def cli() -> None:
 
     args = arg_parser.parse_args()
 
-    game = Game(args.world, args.actions, args.debug)
-    game.run()
+    try:
+        game = Game(args.world, args.actions, args.debug)
+    except WorldReadError as e:
+        print(f'Invalid world file "{args.world}": {e}')
+    else:
+        game.run()
