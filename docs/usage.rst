@@ -1,6 +1,0 @@
-Usage
-=====
-
-.. todo::
-
-    Document.

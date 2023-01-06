@@ -1,14 +1,14 @@
 YATAGE documentation
 ====================
 
-Welcome! This documentation is about YATAGE, Yet Another Text Adventure Game Engine.
+Welcome! This documentation is about YATAGE, Yet Another `Text Adventure Game <https://en.wikipedia.org/wiki/Interactive_fiction>`__ Engine.
 
 |pyversion| |pypiv| |pypil|
 
 Prerequisites
 -------------
 
-  - Python 3.8+
+  - Python 3.8
 
 Installation
 ------------
@@ -25,13 +25,27 @@ Locally, after cloning/downloading the repo:
 
     $ pip install .
 
+Introduction
+------------
+
+Text adventure games have been around for a lot of decades now, created back in an age when computer graphics were reduced
+to their simplest form: symbols.
+
+This simplicity in displaying a game's UI using symbols has something fascinating: it is easy to both create and play
+such game type. You don't have to worry about **a ton** of things, compared to a 2D or 3D game.
+
+You still have to worry about creating a game engine, though. A simple one, but a game engine anyway.
+
+YATAGE has been created to not worry about this step, reducing text adventure game development effort to one thing: writing
+as less symbols as possible in one file, in a structured fashion, to create a playable game.
+
 User's Guide
 ------------
 
 .. toctree::
    :maxdepth: 4
 
-   usage
+   todo
 
 .. |pyversion| image:: https://img.shields.io/pypi/pyversions/yatage.svg
 .. |pypiv| image:: https://img.shields.io/pypi/v/yatage.svg
