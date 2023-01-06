@@ -91,13 +91,12 @@ setup(
         ]
     },
     classifiers=[
-        'Development Status :: 4 - Beta',
-        'Intended Audience :: Developers',
-        'Topic :: Software Development :: Libraries',
-        'Topic :: Games/Entertainment',
+        'Development Status :: 3 - Alpha',
+        'Environment :: Console',
         'Operating System :: OS Independent',
         'Programming Language :: Python',
         'Programming Language :: Python :: 3.8',
+        'Topic :: Games/Entertainment',
     ],
     cmdclass={
         'upload': UploadCommand,
