@@ -14,7 +14,20 @@ such game type. You don't have to worry about **a ton** of things, compared to a
 You still have to worry about creating a game engine, though. A relatively simple and small one, but a game engine anyway.
 
 YATAGE has been created to not worry about this step, reducing text adventure game development effort to one thing: writing
-as less characters and symbols as possible in one file, in a structured fashion, to create a playable game.
+as less characters and symbols as possible in one file, in a structured fashion (`YAML <https://en.wikipedia.org/wiki/YAML>`__),
+to create a playable game.
+
+Here's a short example, which uses a tiny set of the game engine's mechanics:
+
+.. include:: ../examples/short.yml
+    :code: yaml
+
+Features
+--------
+
+.. todo::
+
+    Document.
 
 Prerequisites
 -------------

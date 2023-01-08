@@ -1,0 +1,24 @@
+%YAML 1.2
+---
+version: 1
+name: Short Example
+start: Outside
+rooms:
+    Outside:
+        description: You're in front of a building's hall entrance, looks like it's secured by a guard. Someone's bumps on you
+        exits:
+            entrance: Hall
+    Hall:
+        description: TODO
+        exits:
+            outside: Outside
+items:
+    security card:
+        look: A security card.
+        use:
+            room_conditions:
+                in: [Office]
+            success:
+                text: TODO
+                mark_used: [self]
+            failure: TODO
