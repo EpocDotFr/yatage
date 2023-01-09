@@ -73,4 +73,4 @@ The file should contain one action per line:
 .. literalinclude:: ../../examples/short_actions.txt
     :language: text
 
-If debug mode is enabled, debug actions are made available too (see above).
+If debug mode is enabled, debug actions are made available too (see :ref:`Debug mode` above).
