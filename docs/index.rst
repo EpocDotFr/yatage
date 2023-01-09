@@ -17,10 +17,10 @@ YATAGE has been created to not worry about this step, reducing text adventure ga
 as less characters and symbols as possible in one file, in a structured fashion (`YAML <https://en.wikipedia.org/wiki/YAML>`__),
 to create a playable game.
 
-Here's a short example, which uses a tiny set of the game engine's mechanics:
+Here's a short example, which uses a small subset of the game engine's capabilities:
 
-.. include:: ../examples/short.yml
-    :code: yaml
+.. literalinclude:: ../examples/short.yml
+    :language: yaml
 
 Features
 --------
@@ -49,13 +49,25 @@ Locally, after cloning/downloading the repo:
 
     $ pip install .
 
-User's Guide
-------------
+Players's Guide
+---------------
+
+For when you want to run and play YATAGE-compatible games.
 
 .. toctree::
    :maxdepth: 4
 
-   todo
+   player/running
+   player/playing
+
+Creator's Guide
+---------------
+
+For when you want to create YATAGE-compatible games.
+
+.. todo::
+
+    Document.
 
 .. |pyversion| image:: https://img.shields.io/pypi/pyversions/yatage.svg
 .. |pypiv| image:: https://img.shields.io/pypi/v/yatage.svg

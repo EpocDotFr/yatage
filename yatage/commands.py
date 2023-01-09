@@ -72,6 +72,7 @@ class Commands(Loop):
                 if exit_data.exit:
                     self.current_room = exit_data.exit
 
+                    self.line('')
                     self.line(self.current_room.do_look())
         else:
             self.line('I don\'t understand; try \'help\' for instructions.')

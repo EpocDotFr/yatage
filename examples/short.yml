@@ -2,23 +2,47 @@
 ---
 version: 1
 name: Short Example
-start: Outside
+start: Sidewalk
 rooms:
-    Outside:
-        description: You're in front of a building's hall entrance, looks like it's secured by a guard. Someone's bumps on you
+    Sidewalk:
+        description: >-
+            You're on the sidewalk in front of a building's entrance,
+            letters on the top reads "Hendley Associates". Looks like
+            access is restricted by a security guard.
+
+            Someone in a hurry exiting the building bumps on you. As
+            he walks away, you see he dropped something on the sidewalk.
         exits:
-            entrance: Hall
-    Hall:
+            entrance:
+                items_conditions:
+                    has: [security card]
+                success:
+                    text: >-
+                        Security guard: "Did you forgot something,
+                        Mr. Clark?"
+                    exit: Building hall
+                failure:
+                    text: >-
+                        Security guard: "Sir, I cannot let you pass
+                        without showing a security card."
+            walk: Down the street
+        items: [security card]
+    Down the street:
+        description: >-
+            You walk past the building. There's a hot dog vendor, a
+            press kiosk, some people. Nothing much more of interest,
+            though.
+        exits:
+            back: Sidewalk
+    Building hall:
         description: TODO
         exits:
-            outside: Outside
+            outside: Sidewalk
 items:
     security card:
-        look: A security card.
-        use:
-            room_conditions:
-                in: [Office]
-            success:
-                text: TODO
-                mark_used: [self]
-            failure: TODO
+        look: >-
+            It looks a lot like a credit card. On one side, it reads:
+
+                John Clark
+
+                Security Clearance Level I

@@ -166,7 +166,7 @@ rooms:
             The east passage appears very dark; you feel likely to be eaten by a Grue.
         exits:
             north:
-                text: |
+                text: |-
                     Chiseled on the wall of one of the passageways, you see:
 
                         jgDYBUhWlqLC
@@ -395,7 +395,7 @@ items:
     teleporter:
         look: This small device has a button on it and reads "teleporter" on the side.
         use:
-            text: |
+            text: |-
                 You activate the teleporter! As you spiral through time and space, you think you see a pattern in the stars...
 
                     jKPupWlItgvk
@@ -408,7 +408,7 @@ items:
         alias: teleporter
         look: This small device has a button on it and reads "teleporter" on the side.
         use:
-            text: |
+            text: |-
                 You wake up on a sandy beach with a slight headache. The last thing you remember is activating that teleporter... but now you can't find it anywhere in your pack. Someone seems to have drawn a message in the sand here:
 
                     lVfSqITLZkYK
