@@ -1,8 +1,8 @@
 Running a game
 ==============
 
-The ``yatage`` executable is automatically made available when YATAGE is installed. This is the executable that must be
-used in order to run games.
+The ``yatage`` executable is automatically made available when YATAGE is :ref:`installed <installation>`. This is the
+executable that must be used in order to run games.
 
 Basic usage
 -----------
@@ -48,8 +48,8 @@ This will add the following debug statements in-game:
 
 In addition, the following new actions are made available (for debug purposes only!):
 
-  - ``spawn <item>``: spawn a new item identified by ``<item>`` into the player's inventory
-  - ``tp <room>``: teleport the player to the room identified by ``<room>``
+  - ``spawn <item>`` -- Spawn a new item identified by ``<item>`` into the player's inventory
+  - ``tp <room>`` -- Teleport the player to the room identified by ``<room>``
 
 Finally, debug mode will alter some of the game engine's behavior:
 
