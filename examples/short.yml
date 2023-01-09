@@ -7,8 +7,9 @@ rooms:
     Sidewalk:
         description: >-
             You're on the sidewalk in front of a building's entrance,
-            letters on the top reads "Hendley Associates". Looks like
-            access is restricted by a security guard.
+            a sign on top reads "Hendley Associates". Looks like access
+            is restricted by a security guard.
+
 
             Someone in a hurry exiting the building bumps on you. As
             he walks away, you see he dropped something on the sidewalk.
@@ -24,20 +25,28 @@ rooms:
                 failure:
                     text: >-
                         Security guard: "Sir, I cannot let you pass
-                        without showing a security card."
-            walk: Down the street
+                        without security card."
+            catch up: Down the street
         items: [security card]
     Down the street:
         description: >-
-            You walk past the building. There's a hot dog vendor, a
-            press kiosk, some people. Nothing much more of interest,
-            though.
+            You run past the building, trying to catch up with this
+            stranger. There's a hot dog vendor, a press kiosk, some
+            people. But no sign of him.
         exits:
             back: Sidewalk
     Building hall:
-        description: TODO
+        description: >-
+            You definitively shouldn't be there, but why not pretend
+            you're Mr. Clark?
+            
+            
+            There's lifts right there, let's see where it's leading.
         exits:
             outside: Sidewalk
+            lifts:
+                game_over: >-
+                    You have been busted by a security camera.
 items:
     security card:
         look: >-

@@ -1,0 +1,6 @@
+# This is an automated actions file. This line is a comment, which will be
+# ignored, as well as empty lines.
+
+take security card # First action. Inline comments are allowed.
+entrance           # Second action.
+lifts

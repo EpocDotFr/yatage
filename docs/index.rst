@@ -49,10 +49,10 @@ Locally, after cloning/downloading the repo:
 
     $ pip install .
 
-Players's Guide
----------------
+Player's Guide
+--------------
 
-For when you want to run and play YATAGE-compatible games.
+Guide about running and playing games.
 
 .. toctree::
    :maxdepth: 4
@@ -63,7 +63,7 @@ For when you want to run and play YATAGE-compatible games.
 Creator's Guide
 ---------------
 
-For when you want to create YATAGE-compatible games.
+Guide about creating games.
 
 .. todo::
 
