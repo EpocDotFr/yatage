@@ -1,0 +1,230 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+    <title>YATAGE documentation &#8212; YATAGE 1.0.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css" />
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/sphinx_highlight.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Running a game" href="player/running.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  <div class="document">
+    
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="#">YATAGE</a></h1>
+
+
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="player/running.html">Running a game</a></li>
+<li class="toctree-l1"><a class="reference internal" href="player/playing.html">Playing a game</a></li>
+</ul>
+
+
+<hr />
+<ul>
+    
+    <li class="toctree-l1"><a href="https://github.com/EpocDotFr/yatage">YATAGE @ GitHub</a></li>
+    
+    <li class="toctree-l1"><a href="https://pypi.python.org/pypi/yatage">YATAGE @ PyPI</a></li>
+    
+    <li class="toctree-l1"><a href="https://github.com/EpocDotFr/yatage/issues">Issue Tracker</a></li>
+    
+    <li class="toctree-l1"><a href="https://github.com/EpocDotFr/yatage/releases">Changelog</a></li>
+    
+</ul>
+
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="yatage-documentation">
+<h1>YATAGE documentation<a class="headerlink" href="#yatage-documentation" title="Permalink to this heading">¶</a></h1>
+<p>Welcome! This documentation is about YATAGE, Yet Another <a class="reference external" href="https://en.wikipedia.org/wiki/Interactive_fiction">Text Adventure Game</a> Engine.</p>
+<p><img alt="pyversion" src="https://img.shields.io/pypi/pyversions/yatage.svg" /> <img alt="pypiv" src="https://img.shields.io/pypi/v/yatage.svg" /> <img alt="pypil" src="https://img.shields.io/pypi/l/yatage.svg" /></p>
+<p>Text adventure games have been around for a lot of decades now, created back in an age when computer graphics were reduced
+to their simplest form: alphanumeric characters and symbols.</p>
+<p>This simplicity in displaying a game’s UI using these last has something fascinating: it is easy to both create and play
+such game type. You don’t have to worry about <strong>a ton</strong> of things, compared to a 3D or even a 2D game.</p>
+<p>You still have to worry about creating a game engine, though. A relatively simple and small one, but a game engine anyway.</p>
+<p>YATAGE has been created to not worry about this step, reducing text adventure game development effort to one thing: writing
+as less characters and symbols as possible in one file, in a structured fashion (<a class="reference external" href="https://en.wikipedia.org/wiki/YAML">YAML</a>),
+to create a playable game.</p>
+<p>Here’s a short example, which uses a small subset of the game engine’s capabilities:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">%YAML</span><span class="w"> </span><span class="m">1.2</span>
+<span class="nn">---</span>
+<span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span>
+<span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Short Example</span>
+<span class="nt">start</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Sidewalk</span>
+<span class="nt">rooms</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">Sidewalk</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">&gt;-</span>
+<span class="w">            </span><span class="no">You&#39;re on the sidewalk in front of a building&#39;s entrance,</span>
+<span class="w">            </span><span class="no">a sign on top reads &quot;Hendley Associates&quot;. Looks like access</span>
+<span class="w">            </span><span class="no">is restricted by a security guard.</span>
+
+
+<span class="w">            </span><span class="no">Someone in a hurry exiting the building bumps on you. As</span>
+<span class="w">            </span><span class="no">he walks away, you see he dropped something on the sidewalk.</span>
+<span class="w">        </span><span class="nt">exits</span><span class="p">:</span>
+<span class="w">            </span><span class="nt">entrance</span><span class="p">:</span>
+<span class="w">                </span><span class="nt">items_conditions</span><span class="p">:</span>
+<span class="w">                    </span><span class="nt">has</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">security card</span><span class="p p-Indicator">]</span>
+<span class="w">                </span><span class="nt">success</span><span class="p">:</span>
+<span class="w">                    </span><span class="nt">text</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">&gt;-</span>
+<span class="w">                        </span><span class="no">Security guard: &quot;Did you forgot something,</span>
+<span class="w">                        </span><span class="no">Mr. Clark?&quot;</span>
+<span class="w">                    </span><span class="nt">exit</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Building hall</span>
+<span class="w">                </span><span class="nt">failure</span><span class="p">:</span>
+<span class="w">                    </span><span class="nt">text</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">&gt;-</span>
+<span class="w">                        </span><span class="no">Security guard: &quot;Sir, I cannot let you pass</span>
+<span class="w">                        </span><span class="no">without security card.&quot;</span>
+<span class="w">            </span><span class="nt">catch up</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Down the street</span>
+<span class="w">        </span><span class="nt">items</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">security card</span><span class="p p-Indicator">]</span>
+<span class="w">    </span><span class="nt">Down the street</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">&gt;-</span>
+<span class="w">            </span><span class="no">You run past the building, trying to catch up with this</span>
+<span class="w">            </span><span class="no">stranger. There&#39;s a hot dog vendor, a press kiosk, some</span>
+<span class="w">            </span><span class="no">people. But no sign of him.</span>
+<span class="w">        </span><span class="nt">exits</span><span class="p">:</span>
+<span class="w">            </span><span class="nt">back</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Sidewalk</span>
+<span class="w">    </span><span class="nt">Building hall</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">&gt;-</span>
+<span class="w">            </span><span class="no">You definitively shouldn&#39;t be there, but why not pretend</span>
+<span class="w">            </span><span class="no">you&#39;re Mr. Clark?</span>
+<span class="w">            </span>
+<span class="w">            </span>
+<span class="w">            </span><span class="no">There&#39;s lifts right there, let&#39;s see where it&#39;s leading.</span>
+<span class="w">        </span><span class="nt">exits</span><span class="p">:</span>
+<span class="w">            </span><span class="nt">outside</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Sidewalk</span>
+<span class="w">            </span><span class="nt">lifts</span><span class="p">:</span>
+<span class="w">                </span><span class="nt">game_over</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">&gt;-</span>
+<span class="w">                    </span><span class="no">You have been busted by a security camera.</span>
+<span class="nt">items</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">security card</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">look</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">&gt;-</span>
+<span class="w">            </span><span class="no">It looks a lot like a credit card. On one side, it reads:</span>
+
+<span class="w">                </span><span class="no">John Clark</span>
+
+<span class="w">                </span><span class="no">Security Clearance Level I</span>
+</pre></div>
+</div>
+<section id="features">
+<h2>Features<a class="headerlink" href="#features" title="Permalink to this heading">¶</a></h2>
+<div class="admonition-todo admonition" id="id1">
+<p class="admonition-title">Todo</p>
+<p>Document.</p>
+</div>
+</section>
+<section id="prerequisites">
+<h2>Prerequisites<a class="headerlink" href="#prerequisites" title="Permalink to this heading">¶</a></h2>
+<blockquote>
+<div><ul class="simple">
+<li><p>Python 3.8</p></li>
+</ul>
+</div></blockquote>
+</section>
+<section id="installation">
+<h2>Installation<a class="headerlink" href="#installation" title="Permalink to this heading">¶</a></h2>
+<p>From PyPI:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>pip<span class="w"> </span>install<span class="w"> </span>yatage
+</pre></div>
+</div>
+<p>Locally, after cloning/downloading the repo:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>pip<span class="w"> </span>install<span class="w"> </span>.
+</pre></div>
+</div>
+</section>
+<section id="player-s-guide">
+<h2>Player’s Guide<a class="headerlink" href="#player-s-guide" title="Permalink to this heading">¶</a></h2>
+<p>Guide about running and playing games.</p>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="player/running.html">Running a game</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="player/running.html#basic-usage">Basic usage</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="player/running.html#exiting-the-game">Exiting the game</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="player/running.html#advanced-usage">Advanced usage</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="player/running.html#debug-mode">Debug mode</a></li>
+<li class="toctree-l3"><a class="reference internal" href="player/running.html#automate-actions">Automate actions</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="player/playing.html">Playing a game</a></li>
+</ul>
+</div>
+</section>
+<section id="creator-s-guide">
+<h2>Creator’s Guide<a class="headerlink" href="#creator-s-guide" title="Permalink to this heading">¶</a></h2>
+<p>Guide about creating games.</p>
+<div class="admonition-todo admonition" id="id2">
+<p class="admonition-title">Todo</p>
+<p>Document.</p>
+</div>
+</section>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+    <div class="clearer"></div>
+  </div>
+    <div class="footer">
+      &copy;2022, <a href="https://epoc.fr/">Epoc</a>.
+      
+    </div>
+
+    
+    <a href="https://github.com/EpocDotFr/yatage" class="github">
+        <img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub"  class="github"/>
+    </a>
+    
+
+    
+  </body>
+</html>
