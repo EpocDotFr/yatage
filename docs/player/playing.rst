@@ -3,22 +3,27 @@ Playing a game
 
 Now that you're able to :doc:`run a game <running>` using a valid YATAGE world file, it can be played.
 
-Start
------
+When running a game, you will be shown various information about the world being played on. Extra information may be
+shown if debug mode is enabled (see :ref:`Debug mode`).
 
-When first starting a game, you will be shown various information about the world being played on. Here's an annotated
-example:
+The game itself then begins.
 
-.. code-block:: text
+Actions
+-------
 
-    #############
-    Short Example  (a)
-    #############
+YATAGE implements the typical game loop of text adventure games (we'll not get into details here), it thus excepts you
+to type the action to perform next.
 
-    By Maxime "Epoc" G.  (b)
+The available actions are:
 
-    A short example game.  (c)
+  - ``drop <item>`` -- Drop the item identified by ``<item>`` from the inventory on the current room's floor
+  - ``go <exit>`` or merely ``<exit>`` -- Move to the direction ``<exit>``
+  - ``help`` -- TODO
 
-a. World name
-b. Author(s), if any
-c. World description, if any
+    - ``help <action>`` -- TODO
+  - ``inv`` -- TODO
+  - ``look`` -- TODO
+
+    - ``look <subject>`` -- TODO
+  - ``take <item>`` -- TODO
+  - ``use <item>`` -- TODO
