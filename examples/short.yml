@@ -2,6 +2,8 @@
 ---
 version: 1
 name: Short Example
+description: A short example game.
+author: Maxime "Epoc" G.
 start: Sidewalk
 rooms:
     Sidewalk:

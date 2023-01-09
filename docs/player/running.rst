@@ -16,7 +16,7 @@ The most basic use of ``yatage`` is:
 Where ``{WORLD FILE}`` is the path to a YATAGE world file (``*.yml``).
 
 A bunch of validation steps will be performed on the given file before being actually used to make sure it is a well-formed
-world file .
+world file.
 
 Exiting the game
 ^^^^^^^^^^^^^^^^
@@ -74,3 +74,5 @@ The file should contain one action per line:
     :language: text
 
 If debug mode is enabled, debug actions are made available too (see :ref:`Debug mode` above).
+
+You can now continue to :doc:`playing`
