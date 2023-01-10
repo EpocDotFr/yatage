@@ -5,6 +5,8 @@ Item
 
     Document.
 
+.. _item-structure:
+
 Item structure
 --------------
 
