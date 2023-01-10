@@ -6,5 +6,5 @@ file (``*.yml``) which is itself structured in a specific fashion.
 
 Here's a kinda useless bare-minimum example world file:
 
-.. literalinclude:: ../examples/bare-minimum.yml
+.. literalinclude:: ../../examples/bare-minimum.yml
     :language: yaml
