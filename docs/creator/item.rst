@@ -5,10 +5,8 @@ Item
 
     Document.
 
-.. item-structure:
-
-Structure
----------
+Item structure
+--------------
 
 .. todo::
 
