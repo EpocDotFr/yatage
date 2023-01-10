@@ -5,10 +5,8 @@ Room
 
     Document.
 
-.. room-structure:
-
-Structure
----------
+Room structure
+--------------
 
 .. todo::
 

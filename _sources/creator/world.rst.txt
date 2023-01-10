@@ -20,10 +20,8 @@ At the very least, the world file must have:
 
 Continue reading below to learn about the details of the world file structure.
 
-.. _world-structure:
-
-Structure
----------
+World structure
+---------------
 
 .. _world-version:
 
@@ -73,8 +71,9 @@ rooms
   - Required: **yes**
   - Format: string -> :ref:`room <room-structure>`
 
-This attribute holds all the world's rooms definition. It's a mapping between rooms reference (a string) and a :ref:`room <room-structure>`
-structure. At least one room with a valid structure must be defined and referenced by :ref:`world-start`.
+This attribute holds all the world's rooms definition. It's a mapping between rooms references (a string) and a
+:ref:`room <room-structure>` structure. At least one room with a valid structure must be defined and referenced by
+:ref:`world-start`.
 
 .. _world-description:
 
@@ -110,5 +109,5 @@ items
   - Required: no
   - Format: string -> :ref:`item <item-structure>`
 
-This attribute holds all the world's items definition. It's a mapping between items reference (a string) and an :ref:`item <item-structure>`
-structure.
+This attribute holds all the world's items definition. It's a mapping between items references (a string) and an
+:ref:`item <item-structure>` structure.

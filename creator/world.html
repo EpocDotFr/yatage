@@ -50,7 +50,7 @@
 <p class="caption" role="heading"><span class="caption-text">Creator's Guide</span></p>
 <ul class="current">
 <li class="toctree-l1 current"><a class="current reference internal" href="#">World file</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#structure">Structure</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#world-structure">World structure</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#version">version</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#name">name</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#start">start</a></li>
@@ -127,8 +127,8 @@ file (<code class="docutils literal notranslate"><span class="pre">*.yml</span><
 </ul>
 </div></blockquote>
 <p>Continue reading below to learn about the details of the world file structure.</p>
-<section id="structure">
-<span id="world-structure"></span><h2>Structure<a class="headerlink" href="#structure" title="Permalink to this heading">¶</a></h2>
+<section id="world-structure">
+<h2>World structure<a class="headerlink" href="#world-structure" title="Permalink to this heading">¶</a></h2>
 <section id="version">
 <span id="world-version"></span><h3>version<a class="headerlink" href="#version" title="Permalink to this heading">¶</a></h3>
 <blockquote>
@@ -176,8 +176,9 @@ playing.</p>
 <li><p>Format: string -&gt; <span class="xref std std-ref">room</span></p></li>
 </ul>
 </div></blockquote>
-<p>This attribute holds all the world’s rooms definition. It’s a mapping between rooms reference (a string) and a <span class="xref std std-ref">room</span>
-structure. At least one room with a valid structure must be defined and referenced by <a class="reference internal" href="#world-start"><span class="std std-ref">start</span></a>.</p>
+<p>This attribute holds all the world’s rooms definition. It’s a mapping between rooms references (a string) and a
+<span class="xref std std-ref">room</span> structure. At least one room with a valid structure must be defined and referenced by
+<a class="reference internal" href="#world-start"><span class="std std-ref">start</span></a>.</p>
 </section>
 <section id="description">
 <span id="world-description"></span><h3>description<a class="headerlink" href="#description" title="Permalink to this heading">¶</a></h3>
@@ -213,8 +214,8 @@ running a game at the very beginning, just after <a class="reference internal" h
 <li><p>Format: string -&gt; <span class="xref std std-ref">item</span></p></li>
 </ul>
 </div></blockquote>
-<p>This attribute holds all the world’s items definition. It’s a mapping between items reference (a string) and an <span class="xref std std-ref">item</span>
-structure.</p>
+<p>This attribute holds all the world’s items definition. It’s a mapping between items references (a string) and an
+<span class="xref std std-ref">item</span> structure.</p>
 </section>
 </section>
 </section>
