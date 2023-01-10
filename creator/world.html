@@ -118,7 +118,7 @@ file (<code class="docutils literal notranslate"><span class="pre">*.yml</span><
 <div><ul class="simple">
 <li><p>A <a class="reference internal" href="#world-version"><span class="std std-ref">version</span></a></p></li>
 <li><p>A <a class="reference internal" href="#world-name"><span class="std std-ref">name</span></a></p></li>
-<li><p>A starting room <a class="reference internal" href="#world-start"><span class="std std-ref">start</span></a></p></li>
+<li><p>A starting room (<a class="reference internal" href="#world-start"><span class="std std-ref">start</span></a>)</p></li>
 <li><p>At least one room in <a class="reference internal" href="#world-rooms"><span class="std std-ref">rooms</span></a> referenced by <a class="reference internal" href="#world-start"><span class="std std-ref">start</span></a></p>
 <ul>
 <li><p>This sole room must have at least a <code class="docutils literal notranslate"><span class="pre">description</span></code></p></li>
@@ -126,7 +126,7 @@ file (<code class="docutils literal notranslate"><span class="pre">*.yml</span><
 </li>
 </ul>
 </div></blockquote>
-<p>Continue reading below to learn about the details of the world file structure.</p>
+<p>Continue reading below to learn about the details of the world file’s structure.</p>
 <section id="world-structure">
 <h2>World structure<a class="headerlink" href="#world-structure" title="Permalink to this heading">¶</a></h2>
 <section id="version">
@@ -139,8 +139,7 @@ file (<code class="docutils literal notranslate"><span class="pre">*.yml</span><
 </ul>
 </div></blockquote>
 <p>Although not used yet (at least in the earliest releases of YATAGE), this attribute tells which version the world file
-has been written in. It will allow to handle future – inevitable – breaking changes of the world file
-structure.</p>
+has been written in. It will allow to handle future – inevitable – breaking changes of the world file’s structure.</p>
 </section>
 <section id="name">
 <span id="world-name"></span><h3>name<a class="headerlink" href="#name" title="Permalink to this heading">¶</a></h3>
@@ -173,12 +172,12 @@ playing.</p>
 <div><ul class="simple">
 <li><p>Type: mapping</p></li>
 <li><p>Required: <strong>yes</strong></p></li>
-<li><p>Format: string -&gt; <span class="xref std std-ref">room</span></p></li>
+<li><p>Format: string =&gt; <a class="reference internal" href="room.html#room-structure"><span class="std std-ref">room</span></a></p></li>
 </ul>
 </div></blockquote>
 <p>This attribute holds all the world’s rooms definition. It’s a mapping between rooms references (a string) and a
-<span class="xref std std-ref">room</span> structure. At least one room with a valid structure must be defined and referenced by
-<a class="reference internal" href="#world-start"><span class="std std-ref">start</span></a>.</p>
+<a class="reference internal" href="room.html#room-structure"><span class="std std-ref">room</span></a> structure. References must obviously be unique. At least one room with a valid structure
+must be defined and referenced by <a class="reference internal" href="#world-start"><span class="std std-ref">start</span></a>.</p>
 </section>
 <section id="description">
 <span id="world-description"></span><h3>description<a class="headerlink" href="#description" title="Permalink to this heading">¶</a></h3>
@@ -190,8 +189,8 @@ playing.</p>
 </ul>
 </div></blockquote>
 <p>This attribute may be a multiline string of any size describing this world, which may be used as an introduction to the
-game. It’s shown when running a game at the very beginning, just after <a class="reference internal" href="#world-author"><span class="std std-ref">author</span></a> (if set) or otherwise just after
-<a class="reference internal" href="#world-name"><span class="std std-ref">name</span></a>.</p>
+game. It’s shown when running a game at the very beginning, just after <a class="reference internal" href="#world-author"><span class="std std-ref">author</span></a> (if set) or otherwise just
+after <a class="reference internal" href="#world-name"><span class="std std-ref">name</span></a>.</p>
 </section>
 <section id="author">
 <span id="world-author"></span><h3>author<a class="headerlink" href="#author" title="Permalink to this heading">¶</a></h3>
@@ -211,11 +210,11 @@ running a game at the very beginning, just after <a class="reference internal" h
 <div><ul class="simple">
 <li><p>Type: mapping</p></li>
 <li><p>Required: no</p></li>
-<li><p>Format: string -&gt; <span class="xref std std-ref">item</span></p></li>
+<li><p>Format: string =&gt; <a class="reference internal" href="item.html#item-structure"><span class="std std-ref">item</span></a></p></li>
 </ul>
 </div></blockquote>
 <p>This attribute holds all the world’s items definition. It’s a mapping between items references (a string) and an
-<span class="xref std std-ref">item</span> structure.</p>
+<a class="reference internal" href="item.html#item-structure"><span class="std std-ref">item</span></a> structure. References must obviously be unique.</p>
 </section>
 </section>
 </section>

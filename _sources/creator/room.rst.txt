@@ -5,6 +5,8 @@ Room
 
     Document.
 
+.. _room-structure:
+
 Room structure
 --------------
 
