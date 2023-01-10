@@ -84,8 +84,8 @@
   <section id="playing-a-game">
 <h1>Playing a game<a class="headerlink" href="#playing-a-game" title="Permalink to this heading">¶</a></h1>
 <p>Now that you’re able to <a class="reference internal" href="running.html"><span class="doc">run a game</span></a> using a valid YATAGE world file, it can be played.</p>
-<p>When running a game, you will be shown various information about the world being played on. Extra information may be
-shown if debug mode is enabled (see <a class="reference internal" href="running.html#debug-mode"><span class="std std-ref">Debug mode</span></a>).</p>
+<p>When running a game, you will be first shown various information about the world being played on. Extra information may
+be shown if debug mode is enabled (see <a class="reference internal" href="running.html#debug-mode"><span class="std std-ref">Debug mode</span></a>).</p>
 <p>The game itself then begins.</p>
 <section id="actions">
 <h2>Actions<a class="headerlink" href="#actions" title="Permalink to this heading">¶</a></h2>
@@ -94,23 +94,25 @@ to type the action to perform next.</p>
 <p>The available actions are:</p>
 <blockquote>
 <div><ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">drop</span> <span class="pre">&lt;item&gt;</span></code> – Drop the item identified by <code class="docutils literal notranslate"><span class="pre">&lt;item&gt;</span></code> from the inventory on the current room’s floor</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">go</span> <span class="pre">&lt;exit&gt;</span></code> or merely <code class="docutils literal notranslate"><span class="pre">&lt;exit&gt;</span></code> – Move to the direction <code class="docutils literal notranslate"><span class="pre">&lt;exit&gt;</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">help</span></code> – TODO</p>
+<li><p><code class="docutils literal notranslate"><span class="pre">drop</span> <span class="pre">&lt;item&gt;</span></code> – Remove the item <code class="docutils literal notranslate"><span class="pre">&lt;item&gt;</span></code> from the inventory and drop it into the current room. Example: <code class="docutils literal notranslate"><span class="pre">drop</span> <span class="pre">security</span> <span class="pre">card</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">go</span> <span class="pre">&lt;exit&gt;</span></code> or merely <code class="docutils literal notranslate"><span class="pre">&lt;exit&gt;</span></code> – Travel to the direction <code class="docutils literal notranslate"><span class="pre">&lt;exit&gt;</span></code>. Examples: <code class="docutils literal notranslate"><span class="pre">go</span> <span class="pre">entrance</span></code> or <code class="docutils literal notranslate"><span class="pre">entrance</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">help</span></code> – Show help about all available actions.</p>
 <ul>
-<li><p><code class="docutils literal notranslate"><span class="pre">help</span> <span class="pre">&lt;action&gt;</span></code> – TODO</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">help</span> <span class="pre">&lt;action&gt;</span></code> – Show help about the specific action <code class="docutils literal notranslate"><span class="pre">&lt;action&gt;</span></code>. Example: <code class="docutils literal notranslate"><span class="pre">help</span> <span class="pre">drop</span></code></p></li>
 </ul>
 </li>
-<li><p><code class="docutils literal notranslate"><span class="pre">inv</span></code> – TODO</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">look</span></code> – TODO</p>
+<li><p><code class="docutils literal notranslate"><span class="pre">inv</span></code> – List items currently in inventory.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">look</span></code> – Examine the current room.</p>
 <ul>
-<li><p><code class="docutils literal notranslate"><span class="pre">look</span> <span class="pre">&lt;subject&gt;</span></code> – TODO</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">look</span> <span class="pre">&lt;item&gt;</span></code> – Examine item <code class="docutils literal notranslate"><span class="pre">&lt;item&gt;</span></code>. May be either an item in the current room or in the inventory. Example: <code class="docutils literal notranslate"><span class="pre">look</span> <span class="pre">security</span> <span class="pre">card</span></code></p></li>
 </ul>
 </li>
-<li><p><code class="docutils literal notranslate"><span class="pre">take</span> <span class="pre">&lt;item&gt;</span></code> – TODO</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">use</span> <span class="pre">&lt;item&gt;</span></code> – TODO</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">take</span> <span class="pre">&lt;item&gt;</span></code> – Take item <code class="docutils literal notranslate"><span class="pre">&lt;item&gt;</span></code> from the current room and put it into the inventory. Example: <code class="docutils literal notranslate"><span class="pre">take</span> <span class="pre">security</span> <span class="pre">card</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">use</span> <span class="pre">&lt;item&gt;</span></code> – Activate or apply item <code class="docutils literal notranslate"><span class="pre">&lt;item&gt;</span></code>. Item must be present in inventory. Example: <code class="docutils literal notranslate"><span class="pre">use</span> <span class="pre">security</span> <span class="pre">card</span></code></p></li>
 </ul>
 </div></blockquote>
+<p>Additional actions are available if debug mode is enabled (see <a class="reference internal" href="running.html#debug-mode"><span class="std std-ref">Debug mode</span></a>).</p>
+<p>Good luck! Remember you can <a class="reference internal" href="running.html#exiting-the-game"><span class="std std-ref">exit the game</span></a> anytime.</p>
 </section>
 </section>
 

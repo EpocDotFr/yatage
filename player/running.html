@@ -97,10 +97,10 @@ executable that must be used in order to run games.</p>
 <section id="basic-usage">
 <h2>Basic usage<a class="headerlink" href="#basic-usage" title="Permalink to this heading">¶</a></h2>
 <p>The most basic use of <code class="docutils literal notranslate"><span class="pre">yatage</span></code> is:</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>yatage<span class="w"> </span><span class="o">{</span>WORLD<span class="w"> </span>FILE<span class="o">}</span>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>yatage<span class="w"> </span>&lt;world&gt;
 </pre></div>
 </div>
-<p>Where <code class="docutils literal notranslate"><span class="pre">{WORLD</span> <span class="pre">FILE}</span></code> is the path to a YATAGE world file (<code class="docutils literal notranslate"><span class="pre">*.yml</span></code>).</p>
+<p>Where <code class="docutils literal notranslate"><span class="pre">&lt;world&gt;</span></code> is the path to a YATAGE world file (a <code class="docutils literal notranslate"><span class="pre">*.yml</span></code> file).</p>
 <p>A bunch of validation steps will be performed on the given file before being actually used to make sure it is a well-formed
 world file.</p>
 <section id="exiting-the-game">
@@ -116,7 +116,7 @@ world file.</p>
 <h3>Debug mode<a class="headerlink" href="#debug-mode" title="Permalink to this heading">¶</a></h3>
 <p>Sometimes, you will need debug information about what’s happening, or perform actions that would never be possible while
 playing normally, for example while creating a game. Use the <code class="docutils literal notranslate"><span class="pre">--debug</span></code> flag:</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>yatage<span class="w"> </span><span class="o">{</span>WORLD<span class="w"> </span>FILE<span class="o">}</span><span class="w"> </span>--debug
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>yatage<span class="w"> </span>&lt;world&gt;<span class="w"> </span>--debug
 </pre></div>
 </div>
 <p>This will add the following debug statements in-game:</p>
@@ -145,11 +145,11 @@ playing normally, for example while creating a game. Use the <code class="docuti
 <h3>Automate actions<a class="headerlink" href="#automate-actions" title="Permalink to this heading">¶</a></h3>
 <p>Sometimes, you will be tired of typing every single action that needs to be made in order to get to a given progress
 in-game, for example while creating a game. Fortunately, there’s the <code class="docutils literal notranslate"><span class="pre">--actions</span></code> option:</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>yatage<span class="w"> </span><span class="o">{</span>WORLD<span class="w"> </span>FILE<span class="o">}</span><span class="w"> </span>--actions<span class="w"> </span><span class="o">{</span>ACTIONS<span class="w"> </span>FILE<span class="o">}</span>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>yatage<span class="w"> </span>&lt;world&gt;<span class="w"> </span>--actions<span class="w"> </span>&lt;actions&gt;
 </pre></div>
 </div>
-<p>Where <code class="docutils literal notranslate"><span class="pre">{ACTIONS</span> <span class="pre">FILE}</span></code> is the path to a plain text file (usually <code class="docutils literal notranslate"><span class="pre">*.txt</span></code>) which contains the actions to be
-automatically executed, in order, starting from the top.</p>
+<p>Where <code class="docutils literal notranslate"><span class="pre">&lt;actions&gt;</span></code> is the path to a plain text file (usually <code class="docutils literal notranslate"><span class="pre">*.txt</span></code>) which contains the actions to be automatically
+executed, in order, starting from the top.</p>
 <p>The file should contain one action per line:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span># This is an automated actions file. This line is a comment, which will be
 # ignored, as well as empty lines.
@@ -160,7 +160,7 @@ lifts
 </pre></div>
 </div>
 <p>If debug mode is enabled, debug actions are made available too (see <a class="reference internal" href="#debug-mode"><span class="std std-ref">Debug mode</span></a> above).</p>
-<p>You can now continue to <a class="reference internal" href="playing.html"><span class="doc">Playing a game</span></a></p>
+<p>You can now continue to <a class="reference internal" href="playing.html"><span class="doc">Playing a game</span></a>.</p>
 </section>
 </section>
 </section>
