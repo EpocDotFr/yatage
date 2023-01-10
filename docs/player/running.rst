@@ -48,8 +48,8 @@ This will add the following debug statements in-game:
 
 In addition, the following new actions are made available (for debug purposes only!):
 
-  - ``spawn <item>`` -- Spawn a new item identified by ``<item>`` into the player's inventory
-  - ``tp <room>`` -- Teleport the player to the room identified by ``<room>``
+  - ``spawn <item>`` -- Spawn a new item identified by ``<item>`` into the player's inventory. Example: ``spawn security card``
+  - ``tp <room>`` -- Teleport the player to the room identified by ``<room>``. Example: ``tp Building hall``
 
 Finally, debug mode will alter some of the game engine's behavior:
 

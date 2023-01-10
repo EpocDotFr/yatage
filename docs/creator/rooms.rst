@@ -1,0 +1,6 @@
+Adding rooms
+============
+
+.. todo::
+
+    Document.
