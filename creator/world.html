@@ -102,17 +102,6 @@
 <h1>World file<a class="headerlink" href="#world-file" title="Permalink to this heading">¶</a></h1>
 <p>YATAGE needs what we call a “world file” to be able to run a game: it’s a plaintext <a class="reference external" href="https://en.wikipedia.org/wiki/YAML">YAML</a>-formatted
 file (<code class="docutils literal notranslate"><span class="pre">*.yml</span></code>) which is itself structured in a specific fashion.</p>
-<p>Here’s a kinda useless bare-minimum example world file:</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">%YAML</span><span class="w"> </span><span class="m">1.2</span>
-<span class="nn">---</span>
-<span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span>
-<span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Short Example</span>
-<span class="nt">start</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Central hall</span>
-<span class="nt">rooms</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">Central hall</span><span class="p">:</span>
-<span class="w">        </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Description of the initial room.</span>
-</pre></div>
-</div>
 <p>At the very least, the world file must have:</p>
 <blockquote>
 <div><ul class="simple">
@@ -126,7 +115,6 @@ file (<code class="docutils literal notranslate"><span class="pre">*.yml</span><
 </li>
 </ul>
 </div></blockquote>
-<p>Continue reading below to learn about the details of the world file’s structure.</p>
 <section id="world-structure">
 <h2>World structure<a class="headerlink" href="#world-structure" title="Permalink to this heading">¶</a></h2>
 <section id="version">
