@@ -25,8 +25,8 @@ Structure
 
 .. _world-version:
 
-``version``
-^^^^^^^^^^^
+version
+^^^^^^^
 
   - Type: integer
   - Required: **yes**
@@ -38,8 +38,8 @@ structure.
 
 .. _world-name:
 
-``name``
-^^^^^^^^
+name
+^^^^
 
   - Type: string
   - Required: **yes**
@@ -50,8 +50,8 @@ the very beginning. It may be your world's name, your hero's name, your game's n
 
 .. _world-start:
 
-``start``
-^^^^^^^^^
+start
+^^^^^
 
   - Type: string
   - Required: **yes**
@@ -62,8 +62,8 @@ playing. See also :ref:`world-rooms`.
 
 .. _world-rooms:
 
-``rooms``
-^^^^^^^^^
+rooms
+^^^^^
 
   - Type: mapping
   - Required: **yes**
@@ -72,8 +72,8 @@ This attribute holds all the world's rooms definition. See :doc:`rooms` for full
 
 .. _world-description:
 
-``description``
-^^^^^^^^^^^^^^^
+description
+^^^^^^^^^^^
 
   - Type: string
   - Required: no
@@ -85,8 +85,8 @@ game. It's shown when running a game at the very beginning, just after :ref:`wor
 
 .. _world-author:
 
-``author``
-^^^^^^^^^^
+author
+^^^^^^
 
   - Type: string
   - Required: no
@@ -97,8 +97,8 @@ running a game at the very beginning, just after :ref:`world-name` and before :r
 
 .. _world-items:
 
-``items``
-^^^^^^^^^
+items
+^^^^^
 
   - Type: mapping
   - Required: no
