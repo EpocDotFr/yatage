@@ -11,10 +11,10 @@ Here's a kinda useless bare-minimum example world file:
 
 At the very least, the world file must have:
 
-  - A :ref:`version`
-  - A :ref:`name`
-  - A starting room :ref:`start`
-  - At least one room in :ref:`rooms` referenced by :ref:`start`
+  - A :ref:`world-version`
+  - A :ref:`world-name`
+  - A starting room :ref:`world-start`
+  - At least one room in :ref:`world-rooms` referenced by :ref:`world-start`
 
     - This sole room must have at least a ``description``
 
@@ -22,6 +22,8 @@ Continue reading below to learn about the details of the world file structure.
 
 Structure
 ---------
+
+.. _world-version:
 
 ``version``
 ^^^^^^^^^^^
@@ -34,6 +36,8 @@ Although not used yet (at least in the earliest releases of YATAGE), this requir
 world file has been written in. It will allow to handle future -- inevitable -- breaking changes of the world file
 structure.
 
+.. _world-name:
+
 ``name``
 ^^^^^^^^
 
@@ -41,8 +45,10 @@ structure.
   - Required: **yes**
   - Format: none
 
-This attribute should be a one-line string and should be a few words long. It's shown emphasized when running a game at the
-very beginning. It may be your world's name, your hero's name, your game's name, etc.
+This attribute should be a one-line string and should be a few words long. It's shown emphasized when running a game at
+the very beginning. It may be your world's name, your hero's name, your game's name, etc.
+
+.. _world-start:
 
 ``start``
 ^^^^^^^^^
@@ -52,7 +58,9 @@ very beginning. It may be your world's name, your hero's name, your game's name,
   - Format: room reference
 
 This attribute is a room reference to the starting room of the game, in other words the room where the player will start
-playing. See also :ref:`rooms`.
+playing. See also :ref:`world-rooms`.
+
+.. _world-rooms:
 
 ``rooms``
 ^^^^^^^^^
@@ -62,6 +70,8 @@ playing. See also :ref:`rooms`.
 
 This attribute holds all the world's rooms definition. See :doc:`rooms` for full details.
 
+.. _world-description:
+
 ``description``
 ^^^^^^^^^^^^^^^
 
@@ -70,8 +80,10 @@ This attribute holds all the world's rooms definition. See :doc:`rooms` for full
   - Format: none
 
 This attribute may be a multiline string of any size describing this world, which may be used as an introduction to the
-game. It's shown when running a game at the very beginning, just after :ref:`author` (if set) or otherwise just after
-:ref:`name`.
+game. It's shown when running a game at the very beginning, just after :ref:`world-author` (if set) or otherwise just after
+:ref:`world-name`.
+
+.. _world-author:
 
 ``author``
 ^^^^^^^^^^
@@ -81,7 +93,9 @@ game. It's shown when running a game at the very beginning, just after :ref:`aut
   - Format: none
 
 This attribute should be a one-line string containing any information about the author(s) of this world. It's shown when
-running a game at the very beginning, just after :ref:`name` and before :ref:`description` (if set).
+running a game at the very beginning, just after :ref:`world-name` and before :ref:`world-description` (if set).
+
+.. _world-items:
 
 ``items``
 ^^^^^^^^^

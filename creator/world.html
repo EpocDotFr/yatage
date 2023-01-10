@@ -116,10 +116,10 @@ file (<code class="docutils literal notranslate"><span class="pre">*.yml</span><
 <p>At the very least, the world file must have:</p>
 <blockquote>
 <div><ul class="simple">
-<li><p>A <a class="reference external" href="https://docs.python.org/3.8/library/importlib.metadata.html#version" title="(in Python v3.8)"><span>Distribution versions</span></a></p></li>
-<li><p>A <span class="xref std std-ref">name</span></p></li>
-<li><p>A starting room <span class="xref std std-ref">start</span></p></li>
-<li><p>At least one room in <span class="xref std std-ref">rooms</span> referenced by <span class="xref std std-ref">start</span></p>
+<li><p>A <a class="reference internal" href="#world-version"><span class="std std-ref">version</span></a></p></li>
+<li><p>A <a class="reference internal" href="#world-name"><span class="std std-ref">name</span></a></p></li>
+<li><p>A starting room <a class="reference internal" href="#world-start"><span class="std std-ref">start</span></a></p></li>
+<li><p>At least one room in <a class="reference internal" href="#world-rooms"><span class="std std-ref">rooms</span></a> referenced by <a class="reference internal" href="#world-start"><span class="std std-ref">start</span></a></p>
 <ul>
 <li><p>This sole room must have at least a <code class="docutils literal notranslate"><span class="pre">description</span></code></p></li>
 </ul>
@@ -130,7 +130,7 @@ file (<code class="docutils literal notranslate"><span class="pre">*.yml</span><
 <section id="structure">
 <h2>Structure<a class="headerlink" href="#structure" title="Permalink to this heading">¶</a></h2>
 <section id="version">
-<h3><code class="docutils literal notranslate"><span class="pre">version</span></code><a class="headerlink" href="#version" title="Permalink to this heading">¶</a></h3>
+<span id="world-version"></span><h3><code class="docutils literal notranslate"><span class="pre">version</span></code><a class="headerlink" href="#version" title="Permalink to this heading">¶</a></h3>
 <blockquote>
 <div><ul class="simple">
 <li><p>Type: integer</p></li>
@@ -143,7 +143,7 @@ world file has been written in. It will allow to handle future – inevitable �
 structure.</p>
 </section>
 <section id="name">
-<h3><code class="docutils literal notranslate"><span class="pre">name</span></code><a class="headerlink" href="#name" title="Permalink to this heading">¶</a></h3>
+<span id="world-name"></span><h3><code class="docutils literal notranslate"><span class="pre">name</span></code><a class="headerlink" href="#name" title="Permalink to this heading">¶</a></h3>
 <blockquote>
 <div><ul class="simple">
 <li><p>Type: string</p></li>
@@ -151,11 +151,11 @@ structure.</p>
 <li><p>Format: none</p></li>
 </ul>
 </div></blockquote>
-<p>This attribute should be a one-line string and should be a few words long. It’s shown emphasized when running a game at the
-very beginning. It may be your world’s name, your hero’s name, your game’s name, etc.</p>
+<p>This attribute should be a one-line string and should be a few words long. It’s shown emphasized when running a game at
+the very beginning. It may be your world’s name, your hero’s name, your game’s name, etc.</p>
 </section>
 <section id="start">
-<h3><code class="docutils literal notranslate"><span class="pre">start</span></code><a class="headerlink" href="#start" title="Permalink to this heading">¶</a></h3>
+<span id="world-start"></span><h3><code class="docutils literal notranslate"><span class="pre">start</span></code><a class="headerlink" href="#start" title="Permalink to this heading">¶</a></h3>
 <blockquote>
 <div><ul class="simple">
 <li><p>Type: string</p></li>
@@ -164,10 +164,10 @@ very beginning. It may be your world’s name, your hero’s name, your game’s
 </ul>
 </div></blockquote>
 <p>This attribute is a room reference to the starting room of the game, in other words the room where the player will start
-playing. See also <span class="xref std std-ref">rooms</span>.</p>
+playing. See also <a class="reference internal" href="#world-rooms"><span class="std std-ref">rooms</span></a>.</p>
 </section>
 <section id="rooms">
-<h3><code class="docutils literal notranslate"><span class="pre">rooms</span></code><a class="headerlink" href="#rooms" title="Permalink to this heading">¶</a></h3>
+<span id="world-rooms"></span><h3><code class="docutils literal notranslate"><span class="pre">rooms</span></code><a class="headerlink" href="#rooms" title="Permalink to this heading">¶</a></h3>
 <blockquote>
 <div><ul class="simple">
 <li><p>Type: mapping</p></li>
@@ -177,7 +177,7 @@ playing. See also <span class="xref std std-ref">rooms</span>.</p>
 <p>This attribute holds all the world’s rooms definition. See <a class="reference internal" href="rooms.html"><span class="doc">Adding rooms</span></a> for full details.</p>
 </section>
 <section id="description">
-<h3><code class="docutils literal notranslate"><span class="pre">description</span></code><a class="headerlink" href="#description" title="Permalink to this heading">¶</a></h3>
+<span id="world-description"></span><h3><code class="docutils literal notranslate"><span class="pre">description</span></code><a class="headerlink" href="#description" title="Permalink to this heading">¶</a></h3>
 <blockquote>
 <div><ul class="simple">
 <li><p>Type: string</p></li>
@@ -186,11 +186,11 @@ playing. See also <span class="xref std std-ref">rooms</span>.</p>
 </ul>
 </div></blockquote>
 <p>This attribute may be a multiline string of any size describing this world, which may be used as an introduction to the
-game. It’s shown when running a game at the very beginning, just after <span class="xref std std-ref">author</span> (if set) or otherwise just after
-<span class="xref std std-ref">name</span>.</p>
+game. It’s shown when running a game at the very beginning, just after <a class="reference internal" href="#world-author"><span class="std std-ref">author</span></a> (if set) or otherwise just after
+<a class="reference internal" href="#world-name"><span class="std std-ref">name</span></a>.</p>
 </section>
 <section id="author">
-<h3><code class="docutils literal notranslate"><span class="pre">author</span></code><a class="headerlink" href="#author" title="Permalink to this heading">¶</a></h3>
+<span id="world-author"></span><h3><code class="docutils literal notranslate"><span class="pre">author</span></code><a class="headerlink" href="#author" title="Permalink to this heading">¶</a></h3>
 <blockquote>
 <div><ul class="simple">
 <li><p>Type: string</p></li>
@@ -199,10 +199,10 @@ game. It’s shown when running a game at the very beginning, just after <span c
 </ul>
 </div></blockquote>
 <p>This attribute should be a one-line string containing any information about the author(s) of this world. It’s shown when
-running a game at the very beginning, just after <span class="xref std std-ref">name</span> and before <span class="xref std std-ref">description</span> (if set).</p>
+running a game at the very beginning, just after <a class="reference internal" href="#world-name"><span class="std std-ref">name</span></a> and before <a class="reference internal" href="#world-description"><span class="std std-ref">description</span></a> (if set).</p>
 </section>
 <section id="items">
-<h3><code class="docutils literal notranslate"><span class="pre">items</span></code><a class="headerlink" href="#items" title="Permalink to this heading">¶</a></h3>
+<span id="world-items"></span><h3><code class="docutils literal notranslate"><span class="pre">items</span></code><a class="headerlink" href="#items" title="Permalink to this heading">¶</a></h3>
 <blockquote>
 <div><ul class="simple">
 <li><p>Type: mapping</p></li>
