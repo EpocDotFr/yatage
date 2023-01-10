@@ -13,7 +13,7 @@ The most basic use of ``yatage`` is:
 
     $ yatage <world>
 
-Where ``<world>`` is the path to a YATAGE world file (a ``*.yml`` file).
+Where ``<world>`` is the path to a :ref:`YATAGE world file <world>`.
 
 A bunch of validation steps will be performed on the given file before being actually used to make sure it is a well-formed
 world file.
@@ -55,8 +55,8 @@ Finally, debug mode will alter some of the game engine's behavior:
 
   - Used items will not be hidden in inventory. A ``[used]`` suffix will instead be appended to the items' name
 
-Automate actions
-^^^^^^^^^^^^^^^^
+Automating actions
+^^^^^^^^^^^^^^^^^^
 
 Sometimes, you will be tired of typing every single action that needs to be made in order to get to a given progress
 in-game, for example while creating a game. Fortunately, there's the ``--actions`` option:
@@ -75,4 +75,4 @@ The file should contain one action per line:
 
 If debug mode is enabled, debug actions are made available too (see :ref:`Debug mode` above).
 
-You can now continue to :doc:`playing`.
+You can now continue to :doc:`play`.

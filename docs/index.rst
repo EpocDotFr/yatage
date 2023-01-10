@@ -57,8 +57,8 @@ Guide about running and playing games.
 .. toctree::
    :maxdepth: 4
 
-   player/running
-   player/playing
+   player/run
+   player/play
 
 Creator's Guide
 ---------------
