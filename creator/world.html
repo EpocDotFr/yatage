@@ -148,6 +148,7 @@ structure.</p>
 <div><ul class="simple">
 <li><p>Type: string</p></li>
 <li><p>Required: <strong>yes</strong></p></li>
+<li><p>Format: none</p></li>
 </ul>
 </div></blockquote>
 <p>This attribute should be a one-line string and should be a few words long. It’s shown emphasized when running a game at the
@@ -157,8 +158,9 @@ very beginning. It may be your world’s name, your hero’s name, your game’s
 <h3><code class="docutils literal notranslate"><span class="pre">start</span></code><a class="headerlink" href="#start" title="Permalink to this heading">¶</a></h3>
 <blockquote>
 <div><ul class="simple">
-<li><p>Type: string (room reference)</p></li>
+<li><p>Type: string</p></li>
 <li><p>Required: <strong>yes</strong></p></li>
+<li><p>Format: room reference</p></li>
 </ul>
 </div></blockquote>
 <p>This attribute is a room reference to the starting room of the game, in other words the room where the player will start
@@ -180,6 +182,7 @@ playing. See also <span class="xref std std-ref">rooms</span>.</p>
 <div><ul class="simple">
 <li><p>Type: string</p></li>
 <li><p>Required: no</p></li>
+<li><p>Format: none</p></li>
 </ul>
 </div></blockquote>
 <p>This attribute may be a multiline string of any size describing this world, which may be used as an introduction to the
@@ -192,6 +195,7 @@ game. It’s shown when running a game at the very beginning, just after <span c
 <div><ul class="simple">
 <li><p>Type: string</p></li>
 <li><p>Required: no</p></li>
+<li><p>Format: none</p></li>
 </ul>
 </div></blockquote>
 <p>This attribute should be a one-line string containing any information about the author(s) of this world. It’s shown when
