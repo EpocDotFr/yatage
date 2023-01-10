@@ -55,6 +55,7 @@ Player's Guide
 Guide about running and playing games.
 
 .. toctree::
+   :caption: Player's Guide
    :maxdepth: 4
 
    player/run
@@ -66,6 +67,7 @@ Creator's Guide
 Guide about creating games.
 
 .. toctree::
+   :caption: Creator's Guide
    :maxdepth: 4
 
    creator/world
