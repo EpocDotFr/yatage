@@ -51,13 +51,13 @@
 <ul class="current">
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Creating world file</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#structure">Structure</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#version"><code class="docutils literal notranslate"><span class="pre">version</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#name"><code class="docutils literal notranslate"><span class="pre">name</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#start"><code class="docutils literal notranslate"><span class="pre">start</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#rooms"><code class="docutils literal notranslate"><span class="pre">rooms</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#description"><code class="docutils literal notranslate"><span class="pre">description</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#author"><code class="docutils literal notranslate"><span class="pre">author</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#items"><code class="docutils literal notranslate"><span class="pre">items</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#version">version</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#name">name</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#start">start</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rooms">rooms</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#description">description</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#author">author</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#items">items</a></li>
 </ul>
 </li>
 </ul>
@@ -130,7 +130,7 @@ file (<code class="docutils literal notranslate"><span class="pre">*.yml</span><
 <section id="structure">
 <h2>Structure<a class="headerlink" href="#structure" title="Permalink to this heading">¶</a></h2>
 <section id="version">
-<span id="world-version"></span><h3><code class="docutils literal notranslate"><span class="pre">version</span></code><a class="headerlink" href="#version" title="Permalink to this heading">¶</a></h3>
+<span id="world-version"></span><h3>version<a class="headerlink" href="#version" title="Permalink to this heading">¶</a></h3>
 <blockquote>
 <div><ul class="simple">
 <li><p>Type: integer</p></li>
@@ -143,7 +143,7 @@ world file has been written in. It will allow to handle future – inevitable �
 structure.</p>
 </section>
 <section id="name">
-<span id="world-name"></span><h3><code class="docutils literal notranslate"><span class="pre">name</span></code><a class="headerlink" href="#name" title="Permalink to this heading">¶</a></h3>
+<span id="world-name"></span><h3>name<a class="headerlink" href="#name" title="Permalink to this heading">¶</a></h3>
 <blockquote>
 <div><ul class="simple">
 <li><p>Type: string</p></li>
@@ -155,7 +155,7 @@ structure.</p>
 the very beginning. It may be your world’s name, your hero’s name, your game’s name, etc.</p>
 </section>
 <section id="start">
-<span id="world-start"></span><h3><code class="docutils literal notranslate"><span class="pre">start</span></code><a class="headerlink" href="#start" title="Permalink to this heading">¶</a></h3>
+<span id="world-start"></span><h3>start<a class="headerlink" href="#start" title="Permalink to this heading">¶</a></h3>
 <blockquote>
 <div><ul class="simple">
 <li><p>Type: string</p></li>
@@ -167,7 +167,7 @@ the very beginning. It may be your world’s name, your hero’s name, your game
 playing. See also <a class="reference internal" href="#world-rooms"><span class="std std-ref">rooms</span></a>.</p>
 </section>
 <section id="rooms">
-<span id="world-rooms"></span><h3><code class="docutils literal notranslate"><span class="pre">rooms</span></code><a class="headerlink" href="#rooms" title="Permalink to this heading">¶</a></h3>
+<span id="world-rooms"></span><h3>rooms<a class="headerlink" href="#rooms" title="Permalink to this heading">¶</a></h3>
 <blockquote>
 <div><ul class="simple">
 <li><p>Type: mapping</p></li>
@@ -177,7 +177,7 @@ playing. See also <a class="reference internal" href="#world-rooms"><span class=
 <p>This attribute holds all the world’s rooms definition. See <a class="reference internal" href="rooms.html"><span class="doc">Adding rooms</span></a> for full details.</p>
 </section>
 <section id="description">
-<span id="world-description"></span><h3><code class="docutils literal notranslate"><span class="pre">description</span></code><a class="headerlink" href="#description" title="Permalink to this heading">¶</a></h3>
+<span id="world-description"></span><h3>description<a class="headerlink" href="#description" title="Permalink to this heading">¶</a></h3>
 <blockquote>
 <div><ul class="simple">
 <li><p>Type: string</p></li>
@@ -190,7 +190,7 @@ game. It’s shown when running a game at the very beginning, just after <a clas
 <a class="reference internal" href="#world-name"><span class="std std-ref">name</span></a>.</p>
 </section>
 <section id="author">
-<span id="world-author"></span><h3><code class="docutils literal notranslate"><span class="pre">author</span></code><a class="headerlink" href="#author" title="Permalink to this heading">¶</a></h3>
+<span id="world-author"></span><h3>author<a class="headerlink" href="#author" title="Permalink to this heading">¶</a></h3>
 <blockquote>
 <div><ul class="simple">
 <li><p>Type: string</p></li>
@@ -202,7 +202,7 @@ game. It’s shown when running a game at the very beginning, just after <a clas
 running a game at the very beginning, just after <a class="reference internal" href="#world-name"><span class="std std-ref">name</span></a> and before <a class="reference internal" href="#world-description"><span class="std std-ref">description</span></a> (if set).</p>
 </section>
 <section id="items">
-<span id="world-items"></span><h3><code class="docutils literal notranslate"><span class="pre">items</span></code><a class="headerlink" href="#items" title="Permalink to this heading">¶</a></h3>
+<span id="world-items"></span><h3>items<a class="headerlink" href="#items" title="Permalink to this heading">¶</a></h3>
 <blockquote>
 <div><ul class="simple">
 <li><p>Type: mapping</p></li>
