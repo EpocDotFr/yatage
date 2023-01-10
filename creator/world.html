@@ -54,8 +54,10 @@
 <li class="toctree-l3"><a class="reference internal" href="#version"><code class="docutils literal notranslate"><span class="pre">version</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#name"><code class="docutils literal notranslate"><span class="pre">name</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#start"><code class="docutils literal notranslate"><span class="pre">start</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rooms"><code class="docutils literal notranslate"><span class="pre">rooms</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#description"><code class="docutils literal notranslate"><span class="pre">description</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#author"><code class="docutils literal notranslate"><span class="pre">author</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#items"><code class="docutils literal notranslate"><span class="pre">items</span></code></a></li>
 </ul>
 </li>
 </ul>
@@ -114,11 +116,14 @@ file (<code class="docutils literal notranslate"><span class="pre">*.yml</span><
 <p>At the very least, the world file must have:</p>
 <blockquote>
 <div><ul class="simple">
-<li><p>A <code class="docutils literal notranslate"><span class="pre">version</span></code></p></li>
-<li><p>A <code class="docutils literal notranslate"><span class="pre">name</span></code></p></li>
-<li><p>A starting room <code class="docutils literal notranslate"><span class="pre">start</span></code></p></li>
-<li><p>At least one room in <code class="docutils literal notranslate"><span class="pre">rooms</span></code> referenced by <code class="docutils literal notranslate"><span class="pre">start</span></code> above
-- The sole room must have at least a <code class="docutils literal notranslate"><span class="pre">description</span></code></p></li>
+<li><p>A <a class="reference external" href="https://docs.python.org/3.8/library/importlib.metadata.html#version" title="(in Python v3.8)"><span>Distribution versions</span></a></p></li>
+<li><p>A <span class="xref std std-ref">name</span></p></li>
+<li><p>A starting room <span class="xref std std-ref">start</span></p></li>
+<li><p>At least one room in <span class="xref std std-ref">rooms</span> referenced by <span class="xref std std-ref">start</span></p>
+<ul>
+<li><p>This sole room must have at least a <code class="docutils literal notranslate"><span class="pre">description</span></code></p></li>
+</ul>
+</li>
 </ul>
 </div></blockquote>
 <p>Continue reading below to learn about this file’s structure.</p>
@@ -164,6 +169,19 @@ file (<code class="docutils literal notranslate"><span class="pre">*.yml</span><
 <p>Document.</p>
 </div>
 </section>
+<section id="rooms">
+<h3><code class="docutils literal notranslate"><span class="pre">rooms</span></code><a class="headerlink" href="#rooms" title="Permalink to this heading">¶</a></h3>
+<blockquote>
+<div><ul class="simple">
+<li><p>Type: mapping</p></li>
+<li><p>Required: <strong>yes</strong></p></li>
+</ul>
+</div></blockquote>
+<div class="admonition-todo admonition" id="id4">
+<p class="admonition-title">Todo</p>
+<p>Document.</p>
+</div>
+</section>
 <section id="description">
 <h3><code class="docutils literal notranslate"><span class="pre">description</span></code><a class="headerlink" href="#description" title="Permalink to this heading">¶</a></h3>
 <blockquote>
@@ -172,7 +190,7 @@ file (<code class="docutils literal notranslate"><span class="pre">*.yml</span><
 <li><p>Required: no</p></li>
 </ul>
 </div></blockquote>
-<div class="admonition-todo admonition" id="id4">
+<div class="admonition-todo admonition" id="id5">
 <p class="admonition-title">Todo</p>
 <p>Document.</p>
 </div>
@@ -185,7 +203,20 @@ file (<code class="docutils literal notranslate"><span class="pre">*.yml</span><
 <li><p>Required: no</p></li>
 </ul>
 </div></blockquote>
-<div class="admonition-todo admonition" id="id5">
+<div class="admonition-todo admonition" id="id6">
+<p class="admonition-title">Todo</p>
+<p>Document.</p>
+</div>
+</section>
+<section id="items">
+<h3><code class="docutils literal notranslate"><span class="pre">items</span></code><a class="headerlink" href="#items" title="Permalink to this heading">¶</a></h3>
+<blockquote>
+<div><ul class="simple">
+<li><p>Type: mapping</p></li>
+<li><p>Required: no</p></li>
+</ul>
+</div></blockquote>
+<div class="admonition-todo admonition" id="id7">
 <p class="admonition-title">Todo</p>
 <p>Document.</p>
 </div>

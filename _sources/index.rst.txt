@@ -49,10 +49,8 @@ Locally, after cloning/downloading the repo:
 
     $ pip install .
 
-Player's Guide
---------------
-
-Guide about running and playing games.
+Guide
+-----
 
 .. toctree::
    :caption: Player's Guide
@@ -60,11 +58,6 @@ Guide about running and playing games.
 
    player/run
    player/play
-
-Creator's Guide
----------------
-
-Guide about creating games.
 
 .. toctree::
    :caption: Creator's Guide

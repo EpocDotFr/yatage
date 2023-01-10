@@ -11,11 +11,12 @@ Here's a kinda useless bare-minimum example world file:
 
 At the very least, the world file must have:
 
-  - A ``version``
-  - A ``name``
-  - A starting room ``start``
-  - At least one room in ``rooms`` referenced by ``start`` above
-    - The sole room must have at least a ``description``
+  - A :ref:`version`
+  - A :ref:`name`
+  - A starting room :ref:`start`
+  - At least one room in :ref:`rooms` referenced by :ref:`start`
+
+    - This sole room must have at least a ``description``
 
 Continue reading below to learn about this file's structure.
 
@@ -34,7 +35,7 @@ Structure
     Document.
 
 ``name``
-^^^^^^^^^^^
+^^^^^^^^
 
   - Type: string
   - Required: **yes**
@@ -47,6 +48,16 @@ Structure
 ^^^^^^^^^
 
   - Type: string
+  - Required: **yes**
+
+.. todo::
+
+    Document.
+
+``rooms``
+^^^^^^^^^
+
+  - Type: mapping
   - Required: **yes**
 
 .. todo::
@@ -67,6 +78,16 @@ Structure
 ^^^^^^^^^^
 
   - Type: string
+  - Required: no
+
+.. todo::
+
+    Document.
+
+``items``
+^^^^^^^^^
+
+  - Type: mapping
   - Required: no
 
 .. todo::
