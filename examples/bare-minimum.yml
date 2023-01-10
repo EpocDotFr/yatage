@@ -1,8 +1,0 @@
-%YAML 1.2
----
-version: 1
-name: Short Example
-start: Central hall
-rooms:
-    Central hall:
-        description: Description of the initial room.
