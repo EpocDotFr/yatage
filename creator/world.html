@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
-    <title>Creating world file &#8212; YATAGE 1.0.0 documentation</title>
+    <title>World file &#8212; YATAGE 1.0.0 documentation</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/alabaster.css" />
     <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
@@ -17,7 +17,7 @@
     <script src="../_static/sphinx_highlight.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Adding rooms" href="rooms.html" />
+    <link rel="next" title="Room" href="room.html" />
     <link rel="prev" title="Playing a game" href="../player/play.html" />
    
   <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
@@ -49,7 +49,7 @@
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Creator's Guide</span></p>
 <ul class="current">
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Creating world file</a><ul>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">World file</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#structure">Structure</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#version">version</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#name">name</a></li>
@@ -62,8 +62,8 @@
 </li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="rooms.html">Adding rooms</a></li>
-<li class="toctree-l1"><a class="reference internal" href="items.html">Adding items</a></li>
+<li class="toctree-l1"><a class="reference internal" href="room.html">Room</a></li>
+<li class="toctree-l1"><a class="reference internal" href="item.html">Item</a></li>
 </ul>
 
 
@@ -98,8 +98,8 @@
 
           <div class="body" role="main">
             
-  <section id="creating-world-file">
-<h1>Creating world file<a class="headerlink" href="#creating-world-file" title="Permalink to this heading">¶</a></h1>
+  <section id="world-file">
+<h1>World file<a class="headerlink" href="#world-file" title="Permalink to this heading">¶</a></h1>
 <p>YATAGE needs what we call a “world file” to be able to run a game: it’s a plaintext <a class="reference external" href="https://en.wikipedia.org/wiki/YAML">YAML</a>-formatted
 file (<code class="docutils literal notranslate"><span class="pre">*.yml</span></code>) which is itself structured in a specific fashion.</p>
 <p>Here’s a kinda useless bare-minimum example world file:</p>
@@ -128,7 +128,7 @@ file (<code class="docutils literal notranslate"><span class="pre">*.yml</span><
 </div></blockquote>
 <p>Continue reading below to learn about the details of the world file structure.</p>
 <section id="structure">
-<h2>Structure<a class="headerlink" href="#structure" title="Permalink to this heading">¶</a></h2>
+<span id="world-structure"></span><h2>Structure<a class="headerlink" href="#structure" title="Permalink to this heading">¶</a></h2>
 <section id="version">
 <span id="world-version"></span><h3>version<a class="headerlink" href="#version" title="Permalink to this heading">¶</a></h3>
 <blockquote>
@@ -138,8 +138,8 @@ file (<code class="docutils literal notranslate"><span class="pre">*.yml</span><
 <li><p>Allowed values: <code class="docutils literal notranslate"><span class="pre">1</span></code></p></li>
 </ul>
 </div></blockquote>
-<p>Although not used yet (at least in the earliest releases of YATAGE), this required attribute tells which version the
-world file has been written in. It will allow to handle future – inevitable – breaking changes of the world file
+<p>Although not used yet (at least in the earliest releases of YATAGE), this attribute tells which version the world file
+has been written in. It will allow to handle future – inevitable – breaking changes of the world file
 structure.</p>
 </section>
 <section id="name">
@@ -151,8 +151,8 @@ structure.</p>
 <li><p>Format: none</p></li>
 </ul>
 </div></blockquote>
-<p>This attribute should be a one-line string and should be a few words long. It’s shown emphasized when running a game at
-the very beginning. It may be your world’s name, your hero’s name, your game’s name, etc.</p>
+<p>This attribute should be a one-line string and should be a few words long. It may be your world’s name, your hero’s name,
+your game’s name, etc. It’s shown emphasized when running a game at the very beginning.</p>
 </section>
 <section id="start">
 <span id="world-start"></span><h3>start<a class="headerlink" href="#start" title="Permalink to this heading">¶</a></h3>
@@ -164,7 +164,8 @@ the very beginning. It may be your world’s name, your hero’s name, your game
 </ul>
 </div></blockquote>
 <p>This attribute is a room reference to the starting room of the game, in other words the room where the player will start
-playing. See also <a class="reference internal" href="#world-rooms"><span class="std std-ref">rooms</span></a>.</p>
+playing.</p>
+<p>See also <a class="reference internal" href="#world-rooms"><span class="std std-ref">rooms</span></a>.</p>
 </section>
 <section id="rooms">
 <span id="world-rooms"></span><h3>rooms<a class="headerlink" href="#rooms" title="Permalink to this heading">¶</a></h3>
@@ -172,9 +173,11 @@ playing. See also <a class="reference internal" href="#world-rooms"><span class=
 <div><ul class="simple">
 <li><p>Type: mapping</p></li>
 <li><p>Required: <strong>yes</strong></p></li>
+<li><p>Format: string -&gt; <span class="xref std std-ref">room</span></p></li>
 </ul>
 </div></blockquote>
-<p>This attribute holds all the world’s rooms definition. See <a class="reference internal" href="rooms.html"><span class="doc">Adding rooms</span></a> for full details.</p>
+<p>This attribute holds all the world’s rooms definition. It’s a mapping between rooms reference (a string) and a <span class="xref std std-ref">room</span>
+structure. At least one room with a valid structure must be defined and referenced by <a class="reference internal" href="#world-start"><span class="std std-ref">start</span></a>.</p>
 </section>
 <section id="description">
 <span id="world-description"></span><h3>description<a class="headerlink" href="#description" title="Permalink to this heading">¶</a></h3>
@@ -207,9 +210,11 @@ running a game at the very beginning, just after <a class="reference internal" h
 <div><ul class="simple">
 <li><p>Type: mapping</p></li>
 <li><p>Required: no</p></li>
+<li><p>Format: string -&gt; <span class="xref std std-ref">item</span></p></li>
 </ul>
 </div></blockquote>
-<p>This attribute holds all the world’s items definition. See <a class="reference internal" href="items.html"><span class="doc">Adding items</span></a> for full details.</p>
+<p>This attribute holds all the world’s items definition. It’s a mapping between items reference (a string) and an <span class="xref std std-ref">item</span>
+structure.</p>
 </section>
 </section>
 </section>

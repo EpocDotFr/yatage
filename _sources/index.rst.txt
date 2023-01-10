@@ -64,8 +64,8 @@ Guide
    :maxdepth: 4
 
    creator/world
-   creator/rooms
-   creator/items
+   creator/room
+   creator/item
 
 .. |pyversion| image:: https://img.shields.io/pypi/pyversions/yatage.svg
 .. |pypiv| image:: https://img.shields.io/pypi/v/yatage.svg
