@@ -13,7 +13,7 @@ The most basic use of ``yatage`` is:
 
     $ yatage <world>
 
-Where ``<world>`` is the path to a :doc:`YATAGE world file <world>`.
+Where ``<world>`` is the path to a :doc:`YATAGE world file <../creator/world>`.
 
 A bunch of validation steps will be performed on the given file before being actually used to make sure it is a well-formed
 world file.
