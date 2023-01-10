@@ -11,9 +11,9 @@ The most basic use of ``yatage`` is:
 
 .. code-block:: console
 
-    $ yatage {WORLD FILE}
+    $ yatage <world>
 
-Where ``{WORLD FILE}`` is the path to a YATAGE world file (``*.yml``).
+Where ``<world>`` is the path to a YATAGE world file (a ``*.yml`` file).
 
 A bunch of validation steps will be performed on the given file before being actually used to make sure it is a well-formed
 world file.
@@ -38,7 +38,7 @@ playing normally, for example while creating a game. Use the ``--debug`` flag:
 
 .. code-block:: console
 
-    $ yatage {WORLD FILE} --debug
+    $ yatage <world> --debug
 
 This will add the following debug statements in-game:
 
@@ -63,10 +63,10 @@ in-game, for example while creating a game. Fortunately, there's the ``--actions
 
 .. code-block:: console
 
-    $ yatage {WORLD FILE} --actions {ACTIONS FILE}
+    $ yatage <world> --actions <actions>
 
-Where ``{ACTIONS FILE}`` is the path to a plain text file (usually ``*.txt``) which contains the actions to be
-automatically executed, in order, starting from the top.
+Where ``<actions>`` is the path to a plain text file (usually ``*.txt``) which contains the actions to be automatically
+executed, in order, starting from the top.
 
 The file should contain one action per line:
 
@@ -75,4 +75,4 @@ The file should contain one action per line:
 
 If debug mode is enabled, debug actions are made available too (see :ref:`Debug mode` above).
 
-You can now continue to :doc:`playing`
+You can now continue to :doc:`playing`.

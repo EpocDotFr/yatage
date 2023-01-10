@@ -36,10 +36,10 @@ class Commands(Loop):
         for command in self.commands:
             setattr(self, f'do_{command}', getattr(self, command))
 
-    def look(self, subject: str) -> Optional[bool]:
+    def look(self, item_identifier: str) -> Optional[bool]:
         """You may merely 'look' to examine the room, or you may 'look <subject>' (such as 'look chair') to examine something specific."""
-        if subject:
-            item = yatage.utils.get_item(self.current_room.items, subject) or yatage.utils.get_item(self.inventory, subject)
+        if item_identifier:
+            item = yatage.utils.get_item(self.current_room.items, item_identifier) or yatage.utils.get_item(self.inventory, item_identifier)
 
             if item:
                 self.line(item.do_look())
