@@ -23,7 +23,9 @@ Exiting the game
 
 You can exit the game anytime using either :kbd:`Control-d` or :kbd:`Control-c`.
 
-Note you will lose your progress as YATAGE does not allow to save game state (yet).
+.. note::
+
+    You will lose your progress as YATAGE does not allow to save game state (yet).
 
 Advanced usage
 --------------
@@ -73,6 +75,8 @@ The file should contain one action per line:
 .. literalinclude:: ../../examples/short_actions.txt
     :language: text
 
-If debug mode is enabled, debug actions are made available too (see :ref:`Debug mode` above).
+.. note::
+
+    If debug mode is enabled, debug actions are made available too (see :ref:`Debug mode`).
 
 You can now continue to :doc:`play`.

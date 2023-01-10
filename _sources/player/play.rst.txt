@@ -3,8 +3,11 @@ Playing a game
 
 Now that you're able to :doc:`run a game <run>` using a valid YATAGE world file, it can be played.
 
-When running a game, you will be first shown various information about the world being played on. Extra information may
-be shown if debug mode is enabled (see :ref:`Debug mode`).
+When running a game, you will be first shown various information about the world being played on.
+
+.. note::
+
+    Extra information may be shown if debug mode is enabled (see :ref:`Debug mode`).
 
 The game itself then begins.
 
@@ -28,6 +31,8 @@ The available actions are:
   - ``take <item>`` -- Take item ``<item>`` from the current room and put it into the inventory. Example: ``take security card``
   - ``use <item>`` -- Activate or apply item ``<item>``. Item must be present in inventory. Example: ``use security card``
 
-Additional actions are available if debug mode is enabled (see :ref:`Debug mode`).
+.. note::
+
+    Additional actions are available if debug mode is enabled (see :ref:`Debug mode`).
 
 Good luck! Remember you can :ref:`exit the game <Exiting the game>` anytime.
