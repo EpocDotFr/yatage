@@ -1,5 +1,5 @@
-Creating world file
-===================
+World file
+==========
 
 YATAGE needs what we call a "world file" to be able to run a game: it's a plaintext `YAML <https://en.wikipedia.org/wiki/YAML>`__-formatted
 file (``*.yml``) which is itself structured in a specific fashion.
@@ -20,6 +20,8 @@ At the very least, the world file must have:
 
 Continue reading below to learn about the details of the world file structure.
 
+.. _world-structure:
+
 Structure
 ---------
 
@@ -32,8 +34,8 @@ version
   - Required: **yes**
   - Allowed values: ``1``
 
-Although not used yet (at least in the earliest releases of YATAGE), this required attribute tells which version the
-world file has been written in. It will allow to handle future -- inevitable -- breaking changes of the world file
+Although not used yet (at least in the earliest releases of YATAGE), this attribute tells which version the world file
+has been written in. It will allow to handle future -- inevitable -- breaking changes of the world file
 structure.
 
 .. _world-name:
@@ -45,8 +47,8 @@ name
   - Required: **yes**
   - Format: none
 
-This attribute should be a one-line string and should be a few words long. It's shown emphasized when running a game at
-the very beginning. It may be your world's name, your hero's name, your game's name, etc.
+This attribute should be a one-line string and should be a few words long. It may be your world's name, your hero's name,
+your game's name, etc. It's shown emphasized when running a game at the very beginning.
 
 .. _world-start:
 
@@ -58,7 +60,9 @@ start
   - Format: room reference
 
 This attribute is a room reference to the starting room of the game, in other words the room where the player will start
-playing. See also :ref:`world-rooms`.
+playing.
+
+See also :ref:`world-rooms`.
 
 .. _world-rooms:
 
@@ -67,8 +71,10 @@ rooms
 
   - Type: mapping
   - Required: **yes**
+  - Format: string -> :ref:`room <room-structure>`
 
-This attribute holds all the world's rooms definition. See :doc:`rooms` for full details.
+This attribute holds all the world's rooms definition. It's a mapping between rooms reference (a string) and a :ref:`room <room-structure>`
+structure. At least one room with a valid structure must be defined and referenced by :ref:`world-start`.
 
 .. _world-description:
 
@@ -102,5 +108,7 @@ items
 
   - Type: mapping
   - Required: no
+  - Format: string -> :ref:`item <item-structure>`
 
-This attribute holds all the world's items definition. See :doc:`items` for full details.
+This attribute holds all the world's items definition. It's a mapping between items reference (a string) and an :ref:`item <item-structure>`
+structure.
