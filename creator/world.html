@@ -42,12 +42,24 @@
 
 
 <h3>Navigation</h3>
+<p class="caption" role="heading"><span class="caption-text">Player's Guide</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../player/run.html">Running a game</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../player/play.html">Playing a game</a></li>
 </ul>
+<p class="caption" role="heading"><span class="caption-text">Creator's Guide</span></p>
 <ul class="current">
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Creating world file</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Creating world file</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#structure">Structure</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#version"><code class="docutils literal notranslate"><span class="pre">version</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#name"><code class="docutils literal notranslate"><span class="pre">name</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#start"><code class="docutils literal notranslate"><span class="pre">start</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#description"><code class="docutils literal notranslate"><span class="pre">description</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#author"><code class="docutils literal notranslate"><span class="pre">author</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="rooms.html">Adding rooms</a></li>
 <li class="toctree-l1"><a class="reference internal" href="items.html">Adding items</a></li>
 </ul>
@@ -99,6 +111,86 @@ file (<code class="docutils literal notranslate"><span class="pre">*.yml</span><
 <span class="w">        </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Description of the initial room.</span>
 </pre></div>
 </div>
+<p>At the very least, the world file must have:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>A <code class="docutils literal notranslate"><span class="pre">version</span></code></p></li>
+<li><p>A <code class="docutils literal notranslate"><span class="pre">name</span></code></p></li>
+<li><p>A starting room <code class="docutils literal notranslate"><span class="pre">start</span></code></p></li>
+<li><p>At least one room in <code class="docutils literal notranslate"><span class="pre">rooms</span></code> referenced by <code class="docutils literal notranslate"><span class="pre">start</span></code> above
+- The sole room must have at least a <code class="docutils literal notranslate"><span class="pre">description</span></code></p></li>
+</ul>
+</div></blockquote>
+<p>Continue reading below to learn about this file’s structure.</p>
+<section id="structure">
+<h2>Structure<a class="headerlink" href="#structure" title="Permalink to this heading">¶</a></h2>
+<section id="version">
+<h3><code class="docutils literal notranslate"><span class="pre">version</span></code><a class="headerlink" href="#version" title="Permalink to this heading">¶</a></h3>
+<blockquote>
+<div><ul class="simple">
+<li><p>Type: integer</p></li>
+<li><p>Required: <strong>yes</strong></p></li>
+<li><p>Allowed values: <code class="docutils literal notranslate"><span class="pre">1</span></code></p></li>
+</ul>
+</div></blockquote>
+<div class="admonition-todo admonition" id="id1">
+<p class="admonition-title">Todo</p>
+<p>Document.</p>
+</div>
+</section>
+<section id="name">
+<h3><code class="docutils literal notranslate"><span class="pre">name</span></code><a class="headerlink" href="#name" title="Permalink to this heading">¶</a></h3>
+<blockquote>
+<div><ul class="simple">
+<li><p>Type: string</p></li>
+<li><p>Required: <strong>yes</strong></p></li>
+</ul>
+</div></blockquote>
+<div class="admonition-todo admonition" id="id2">
+<p class="admonition-title">Todo</p>
+<p>Document.</p>
+</div>
+</section>
+<section id="start">
+<h3><code class="docutils literal notranslate"><span class="pre">start</span></code><a class="headerlink" href="#start" title="Permalink to this heading">¶</a></h3>
+<blockquote>
+<div><ul class="simple">
+<li><p>Type: string</p></li>
+<li><p>Required: <strong>yes</strong></p></li>
+</ul>
+</div></blockquote>
+<div class="admonition-todo admonition" id="id3">
+<p class="admonition-title">Todo</p>
+<p>Document.</p>
+</div>
+</section>
+<section id="description">
+<h3><code class="docutils literal notranslate"><span class="pre">description</span></code><a class="headerlink" href="#description" title="Permalink to this heading">¶</a></h3>
+<blockquote>
+<div><ul class="simple">
+<li><p>Type: string</p></li>
+<li><p>Required: no</p></li>
+</ul>
+</div></blockquote>
+<div class="admonition-todo admonition" id="id4">
+<p class="admonition-title">Todo</p>
+<p>Document.</p>
+</div>
+</section>
+<section id="author">
+<h3><code class="docutils literal notranslate"><span class="pre">author</span></code><a class="headerlink" href="#author" title="Permalink to this heading">¶</a></h3>
+<blockquote>
+<div><ul class="simple">
+<li><p>Type: string</p></li>
+<li><p>Required: no</p></li>
+</ul>
+</div></blockquote>
+<div class="admonition-todo admonition" id="id5">
+<p class="admonition-title">Todo</p>
+<p>Document.</p>
+</div>
+</section>
+</section>
 </section>
 
 
