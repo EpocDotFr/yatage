@@ -4,14 +4,23 @@ World file
 YATAGE needs what we call a "world file" to be able to run a game: it's a plaintext `YAML <https://en.wikipedia.org/wiki/YAML>`__-formatted
 file (``*.yml``) which is itself structured in a specific fashion.
 
-At the very least, the world file must have:
+Overview
+--------
 
-  - A :ref:`world-version`
-  - A :ref:`world-name`
-  - A starting room (:ref:`world-start`)
-  - At least one room in :ref:`world-rooms` referenced by :ref:`world-start`
+.. todo::
 
-    - This sole room must have at least a ``description``
+    Document.
+
+.. important::
+
+    At the very least, the world file must have:
+
+      - A :ref:`world-version`
+      - A :ref:`world-name`
+      - A starting room (:ref:`world-start`)
+      - At least one well-formed room in :ref:`world-rooms` referenced by :ref:`world-start` above
+
+.. _world-structure:
 
 World structure
 ---------------
@@ -49,7 +58,7 @@ start
   - Required: **yes**
   - Format: room reference
 
-This attribute is a room reference to the starting room of the game, in other words the room where the player will start
+This attribute is a reference to the starting room of the game, in other words the room where the player will start
 playing.
 
 See also :ref:`world-rooms`.
@@ -62,10 +71,11 @@ rooms
   - Type: mapping
   - Required: **yes**
   - Format: string => :ref:`room <room-structure>`
+  - Minimum number of items: 1
 
 This attribute holds all the world's rooms definition. It's a mapping between rooms references (a string) and a
-:ref:`room <room-structure>` structure. References must obviously be unique. At least one room with a valid structure
-must be defined and referenced by :ref:`world-start`.
+:ref:`room <room-structure>` structure. References must obviously be unique. At least one well-formed room must be
+defined and referenced by :ref:`world-start`.
 
 .. _world-description:
 

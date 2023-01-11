@@ -50,6 +50,7 @@
 <p class="caption" role="heading"><span class="caption-text">Creator's Guide</span></p>
 <ul class="current">
 <li class="toctree-l1 current"><a class="current reference internal" href="#">World file</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#overview">Overview</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#world-structure">World structure</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#version">version</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#name">name</a></li>
@@ -102,21 +103,27 @@
 <h1>World file<a class="headerlink" href="#world-file" title="Permalink to this heading">¶</a></h1>
 <p>YATAGE needs what we call a “world file” to be able to run a game: it’s a plaintext <a class="reference external" href="https://en.wikipedia.org/wiki/YAML">YAML</a>-formatted
 file (<code class="docutils literal notranslate"><span class="pre">*.yml</span></code>) which is itself structured in a specific fashion.</p>
+<section id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Permalink to this heading">¶</a></h2>
+<div class="admonition-todo admonition" id="id1">
+<p class="admonition-title">Todo</p>
+<p>Document.</p>
+</div>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
 <p>At the very least, the world file must have:</p>
 <blockquote>
 <div><ul class="simple">
 <li><p>A <a class="reference internal" href="#world-version"><span class="std std-ref">version</span></a></p></li>
 <li><p>A <a class="reference internal" href="#world-name"><span class="std std-ref">name</span></a></p></li>
 <li><p>A starting room (<a class="reference internal" href="#world-start"><span class="std std-ref">start</span></a>)</p></li>
-<li><p>At least one room in <a class="reference internal" href="#world-rooms"><span class="std std-ref">rooms</span></a> referenced by <a class="reference internal" href="#world-start"><span class="std std-ref">start</span></a></p>
-<ul>
-<li><p>This sole room must have at least a <code class="docutils literal notranslate"><span class="pre">description</span></code></p></li>
-</ul>
-</li>
+<li><p>At least one well-formed room in <a class="reference internal" href="#world-rooms"><span class="std std-ref">rooms</span></a> referenced by <a class="reference internal" href="#world-start"><span class="std std-ref">start</span></a> above</p></li>
 </ul>
 </div></blockquote>
+</div>
+</section>
 <section id="world-structure">
-<h2>World structure<a class="headerlink" href="#world-structure" title="Permalink to this heading">¶</a></h2>
+<span id="id2"></span><h2>World structure<a class="headerlink" href="#world-structure" title="Permalink to this heading">¶</a></h2>
 <section id="version">
 <span id="world-version"></span><h3>version<a class="headerlink" href="#version" title="Permalink to this heading">¶</a></h3>
 <blockquote>
@@ -150,7 +157,7 @@ your game’s name, etc. It’s shown emphasized when running a game at the very
 <li><p>Format: room reference</p></li>
 </ul>
 </div></blockquote>
-<p>This attribute is a room reference to the starting room of the game, in other words the room where the player will start
+<p>This attribute is a reference to the starting room of the game, in other words the room where the player will start
 playing.</p>
 <p>See also <a class="reference internal" href="#world-rooms"><span class="std std-ref">rooms</span></a>.</p>
 </section>
@@ -161,11 +168,12 @@ playing.</p>
 <li><p>Type: mapping</p></li>
 <li><p>Required: <strong>yes</strong></p></li>
 <li><p>Format: string =&gt; <a class="reference internal" href="room.html#room-structure"><span class="std std-ref">room</span></a></p></li>
+<li><p>Minimum number of items: 1</p></li>
 </ul>
 </div></blockquote>
 <p>This attribute holds all the world’s rooms definition. It’s a mapping between rooms references (a string) and a
-<a class="reference internal" href="room.html#room-structure"><span class="std std-ref">room</span></a> structure. References must obviously be unique. At least one room with a valid structure
-must be defined and referenced by <a class="reference internal" href="#world-start"><span class="std std-ref">start</span></a>.</p>
+<a class="reference internal" href="room.html#room-structure"><span class="std std-ref">room</span></a> structure. References must obviously be unique. At least one well-formed room must be
+defined and referenced by <a class="reference internal" href="#world-start"><span class="std std-ref">start</span></a>.</p>
 </section>
 <section id="description">
 <span id="world-description"></span><h3>description<a class="headerlink" href="#description" title="Permalink to this heading">¶</a></h3>
