@@ -41,6 +41,7 @@ html_theme_options = {
     'logo_name': True,
     'description': 'Yet Another Text Adventure Game Engine',
     'logo': 'logo.png',
+    'logo_text_align': 'center',
     'extra_nav_links': {
         'YATAGE @ GitHub': 'https://github.com/EpocDotFr/yatage',
         'YATAGE @ PyPI': 'https://pypi.python.org/pypi/yatage',
