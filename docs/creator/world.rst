@@ -1,15 +1,15 @@
 World file
 ==========
 
-YATAGE uses a world file to be able to run a game: it is a plaintext `YAML <https://en.wikipedia.org/wiki/YAML>`__-formatted
+YATAGE needs a world file in order to be able to run a game: it is a plaintext `YAML <https://en.wikipedia.org/wiki/YAML>`__-formatted
 file (``*.yml``) which is itself structured in a specific fashion.
 
 This file contains everything that is needed in order to create a text adventure game, namely:
 
-  - **Rooms**, which defines the physical dimension of the game. The player move between rooms to advance throughout the game
-  - **Items**, which defines objects that can be found and taken along the way. The player can interact with these objects
+  - **Rooms**, which defines the physical dimension of the game. The player move between rooms to advance throughout the game;
+  - **Items**, which defines objects that can be found along the way. The player can interact with these objects.
 
-The following section details how this file must be structured following the YAML format.
+The following section details how this file must be structured, following the YAML format.
 
 .. _world-structure:
 
@@ -33,7 +33,9 @@ version
   - Allowed values: ``1``
 
 Although not used yet (at least in the earliest releases of YATAGE), this attribute tells which version the world file
-has been written in. It will allow to handle future -- inevitable -- breaking changes of the world file's structure.
+has been written in.
+
+It will allow to handle future -- inevitable -- breaking changes of the world file's structure.
 
 .. _world-name:
 
@@ -71,13 +73,15 @@ rooms
   - Type: mapping
   - Required: **yes**
   - Format: string => :ref:`room <room-structure>`
-  - Minimum number of items: 1
+  - Minimum count: 1
 
 This attribute holds all the world's rooms definition. It is a mapping between rooms references (a string) and a
 :ref:`room <room-structure>` structure.
 
 References *must* obviously be unique. References are used as the in-game rooms name unless the rooms's ``name`` has
 been set. At least one well-formed room *must* be defined and referenced by :ref:`world-start`.
+
+See also :doc:`<room>`.
 
 .. _world-description:
 
@@ -122,3 +126,5 @@ This attribute holds all the world's items definition. It is a mapping between i
 
 References *must* obviously be unique. References are used as the in-game items name unless the item's ``alias`` has
 been set. References *should* preferably be lowercase.
+
+See also :doc:`<item>`.
