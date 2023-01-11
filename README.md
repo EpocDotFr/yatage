@@ -1,5 +1,7 @@
 # YATAGE
 
+<img src="docs/_static/logo_white.png" align="right">
+
 Yet Another [Text Adventure Game](https://en.wikipedia.org/wiki/Interactive_fiction) Engine.
 
 ![Python versions](https://img.shields.io/pypi/pyversions/yatage.svg) ![Version](https://img.shields.io/pypi/v/yatage.svg) ![License](https://img.shields.io/pypi/l/yatage.svg)

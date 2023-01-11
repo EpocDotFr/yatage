@@ -40,7 +40,7 @@ html_theme_options = {
     'fixed_sidebar': True,
     'logo_name': True,
     'description': 'Yet Another Text Adventure Game Engine',
-    'logo': 'logo.png',
+    'logo': 'logo_transparent.png',
     'logo_text_align': 'center',
     'extra_nav_links': {
         'YATAGE @ GitHub': 'https://github.com/EpocDotFr/yatage',
