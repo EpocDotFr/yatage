@@ -81,7 +81,7 @@ This attribute holds all the world's rooms definition. It is a mapping between r
 References *must* obviously be unique. References are used as the in-game rooms name unless the rooms's ``name`` has
 been set. At least one well-formed room *must* be defined and referenced by :ref:`world-start`.
 
-See also :doc:`<room>`.
+See also :doc:`room`.
 
 .. _world-description:
 
@@ -127,4 +127,4 @@ This attribute holds all the world's items definition. It is a mapping between i
 References *must* obviously be unique. References are used as the in-game items name unless the item's ``alias`` has
 been set. References *should* preferably be lowercase.
 
-See also :doc:`<item>`.
+See also :doc:`item`.
