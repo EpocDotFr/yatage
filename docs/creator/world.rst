@@ -6,17 +6,17 @@ file (``*.yml``) which is itself structured in a specific fashion.
 
 This file contains everything that is needed in order to create a text adventure game, namely:
 
-  - :doc:`Rooms <room>`, which defines the physical dimension of the game. The player move between rooms to advance throughout the game;
-  - :doc:`Items <item>`, which defines objects that can be found along the way. The player can interact with these objects.
+  - :doc:`Rooms <room>`, which defines the physical dimension of the world;
+  - :doc:`Items <item>`, which defines objects that can be found along the way.
 
-The following section details how this file must be structured, following the YAML format.
+The following section details how this file *must* be structured, following the YAML format.
 
 .. _world-structure:
 
 World structure
 ---------------
 
-At the very least, the world file must contain:
+At the very least, the world file *must* contain:
 
   - A :ref:`world-version`
   - A :ref:`world-name`
@@ -107,7 +107,7 @@ author
   - Required: no
   - Format: none
 
-This attribute *should* be a one-line string containing any information about the author(s) of this world.
+This attribute *should* be a single-line string containing any information about the author(s) of this world.
 
 It is shown when running a game at the very beginning, just after :ref:`world-name` and before :ref:`world-description`
 (if set).
