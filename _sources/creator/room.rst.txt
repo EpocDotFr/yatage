@@ -15,7 +15,7 @@ The following section details how a room *must* be structured, following the YAM
 Room structure
 --------------
 
-At the very least, a room must contain:
+At the very least, a room *must* contain:
 
   - A :ref:`room-description`
 
@@ -28,9 +28,10 @@ description
   - Required: **yes**
   - Format: none
 
-.. todo::
+This attribute *must* be a multiline or one-line string of any size describing the room and its content.
 
-    Document.
+It is shown when the player enters a room, and when the player invokes the ``look`` action, just after :ref:`room-name`
+(if set) or otherwise just after the room's :ref:`reference <world-rooms>`.
 
 .. _room-name:
 
@@ -41,9 +42,10 @@ name
   - Required: no
   - Format: none
 
-.. todo::
+This attribute *should* be a one-line string and *should* be a few words long.
 
-    Document.
+A room's display name is, by default, its associated :ref:`reference <world-rooms>`. This behavior *may* be overridden by
+this attribute. If set, its value will be used everywhere the room's display name must be shown.
 
 items
 ^^^^^

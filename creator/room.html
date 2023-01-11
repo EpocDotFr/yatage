@@ -116,7 +116,7 @@
 <p>The following section details how a room <em>must</em> be structured, following the YAML format.</p>
 <section id="room-structure">
 <span id="id1"></span><h2>Room structure<a class="headerlink" href="#room-structure" title="Permalink to this heading">¶</a></h2>
-<p>At the very least, a room must contain:</p>
+<p>At the very least, a room <em>must</em> contain:</p>
 <blockquote>
 <div><ul class="simple">
 <li><p>A <a class="reference internal" href="#room-description"><span class="std std-ref">description</span></a></p></li>
@@ -131,10 +131,9 @@
 <li><p>Format: none</p></li>
 </ul>
 </div></blockquote>
-<div class="admonition-todo admonition" id="id2">
-<p class="admonition-title">Todo</p>
-<p>Document.</p>
-</div>
+<p>This attribute <em>must</em> be a multiline or one-line string of any size describing the room and its content.</p>
+<p>It is shown when the player enters a room, and when the player invokes the <code class="docutils literal notranslate"><span class="pre">look</span></code> action, just after <a class="reference internal" href="#room-name"><span class="std std-ref">name</span></a>
+(if set) or otherwise just after the room’s <a class="reference internal" href="world.html#world-rooms"><span class="std std-ref">reference</span></a>.</p>
 </section>
 <section id="name">
 <span id="room-name"></span><h3>name<a class="headerlink" href="#name" title="Permalink to this heading">¶</a></h3>
@@ -145,10 +144,9 @@
 <li><p>Format: none</p></li>
 </ul>
 </div></blockquote>
-<div class="admonition-todo admonition" id="id3">
-<p class="admonition-title">Todo</p>
-<p>Document.</p>
-</div>
+<p>This attribute <em>should</em> be a one-line string and <em>should</em> be a few words long.</p>
+<p>A room’s display name is, by default, its associated <a class="reference internal" href="world.html#world-rooms"><span class="std std-ref">reference</span></a>. This behavior <em>may</em> be overridden by
+this attribute. If set, its value will be used everywhere the room’s display name must be shown.</p>
 </section>
 <section id="items">
 <h3>items<a class="headerlink" href="#items" title="Permalink to this heading">¶</a></h3>
@@ -159,7 +157,7 @@
 <li><p>Format: array of items references</p></li>
 </ul>
 </div></blockquote>
-<div class="admonition-todo admonition" id="id4">
+<div class="admonition-todo admonition" id="id2">
 <p class="admonition-title">Todo</p>
 <p>Document.</p>
 </div>
