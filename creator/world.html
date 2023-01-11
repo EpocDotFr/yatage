@@ -114,14 +114,14 @@ file (<code class="docutils literal notranslate"><span class="pre">*.yml</span><
 <p>This file contains everything that is needed in order to create a text adventure game, namely:</p>
 <blockquote>
 <div><ul class="simple">
-<li><p><a class="reference internal" href="room.html"><span class="doc">Rooms</span></a>, which defines the physical dimension of the game. The player move between rooms to advance throughout the game;</p></li>
-<li><p><a class="reference internal" href="item.html"><span class="doc">Items</span></a>, which defines objects that can be found along the way. The player can interact with these objects.</p></li>
+<li><p><a class="reference internal" href="room.html"><span class="doc">Rooms</span></a>, which defines the physical dimension of the world;</p></li>
+<li><p><a class="reference internal" href="item.html"><span class="doc">Items</span></a>, which defines objects that can be found along the way.</p></li>
 </ul>
 </div></blockquote>
-<p>The following section details how this file must be structured, following the YAML format.</p>
+<p>The following section details how this file <em>must</em> be structured, following the YAML format.</p>
 <section id="world-structure">
 <span id="id1"></span><h2>World structure<a class="headerlink" href="#world-structure" title="Permalink to this heading">¶</a></h2>
-<p>At the very least, the world file must contain:</p>
+<p>At the very least, the world file <em>must</em> contain:</p>
 <blockquote>
 <div><ul class="simple">
 <li><p>A <a class="reference internal" href="#world-version"><span class="std std-ref">version</span></a></p></li>
@@ -208,7 +208,7 @@ the game.</p>
 <li><p>Format: none</p></li>
 </ul>
 </div></blockquote>
-<p>This attribute <em>should</em> be a one-line string containing any information about the author(s) of this world.</p>
+<p>This attribute <em>should</em> be a single-line string containing any information about the author(s) of this world.</p>
 <p>It is shown when running a game at the very beginning, just after <a class="reference internal" href="#world-name"><span class="std std-ref">name</span></a> and before <a class="reference internal" href="#world-description"><span class="std std-ref">description</span></a>
 (if set).</p>
 </section>
