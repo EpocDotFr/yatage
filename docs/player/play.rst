@@ -19,45 +19,44 @@ to type the action to perform next.
 
 The available actions are:
 
-  - ``drop <item>``
+``drop <item>``
+  Remove the item ``<item>`` from the inventory and drop it into the current room.
 
-    Remove the item ``<item>`` from the inventory and drop it into the current room.
+  Example: ``drop security card``
 
-    Example: ``drop security card``
-  - ``go <exit>`` or merely ``<exit>``
+``go <exit>`` or merely ``<exit>``
+  Travel to the direction ``<exit>``.
 
-    Travel to the direction ``<exit>``.
+  Examples: ``go entrance`` or ``entrance``
 
-    Examples: ``go entrance`` or ``entrance``
-  - ``help``
+``help``
+  Show help about all available actions.
 
-    Show help about all available actions.
-  - ``help <action>``
+``help <action>``
+  Show help about the specific action ``<action>``.
 
-    Show help about the specific action ``<action>``.
+  Example: ``help drop``
 
-    Example: ``help drop``
-  - ``inv``
+``inv``
+  List items currently in inventory.
 
-    List items currently in inventory.
-  - ``look``
+``look``
+  Examine the current room.
 
-    Examine the current room.
-  - ``look <item>``
+``look <item>``
+  Examine item ``<item>``. May be either an item in the current room or in the inventory.
 
-    Examine item ``<item>``. May be either an item in the current room or in the inventory.
+  Example: ``look security card``
 
-    Example: ``look security card``
-  - ``take <item>``
+``take <item>``
+  Take item ``<item>`` from the current room and put it into the inventory.
 
-    Take item ``<item>`` from the current room and put it into the inventory.
+  Example: ``take security card``
 
-    Example: ``take security card``
-  - ``use <item>``
+``use <item>``
+  Activate or apply item ``<item>``. Item must be present in inventory.
 
-    Activate or apply item ``<item>``. Item must be present in inventory.
-
-    Example: ``use security card``
+  Example: ``use security card``
 
 .. note::
 
