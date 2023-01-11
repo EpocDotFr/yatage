@@ -100,16 +100,16 @@
             
   <section id="world-file">
 <h1>World file<a class="headerlink" href="#world-file" title="Permalink to this heading">¶</a></h1>
-<p>YATAGE uses a world file to be able to run a game: it is a plaintext <a class="reference external" href="https://en.wikipedia.org/wiki/YAML">YAML</a>-formatted
+<p>YATAGE needs a world file in order to be able to run a game: it is a plaintext <a class="reference external" href="https://en.wikipedia.org/wiki/YAML">YAML</a>-formatted
 file (<code class="docutils literal notranslate"><span class="pre">*.yml</span></code>) which is itself structured in a specific fashion.</p>
 <p>This file contains everything that is needed in order to create a text adventure game, namely:</p>
 <blockquote>
 <div><ul class="simple">
-<li><p><strong>Rooms</strong>, which defines the physical dimension of the game. The player move between rooms to advance throughout the game</p></li>
-<li><p><strong>Items</strong>, which defines objects that can be found and taken along the way. The player can interact with these objects</p></li>
+<li><p><strong>Rooms</strong>, which defines the physical dimension of the game. The player move between rooms to advance throughout the game;</p></li>
+<li><p><strong>Items</strong>, which defines objects that can be found along the way. The player can interact with these objects.</p></li>
 </ul>
 </div></blockquote>
-<p>The following section details how this file must be structured following the YAML format.</p>
+<p>The following section details how this file must be structured, following the YAML format.</p>
 <section id="world-structure">
 <span id="id1"></span><h2>World structure<a class="headerlink" href="#world-structure" title="Permalink to this heading">¶</a></h2>
 <p>At the very least, the world file must contain:</p>
@@ -131,7 +131,8 @@ file (<code class="docutils literal notranslate"><span class="pre">*.yml</span><
 </ul>
 </div></blockquote>
 <p>Although not used yet (at least in the earliest releases of YATAGE), this attribute tells which version the world file
-has been written in. It will allow to handle future – inevitable – breaking changes of the world file’s structure.</p>
+has been written in.</p>
+<p>It will allow to handle future – inevitable – breaking changes of the world file’s structure.</p>
 </section>
 <section id="name">
 <span id="world-name"></span><h3>name<a class="headerlink" href="#name" title="Permalink to this heading">¶</a></h3>
@@ -166,13 +167,14 @@ playing.</p>
 <li><p>Type: mapping</p></li>
 <li><p>Required: <strong>yes</strong></p></li>
 <li><p>Format: string =&gt; <a class="reference internal" href="room.html#room-structure"><span class="std std-ref">room</span></a></p></li>
-<li><p>Minimum number of items: 1</p></li>
+<li><p>Minimum count: 1</p></li>
 </ul>
 </div></blockquote>
 <p>This attribute holds all the world’s rooms definition. It is a mapping between rooms references (a string) and a
 <a class="reference internal" href="room.html#room-structure"><span class="std std-ref">room</span></a> structure.</p>
 <p>References <em>must</em> obviously be unique. References are used as the in-game rooms name unless the rooms’s <code class="docutils literal notranslate"><span class="pre">name</span></code> has
 been set. At least one well-formed room <em>must</em> be defined and referenced by <a class="reference internal" href="#world-start"><span class="std std-ref">start</span></a>.</p>
+<p>See also <span class="xref std std-doc">&lt;room&gt;</span>.</p>
 </section>
 <section id="description">
 <span id="world-description"></span><h3>description<a class="headerlink" href="#description" title="Permalink to this heading">¶</a></h3>
@@ -214,6 +216,7 @@ the game.</p>
 <a class="reference internal" href="item.html#item-structure"><span class="std std-ref">item</span></a> structure.</p>
 <p>References <em>must</em> obviously be unique. References are used as the in-game items name unless the item’s <code class="docutils literal notranslate"><span class="pre">alias</span></code> has
 been set. References <em>should</em> preferably be lowercase.</p>
+<p>See also <span class="xref std std-doc">&lt;item&gt;</span>.</p>
 </section>
 </section>
 </section>
