@@ -63,3 +63,5 @@ The available actions are:
     Additional actions are available if debug mode is enabled (see :ref:`Debug mode`).
 
 Good luck! Remember you can :ref:`exit the game <Exiting the game>` anytime.
+
+You're now ready to :doc:`create your own games <../creator/world>`!

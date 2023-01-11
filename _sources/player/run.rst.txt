@@ -68,7 +68,7 @@ Automating actions
 ^^^^^^^^^^^^^^^^^^
 
 Sometimes, you will be tired of typing every single action that needs to be made in order to get to a given progress
-in-game, for example while creating a game. Fortunately, there's the ``--actions`` option:
+in-game, for example while creating a game. Fortunately, there is the ``--actions`` option:
 
 .. code-block:: console
 
