@@ -5,7 +5,7 @@ Rooms defines the physical dimension of the world. The player moves between room
 
 Rooms *may* define:
 
-  - **Exits**, which are different ways to leave the current room;
+  - **Exits**, which are different ways to leave the room;
   - Instances of :doc:`items <item>`, which can be taken then interacted with by the player.
 
 The following section details how a room *must* be structured, following the YAML format.
@@ -47,12 +47,34 @@ This attribute *should* be a one-line string and *should* be a few words long.
 A room's display name is, by default, its associated :ref:`reference <world-rooms>`. This behavior *may* be overridden by
 this attribute. If set, its value will be used everywhere the room's display name must be shown.
 
+.. _room-items:
+
 items
 ^^^^^
 
   - Type: array
   - Required: no
   - Format: array of items references
+
+.. todo::
+
+    Document.
+
+.. _room-exits:
+
+exits
+^^^^^
+
+  - Type: mapping
+  - Required: no
+  - Format: string => ``exit``
+
+.. todo::
+
+    Document.
+
+Exit types
+----------
 
 .. todo::
 
