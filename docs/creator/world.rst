@@ -6,8 +6,8 @@ file (``*.yml``) which is itself structured in a specific fashion.
 
 This file contains everything that is needed in order to create a text adventure game, namely:
 
-  - **Rooms**, which defines the physical dimension of the game. The player move between rooms to advance throughout the game;
-  - **Items**, which defines objects that can be found along the way. The player can interact with these objects.
+  - :doc:`Rooms <room>`, which defines the physical dimension of the game. The player move between rooms to advance throughout the game;
+  - :doc:`Items <item>`, which defines objects that can be found along the way. The player can interact with these objects.
 
 The following section details how this file must be structured, following the YAML format.
 

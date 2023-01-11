@@ -39,6 +39,8 @@ html_theme_options = {
     'github_repo': 'yatage',
     'fixed_sidebar': True,
     'logo_name': True,
+    'description': 'Yet Another Text Adventure Game Engine',
+    'logo': 'logo.png',
     'extra_nav_links': {
         'YATAGE @ GitHub': 'https://github.com/EpocDotFr/yatage',
         'YATAGE @ PyPI': 'https://pypi.python.org/pypi/yatage',
@@ -47,7 +49,7 @@ html_theme_options = {
     }
 }
 
-html_static_path = []
+html_static_path = ['_static']
 
 html_sidebars = { '**': ['about.html', 'navigation.html', 'searchbox.html'] }
 
