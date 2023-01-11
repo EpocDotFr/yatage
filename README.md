@@ -26,3 +26,7 @@ From the `docs` directory, run `make.bat html` on Windows or `make html` on Linu
 **Publishing the package:**
 
 From the root directory, run `python setup.py upload`. This will create a git tag and publish on PyPI.
+
+## Credits
+
+  - Logo by [Delapouite](https://game-icons.net/1x1/delapouite/dungeon-gate.html) ([CC BY 3.0](https://creativecommons.org/licenses/by/3.0/))
