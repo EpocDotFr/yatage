@@ -37,7 +37,11 @@ class Commands(Loop):
             setattr(self, f'do_{command}', getattr(self, command))
 
     def look(self, item_identifier: str) -> Optional[bool]:
-        """You may merely 'look' to examine the room, or you may 'look <subject>' (such as 'look chair') to examine something specific."""
+        """look
+            Examine the current room.
+        
+        look <item>
+            Examine item <item>. May be either an item in the current room or in the inventory."""
         if item_identifier:
             item = yatage.utils.get_item(self.current_room.items, item_identifier) or yatage.utils.get_item(self.inventory, item_identifier)
 
@@ -51,7 +55,9 @@ class Commands(Loop):
         return
 
     def go(self, exit_: str) -> Optional[bool]:
-        """You may 'go <exit>' to travel in that direction (such as 'go west'), or you may merely '<exit>' (such as 'west')."""
+        """go <exit> or merely <exit>
+        
+        Travel to the direction <exit>."""
         if exit_ in self.current_room.exits:
             exit_data = self.current_room.exits.get(exit_)
 
@@ -80,13 +86,15 @@ class Commands(Loop):
         return
 
     def inv(self, _: str) -> Optional[bool]:
-        """To see the contents of your inventory, merely 'inv'."""
+        """List items currently in inventory."""
         self.line(self.inventory.do_look())
 
         return
 
     def take(self, item_identifier: str) -> Optional[bool]:
-        """You may 'take <item>' (such as 'take large rock')."""
+        """take <item>
+        
+        Take item <item> from the current room and put it into the inventory."""
         if self.inventory.take(item_identifier):
             self.line('Taken.')
         else:
@@ -95,7 +103,9 @@ class Commands(Loop):
         return
 
     def drop(self, item_identifier: str) -> Optional[bool]:
-        """To drop something in your inventory, you may 'drop <item>'."""
+        """drop <item>
+        
+        Remove the item <item> from the inventory and drop it into the current room."""
         if self.inventory.drop(item_identifier):
             self.line('Dropped.')
         else:
@@ -104,14 +114,18 @@ class Commands(Loop):
         return
 
     def use(self, item_identifier: str) -> Optional[bool]:
-        """You may activate or otherwise apply an item with 'use <item>'."""
+        """use <item>
+        
+        Activate or apply item <item>. Item must be present in inventory."""
         if not self.inventory.use(item_identifier):
             self.line('You can\'t find that in your pack.')
 
         return
 
     def spawn(self, item_identifier: str) -> Optional[bool]:
-        """Debug: Spawn an item into inventory with 'spawn <item>'."""
+        """spawn <item>
+        
+        Spawn a new item identified by <item> into the player’s inventory."""
         if self.inventory.spawn(item_identifier):
             self.line('Spawned.')
         else:
@@ -120,7 +134,9 @@ class Commands(Loop):
         return
 
     def tp(self, room_identifier: str) -> Optional[bool]:
-        """Debug: Teleport to the given room with 'tp <room>'."""
+        """tp <room>
+        
+        Teleport the player to the room identified by <room>."""
         if room_identifier not in self.world.rooms:
             self.line('Unknown room.')
 
