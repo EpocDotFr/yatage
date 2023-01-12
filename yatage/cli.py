@@ -1,6 +1,13 @@
 from yatage.exceptions import WorldReadError
 from yatage.game import Game
 import argparse
+# For The Loding Scene
+import os
+from yatage.ascii import loding
+from asciimatics.effects import Cycle, Stars, BannerText, Print
+from asciimatics.renderers import FigletText, Rainbow
+from asciimatics.scene import Scene
+from asciimatics.screen import Screen
 
 
 def cli() -> None:
@@ -12,6 +19,7 @@ def cli() -> None:
     args = arg_parser.parse_args()
 
     try:
+        Screen.wrapper(loading)
         game = Game(args.world, args.actions, args.debug)
     except WorldReadError as e:
         print(f'Invalid world file "{args.world}": {e}')

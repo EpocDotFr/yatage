@@ -108,3 +108,5 @@ docs/_build/
 target/
 
 # Created by .ignore support plugin (hsz.mobi)
+yatage/testworld.yaml
+test.yaml
