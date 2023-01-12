@@ -21,7 +21,7 @@ world file.
 Exiting the game
 ^^^^^^^^^^^^^^^^
 
-You can exit the game anytime using either :kbd:`Control-d` or :kbd:`Control-c`.
+You can exit the game anytime using either :kbd:`Control-D` or :kbd:`Control-C`.
 
 .. note::
 

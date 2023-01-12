@@ -45,7 +45,7 @@ html_theme_options = {
     'extra_nav_links': {
         'YATAGE @ GitHub': 'https://github.com/EpocDotFr/yatage',
         'YATAGE @ PyPI': 'https://pypi.python.org/pypi/yatage',
-        'Issue Tracker': 'https://github.com/EpocDotFr/yatage/issues',
+        'Issue Tracker / Roadmap': 'https://github.com/EpocDotFr/yatage/issues',
         'Changelog': 'https://github.com/EpocDotFr/yatage/releases',
     }
 }
