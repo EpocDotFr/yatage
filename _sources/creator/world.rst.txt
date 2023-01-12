@@ -78,8 +78,8 @@ rooms
 This attribute holds all the world's rooms definition. It is a mapping between rooms references (a string) and a
 :ref:`room <room-structure>` structure.
 
-References *must* obviously be unique. References are used as the in-game rooms name unless the rooms's ``name`` has
-been set. At least one well-formed room *must* be defined and referenced by :ref:`world-start`.
+References *must* obviously be unique. References are used as the in-game rooms name unless the rooms's :ref:`room-name`
+has been set. At least one well-formed room *must* be defined and referenced by :ref:`world-start`.
 
 See also :doc:`room`.
 

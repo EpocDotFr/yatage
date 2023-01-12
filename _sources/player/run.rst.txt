@@ -48,7 +48,7 @@ This will add the following debug statements in-game:
   - Rooms identifier will be displayed next to all rooms names
   - Details will be displayed next to the exits' name (exit type, conditions, rooms identifiers / names, etc)
 
-In addition, the following new actions are made available (for debug purposes only!):
+In addition, the following new :ref:`actions <Actions>` are made available (for debug purposes only!):
 
 ``spawn <item>``
   Spawn a new item identified by ``<item>`` into the player's inventory.
