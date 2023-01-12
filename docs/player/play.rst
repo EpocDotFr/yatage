@@ -19,39 +19,57 @@ to type the action to perform next.
 
 The available actions are:
 
+.. _action-look:
+
 ``look``
   Examine the current room.
+
+.. _action-look-item:
 
 ``look <item>``
   Examine item ``<item>``. May be either an item in the current room or in the inventory.
 
   Example: ``look security card``
 
+.. _action-go:
+
 ``go <exit>`` or merely ``<exit>``
   Travel to the direction ``<exit>``.
 
   Examples: ``go entrance`` or ``entrance``
 
+.. _action-in:
+
 ``inv``
   List items currently in inventory.
+
+.. _action-take:
 
 ``take <item>``
   Take item ``<item>`` from the current room and put it into the inventory.
 
   Example: ``take security card``
 
+.. _action-drop:
+
 ``drop <item>``
   Remove the item ``<item>`` from the inventory and drop it into the current room.
 
   Example: ``drop security card``
+
+.. _action-use:
 
 ``use <item>``
   Activate or apply item ``<item>``. Item must be present in inventory.
 
   Example: ``use security card``
 
+.. _action-help:
+
 ``help``
   Show help about all available actions.
+
+.. _action-help-action:
 
 ``help <action>``
   Show help about the specific action ``<action>``.

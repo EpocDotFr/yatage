@@ -30,8 +30,8 @@ description
 
 This attribute *must* be a multiline or one-line string of any size describing the room and its content.
 
-It is shown when the player enters a room, and when the player invokes the ``look`` action, just after :ref:`room-name`
-(if set) or otherwise just after the room's :ref:`reference <world-rooms>`.
+It is shown when the player enters a room, and when the player invokes the :ref:`action-look` action, just after
+:ref:`room-name` (if set) or otherwise just after the room's :ref:`reference <world-rooms>`.
 
 .. _room-name:
 

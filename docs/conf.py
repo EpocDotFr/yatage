@@ -43,9 +43,10 @@ html_theme_options = {
     'logo': 'logo_transparent.png',
     'logo_text_align': 'center',
     'extra_nav_links': {
-        'YATAGE @ GitHub': 'https://github.com/EpocDotFr/yatage',
         'YATAGE @ PyPI': 'https://pypi.python.org/pypi/yatage',
-        'Issue Tracker / Roadmap': 'https://github.com/EpocDotFr/yatage/issues',
+        'YATAGE @ GitHub': 'https://github.com/EpocDotFr/yatage',
+        'Issue Tracker': 'https://github.com/EpocDotFr/yatage/issues',
+        'Roadmap': 'https://github.com/EpocDotFr/yatage/milestones',
         'Changelog': 'https://github.com/EpocDotFr/yatage/releases',
     }
 }
