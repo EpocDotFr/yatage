@@ -52,11 +52,12 @@ html_theme_options = {
 
 html_static_path = ['_static']
 
-html_sidebars = { '**': ['about.html', 'navigation.html', 'searchbox.html'] }
+html_sidebars = {'**': ['about.html', 'navigation.html', 'searchbox.html']}
 
 html_show_sourcelink = False
 html_show_sphinx = False
 html_show_copyright = True
+html_favicon = 'favicon.ico'
 
 intersphinx_mapping = {
     'python': ('https://docs.python.org/3.8', None),
