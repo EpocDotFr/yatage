@@ -10,10 +10,6 @@ Yet Another [Text Adventure Game](https://en.wikipedia.org/wiki/Interactive_fict
 
 Everything you need to know is located [here](https://epocdotfr.github.io/yatage/).
 
-## Changelog
-
-See [here](https://github.com/EpocDotFr/yatage/releases).
-
 ## Development
 
 **Getting source code, installing the package as well as its dev packages:**
