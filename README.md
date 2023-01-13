@@ -1,6 +1,6 @@
 # YATAGE
 
-<img src="docs/_static/logo_white.png" align="right">
+<img src="https://epocdotfr.github.io/yatage/_static/logo_transparent.png" align="right">
 
 Yet Another [Text Adventure Game](https://en.wikipedia.org/wiki/Interactive_fiction) Engine.
 
