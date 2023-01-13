@@ -57,6 +57,13 @@ In addition, the following new :ref:`actions <Actions>` are made available (for 
 
   Example: ``spawn security card``
 
+.. _action-destroy:
+
+``destroy <item>``
+  Destroy item identified by ``<item>`` in player's inventory.
+
+  Example: ``destroy security card``
+
 .. _action-tp:
 
 ``tp <room>``
