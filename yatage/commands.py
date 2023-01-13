@@ -27,6 +27,7 @@ class Commands(Loop):
         if self.debug:
             self.commands.extend([
                 'spawn',
+                'destroy',
                 'tp',
             ])
 
@@ -128,6 +129,17 @@ class Commands(Loop):
         Spawn a new item identified by <item> into the player’s inventory."""
         if self.inventory.spawn(item_identifier):
             self.line('Spawned.')
+        else:
+            self.line('Unknown item.')
+
+        return
+
+    def destroy(self, item_identifier: str) -> Optional[bool]:
+        """destroy <item>
+        
+        Destroy item identified by <item> in player’s inventory."""
+        if self.inventory.destroy(item_identifier):
+            self.line('Destroyed.')
         else:
             self.line('Unknown item.')
 
