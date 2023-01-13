@@ -22,13 +22,6 @@ Here is a short example, which uses a small subset of the game engine's capabili
 .. literalinclude:: ../examples/short.yml
     :language: yaml
 
-Features
---------
-
-.. todo::
-
-    Document.
-
 Prerequisites
 -------------
 
@@ -66,6 +59,11 @@ Guide
    creator/world
    creator/room
    creator/item
+
+Credits
+-------
+
+  - Logo by `Delapouite <https://game-icons.net/1x1/delapouite/dungeon-gate.html>`__ (`CC BY 3.0 <https://creativecommons.org/licenses/by/3.0/>`__)
 
 .. |pyversion| image:: https://img.shields.io/pypi/pyversions/yatage.svg
 .. |pypiv| image:: https://img.shields.io/pypi/v/yatage.svg
