@@ -1,5 +1,6 @@
 from typing import Optional, List, Any, Dict
 from yatage.item import Item
+import yatage.utils
 import dataclasses
 
 
@@ -91,6 +92,9 @@ class Room:
     @property
     def name_or_identifier(self) -> str:
         return self.name or self.identifier
+
+    def get_item(self, item_identifier: str, attr: str = 'identifier') -> Optional[Item]:
+        return yatage.utils.get_item(self.items, item_identifier, attr)
 
     def __str__(self) -> str:
         name = self.name_or_identifier

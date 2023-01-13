@@ -31,13 +31,14 @@ class Inventory(UserList):
 
         return '\n'.join(text)
 
-    def has(self, item_identifier: str) -> bool:
-        item = yatage.utils.get_item(self, item_identifier)
+    def get(self, item_identifier: str, attr: str = 'identifier'):  # TODO Typing
+        return yatage.utils.get_item(self, item_identifier, attr)
 
-        return True if item else False
+    def has(self, item_identifier: str) -> bool:
+        return True if self.get(item_identifier) else False
 
     def use(self, item_identifier: str) -> bool:
-        item = yatage.utils.get_item(self, item_identifier, 'alias_or_identifier')
+        item = self.get(item_identifier, 'alias_or_identifier')
 
         if not item:
             return False
@@ -47,7 +48,7 @@ class Inventory(UserList):
         return True
 
     def take(self, item_identifier: str) -> bool:
-        item = yatage.utils.get_item(self.game.current_room.items, item_identifier, 'alias_or_identifier')
+        item = self.game.current_room.get_item(item_identifier, 'alias_or_identifier')
 
         if not item:
             return False
@@ -61,7 +62,7 @@ class Inventory(UserList):
         return True
 
     def drop(self, item_identifier: str) -> bool:
-        item = yatage.utils.get_item(self, item_identifier, 'alias_or_identifier')
+        item = self.get(item_identifier, 'alias_or_identifier')
 
         if not item:
             return False
@@ -75,7 +76,7 @@ class Inventory(UserList):
         return True
 
     def destroy(self, item_identifier: str) -> bool:
-        item = yatage.utils.get_item(self, item_identifier)
+        item = self.get(item_identifier)
 
         if not item:
             return False

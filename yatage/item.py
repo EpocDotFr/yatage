@@ -1,5 +1,4 @@
 from typing import Optional, List, Any, Union
-import yatage.utils
 import dataclasses
 
 
@@ -24,8 +23,7 @@ class ItemUse:
             )
 
         for item_identifier in self.mark_used:
-            item = yatage.utils.get_item(
-                self.world.game.inventory,
+            item = self.world.game.inventory.get(
                 item_instance.definition.identifier if item_identifier == 'self' else item_identifier
             )
 
@@ -103,11 +101,11 @@ class ItemConditions:
         ])
 
         results.extend([
-            yatage.utils.get_item(self.world.game.inventory, item_identifier).used for item_identifier in self.has_used if self.world.game.inventory.has(item_identifier)
+            self.world.game.inventory.get(item_identifier).used for item_identifier in self.has_used if self.world.game.inventory.has(item_identifier)
         ])
 
         results.extend([
-            not yatage.utils.get_item(self.world.game.inventory, item_identifier).used for item_identifier in self.has_not_used if self.world.game.inventory.has(item_identifier)
+            not self.world.game.inventory.get(item_identifier).used for item_identifier in self.has_not_used if self.world.game.inventory.has(item_identifier)
         ])
 
         return False not in results

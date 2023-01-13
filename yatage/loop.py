@@ -6,7 +6,7 @@ class Loop(Cmd):
     prompt: str = '\nWhat do you do?\n===============\n> '
     doc_header: str = 'Available actions (type help <action>):'
     ruler: str = '^'
-    hidden_commands: Tuple[str] = ('do_EOF',)
+    hidden_commands: Tuple[str, ...] = ('do_EOF',)
 
     def postloop(self) -> None:
         self.line('')
@@ -25,8 +25,8 @@ class Loop(Cmd):
     def line(self, text: str, end: str = '\n') -> None:
         self.stdout.write(f'{text}{end}')
 
-    def print_help(self, lines: Tuple[str]) -> str:
-        return self.line('\n'.join(lines))
+    def print_help(self, lines: Tuple[str, ...]) -> None:
+        self.line('\n'.join(lines))
 
     def run(self) -> None:
         try:

@@ -1,10 +1,11 @@
 from __future__ import annotations
 from yatage.item import ItemDefinition, ItemUse, ItemConditionedUse, ItemConditions, RoomConditions
 from yatage.room import Room, GameOverExit, TextExit, ItemConditionedExit
-from typing import Dict, Optional, Any, Union, Tuple
+from typing import Dict, Optional, Union, Tuple, Any
 from yatage.exceptions import WorldReadError
 import dataclasses
 import yaml
+import io
 
 
 @dataclasses.dataclass
@@ -18,15 +19,23 @@ class World:
     description: Optional[str] = None
     author: Optional[str] = None
 
-    SUPPORTED_VERSIONS: Tuple[int] = (1,)
+    SUPPORTED_VERSIONS: Tuple[int, ...] = (1,)
 
     @classmethod
-    def load(cls, game) -> World:  # TODO Typing
-        with open(game.world_filename, 'rb') as f:
-            try:
-                world_data = yaml.safe_load(f)  # TODO Move to stream-based loading?
-            except yaml.YAMLError as e:
-                raise WorldReadError(f'Could not parse world file: {e}') from e
+    def loads(cls, game, s):
+        with io.StringIO(s) as fp:
+            return cls.read(game, fp)
+
+    @classmethod
+    def load(cls, game, fp):
+        return cls.read(game, fp)
+
+    @classmethod
+    def read(cls, game, fp) -> World:  # TODO Typing
+        try:
+            world_data = yaml.safe_load(fp)  # TODO Move to stream-based loading?
+        except yaml.YAMLError as e:
+            raise WorldReadError(f'Could not parse world file: {e}') from e
 
         version = world_data.get('version')
 
@@ -51,11 +60,7 @@ class World:
         elif not isinstance(start, str):
             raise WorldReadError('Top level "start" must be a string')
 
-        ret = cls(
-            game,
-            version,
-            name
-        )
+        ret = cls(game, version, name)
 
         description = world_data.get('description')
 
