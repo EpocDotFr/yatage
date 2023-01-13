@@ -36,13 +36,9 @@ class Commands(Loop):
     def register_commands(self) -> None:
         for command in self.commands:
             setattr(self, f'do_{command}', getattr(self, command))
+            setattr(self, f'help_{command}', getattr(self, f'print_{command}_help'))
 
     def look(self, item_identifier: str) -> Optional[bool]:
-        """look
-            Examine the current room.
-        
-        look <item>
-            Examine item <item>. May be either an item in the current room or in the inventory."""
         if item_identifier:
             item = yatage.utils.get_item(self.current_room.items, item_identifier) or yatage.utils.get_item(self.inventory, item_identifier)
 
@@ -55,10 +51,16 @@ class Commands(Loop):
 
         return
 
+    def print_look_help(self) -> str:
+        self.print_help((
+            'look',
+            '    Examine the current room.',
+            '',
+            'look <item>',
+            '    Examine item <item>. May be either an item in the current room or in the inventory.',
+        ))
+
     def go(self, exit_: str) -> Optional[bool]:
-        """go <exit> or merely <exit>
-        
-        Travel to the direction <exit>."""
         if exit_ in self.current_room.exits:
             exit_data = self.current_room.exits.get(exit_)
 
@@ -86,16 +88,24 @@ class Commands(Loop):
 
         return
 
+    def print_go_help(self) -> str:
+        self.print_help((
+            'go <exit> or merely <exit>',
+            '',
+            'Travel to the direction <exit>.',
+        ))
+
     def inv(self, _: str) -> Optional[bool]:
-        """List items currently in inventory."""
         self.line(self.inventory.do_look())
 
         return
 
+    def print_inv_help(self) -> str:
+        self.print_help((
+            'List items currently in inventory.',
+        ))
+
     def take(self, item_identifier: str) -> Optional[bool]:
-        """take <item>
-        
-        Take item <item> from the current room and put it into the inventory."""
         if self.inventory.take(item_identifier):
             self.line('Taken.')
         else:
@@ -103,10 +113,14 @@ class Commands(Loop):
 
         return
 
+    def print_take_help(self) -> str:
+        self.print_help((
+            'take <item>',
+            '',
+            'Take item <item> from the current room and put it into the inventory.',
+        ))
+
     def drop(self, item_identifier: str) -> Optional[bool]:
-        """drop <item>
-        
-        Remove the item <item> from the inventory and drop it into the current room."""
         if self.inventory.drop(item_identifier):
             self.line('Dropped.')
         else:
@@ -114,19 +128,27 @@ class Commands(Loop):
 
         return
 
+    def print_drop_help(self) -> str:
+        self.print_help((
+            'drop <item>',
+            '',
+            'Remove the item <item> from the inventory and drop it into the current room.',
+        ))
+
     def use(self, item_identifier: str) -> Optional[bool]:
-        """use <item>
-        
-        Activate or apply item <item>. Item must be present in inventory."""
         if not self.inventory.use(item_identifier):
             self.line('You can\'t find that in your pack.')
 
         return
 
+    def print_use_help(self) -> str:
+        self.print_help((
+            'use <item>',
+            '',
+            'Activate or apply item <item>. Item must be present in inventory.',
+        ))
+
     def spawn(self, item_identifier: str) -> Optional[bool]:
-        """spawn <item>
-        
-        Spawn a new item identified by <item> into the player’s inventory."""
         if self.inventory.spawn(item_identifier):
             self.line('Spawned.')
         else:
@@ -134,10 +156,14 @@ class Commands(Loop):
 
         return
 
+    def print_spawn_help(self) -> str:
+        self.print_help((
+            'spawn <item>',
+            '',
+            'Debug: Spawn a new item identified by <item> into the player’s inventory.',
+        ))
+
     def destroy(self, item_identifier: str) -> Optional[bool]:
-        """destroy <item>
-        
-        Destroy item identified by <item> in player’s inventory."""
         if self.inventory.destroy(item_identifier):
             self.line('Destroyed.')
         else:
@@ -145,10 +171,14 @@ class Commands(Loop):
 
         return
 
+    def print_destroy_help(self) -> str:
+        self.print_help((
+            'destroy <item>',
+            '',
+            'Debug: Destroy item identified by <item> in player’s inventory.',
+        ))
+
     def tp(self, room_identifier: str) -> Optional[bool]:
-        """tp <room>
-        
-        Teleport the player to the room identified by <room>."""
         if room_identifier not in self.world.rooms:
             self.line('Unknown room.')
 
@@ -159,6 +189,13 @@ class Commands(Loop):
         self.line(self.current_room.do_look())
 
         return
+
+    def print_tp_help(self) -> str:
+        self.print_help((
+            'tp <room>',
+            '',
+            'Debug: Teleport the player to the room identified by <room>.',
+        ))
 
     def default(self, line: str) -> Optional[bool]:
         return self.go(line)
