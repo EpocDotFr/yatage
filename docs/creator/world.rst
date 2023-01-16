@@ -31,6 +31,11 @@ version
   - Type: integer
   - Required: **yes**
   - Allowed values: ``1``
+  - Example:
+
+    .. code-block:: yaml
+
+        version: 1
 
 Although not used yet (at least in the earliest releases of YATAGE), this attribute tells which version the world file
 has been written in.
@@ -45,11 +50,16 @@ name
   - Type: string
   - Required: **yes**
   - Format: none
+  - Example:
+
+    .. code-block:: yaml
+
+        name: My awesome game
 
 This attribute *should* be a one-line string and *should* be a few words long. It *may* be your world's name, your hero's
 name, your game's name, etc.
 
-It is shown emphasized when running a game at the very beginning.
+It is shown emphasized when running a game at the very beginning, or when using the :ref:`action-intro` action.
 
 .. _world-start:
 
@@ -59,6 +69,14 @@ start
   - Type: string
   - Required: **yes**
   - Format: room reference
+  - Example:
+
+    .. code-block:: yaml
+
+        start: Down the street
+        rooms:
+            Down the street:
+                description: You're on the sidewalk.
 
 This attribute is a reference to the starting room of the game, in other words the room where the player will start
 playing.
@@ -74,6 +92,14 @@ rooms
   - Required: **yes**
   - Format: string => :ref:`room <room-structure>`
   - Minimum count: 1
+  - Example:
+
+    .. code-block:: yaml
+
+        start: Down the street
+        rooms:
+            Down the street:
+                description: You're on the sidewalk.
 
 This attribute holds all the world's rooms definition. It is a mapping between rooms references (a string) and a
 :ref:`room <room-structure>` structure.
@@ -91,12 +117,17 @@ description
   - Type: string
   - Required: no
   - Format: none
+  - Example:
+
+    .. code-block:: yaml
+
+        description: A short example game.
 
 This attribute *may* be a multiline string of any size describing this world, which *may* be used as an introduction to
 the game.
 
-It is shown when running a game at the very beginning, just after :ref:`world-author` (if set) or otherwise just after
-:ref:`world-name`.
+It is shown when running a game at the very beginning (or when using the :ref:`action-intro` action), just after
+:ref:`world-author` (if set) or otherwise just after :ref:`world-name`.
 
 .. _world-author:
 
@@ -106,11 +137,16 @@ author
   - Type: string
   - Required: no
   - Format: none
+  - Example:
+
+    .. code-block:: yaml
+
+        author: Maxime "Epoc" G. (https://epoc.fr/)
 
 This attribute *should* be a single-line string containing any information about the author(s) of this world.
 
-It is shown when running a game at the very beginning, just after :ref:`world-name` and before :ref:`world-description`
-(if set).
+It is shown when running a game at the very beginning (or when using the :ref:`action-intro` action), just after
+:ref:`world-name` and before :ref:`world-description` (if set).
 
 .. _world-items:
 
@@ -120,6 +156,13 @@ items
   - Type: mapping
   - Required: no
   - Format: string => :ref:`item <item-structure>`
+  - Example:
+
+    .. code-block:: yaml
+
+        items:
+            security card:
+                look: It looks a lot like a credit card.
 
 This attribute holds all the world's items definition. It is a mapping between items references (a string) and an
 :ref:`item <item-structure>` structure.

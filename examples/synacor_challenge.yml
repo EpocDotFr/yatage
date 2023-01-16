@@ -15,17 +15,17 @@ description: |-
 
     Welcome to the Synacor Challenge!
     Please record your progress by putting codes like this one into the challenge website: KDfTwYgxhJKC
-    
+
     Executing self-test...
-    
+
     self-test complete, all tests pass
     The self-test completion code is: teJavuPYnIJs
-author: "Eric Wastl (http://was.tl/), Maxime \"Epoc\" G. (https://epoc.fr/)"
+author: Eric Wastl (http://was.tl/), Maxime "Epoc" G. (https://epoc.fr/)
 start: Foothills
 rooms:
     # Foothills
     Foothills:
-        description: "You find yourself standing at the base of an enormous mountain. At its base to the north, there is a massive doorway. A sign nearby reads \"Keep out! Definitely no treasure within!\""
+        description: You find yourself standing at the base of an enormous mountain. At its base to the north, there is a massive doorway. A sign nearby reads "Keep out! Definitely no treasure within!"
         exits:
             doorway: Dark cave
             south: Foothills South
@@ -321,7 +321,7 @@ rooms:
 items:
     tablet:
         look: The tablet seems appropriate for use as a writing surface but is unfortunately blank. Perhaps you should USE it as a writing surface...
-        use: "You find yourself writing \"tNXeWMvrJskW\" on the tablet. Perhaps it's some kind of code?"
+        use: You find yourself writing "tNXeWMvrJskW" on the tablet. Perhaps it's some kind of code?
     can:
         look: This can is full of high-quality lantern oil.
         use:
@@ -412,7 +412,7 @@ items:
                 You wake up on a sandy beach with a slight headache. The last thing you remember is activating that teleporter... but now you can't find it anywhere in your pack. Someone seems to have drawn a message in the sand here:
 
                     lVfSqITLZkYK
-                
+
                 It begins to rain. The message washes away. You take a deep breath and feel firmly grounded in reality as the effects of the teleportation wear off.
             remove: [self]
             teleport: Beach
@@ -463,7 +463,7 @@ items:
             now-bypassed confirmation mechanism will not protect you!
 
             Of course, since teleportation is impossible, this is all totally ridiculous.
-            
+
             Note
             ----
 
