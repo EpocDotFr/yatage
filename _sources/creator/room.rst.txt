@@ -27,6 +27,11 @@ description
   - Type: string
   - Required: **yes**
   - Format: none
+  - Example:
+
+    .. code-block:: yaml
+
+        description: You're on the sidewalk.
 
 This attribute *must* be a multiline or one-line string of any size describing the room and its content.
 
@@ -41,6 +46,11 @@ name
   - Type: string
   - Required: no
   - Format: none
+  - Example:
+
+    .. code-block:: yaml
+
+        name: Building hall
 
 This attribute *should* be a one-line string and *should* be a few words long.
 
@@ -55,6 +65,11 @@ items
   - Type: array
   - Required: no
   - Format: array of items references
+  - Example:
+
+    .. code-block:: yaml
+
+        items: [security card, book]
 
 .. todo::
 
@@ -68,6 +83,13 @@ exits
   - Type: mapping
   - Required: no
   - Format: string => ``exit``
+  - Example:
+
+    .. code-block:: yaml
+
+        exits:
+            back: Sidewalk
+            pursue: Down the street
 
 .. todo::
 
