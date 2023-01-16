@@ -29,7 +29,12 @@ General
 .. _action-intro:
 
 ``intro``
-  Shows the introductory text that is displayed when starting the game.
+  Show the introductory text that is displayed when starting the game.
+
+.. _action-exit:
+
+``exit``
+  Exit the game.
 
 .. _action-go:
 

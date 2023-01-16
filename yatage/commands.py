@@ -14,6 +14,7 @@ class Commands(Loop):
     commands: List[str] = [
         'look',
         'intro',
+        'exit',
         'go',
         'inv',
         'take',
@@ -65,7 +66,15 @@ class Commands(Loop):
 
     def _intro_help(self) -> None:
         self.print_help((
-            'Shows the introductory text that is displayed when starting the game.',
+            'Show the introductory text that is displayed when starting the game.',
+        ))
+
+    def _exit(self, _: str) -> Optional[bool]:
+        return True
+
+    def _exit_help(self) -> None:
+        self.print_help((
+            'Exit the game.',
         ))
 
     def _go(self, exit_: str) -> Optional[bool]:
