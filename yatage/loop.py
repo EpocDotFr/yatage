@@ -30,9 +30,9 @@ class Loop(Cmd):
     def print_help(self, lines: Tuple[str, ...]) -> None:
         self.line('\n'.join(lines))
 
-    def clear_screen(self):
+    def clear_screen(self) -> None:
         if platform.system() == 'Windows' and platform.release() not in ('10', '11', 'post11'):
-            subprocess.run('cls', check=True)
+            subprocess.run('cls')
         else:
             self.line("\033[H\033[2J", '')
 
