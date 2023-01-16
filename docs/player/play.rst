@@ -3,7 +3,8 @@ Playing a game
 
 Now that you're able to :doc:`run a game <run>` using a valid YATAGE world file, it can be played.
 
-When starting a game, you will be first shown various information about the world being played on.
+When starting a game, you will be first shown various information about the world being played on (you can show it
+again later anytime using the :ref:`action-intro` action).
 
 .. note::
 
@@ -24,6 +25,11 @@ General
 
 ``look``
   Examine the current room.
+
+.. _action-intro:
+
+``intro``
+  Shows the introductory text that is displayed when starting the game.
 
 .. _action-go:
 

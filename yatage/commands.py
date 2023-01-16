@@ -13,6 +13,7 @@ class Commands(Loop):
 
     commands: List[str] = [
         'look',
+        'intro',
         'go',
         'inv',
         'take',
@@ -57,6 +58,14 @@ class Commands(Loop):
             '',
             'look <item>',
             '    Examine item <item>. May be either an item in the current room or in the inventory.',
+        ))
+
+    def _intro(self, _: str) -> Optional[bool]:
+        self.line(self.create_intro(False))
+
+    def _intro_help(self) -> None:
+        self.print_help((
+            'Shows the introductory text that is displayed when starting the game.',
         ))
 
     def _go(self, exit_: str) -> Optional[bool]:

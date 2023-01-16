@@ -32,7 +32,7 @@ class Game(Commands):
 
         self.load_actions()
 
-    def create_intro(self) -> str:
+    def create_intro(self, include_current_room: bool = True) -> str:
         header = '#' * len(self.world.name)
 
         text = [
@@ -61,10 +61,11 @@ class Game(Commands):
                 self.world.description,
             ))
 
-        text.extend((
-            '',
-            self.current_room.do_look(),
-        ))
+        if include_current_room:
+            text.extend((
+                '',
+                self.current_room.do_look(),
+            ))
 
         return '\n'.join(text)
 

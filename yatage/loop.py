@@ -10,6 +10,9 @@ class Loop(Cmd):
     ruler: str = '^'
     hidden_commands: Tuple[str, ...] = ('do_EOF',)
 
+    def preloop(self) -> None:
+        self.clear_screen()
+
     def postloop(self) -> None:
         self.line('')
 
