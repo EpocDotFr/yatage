@@ -1,5 +1,7 @@
 from typing import Tuple, List, Optional
 from cmd import Cmd
+import subprocess
+import platform
 
 
 class Loop(Cmd):
@@ -12,7 +14,7 @@ class Loop(Cmd):
         self.line('')
 
     def precmd(self, line) -> str:
-        self.line('')
+        self.clear_screen()
 
         return line
 
@@ -27,6 +29,12 @@ class Loop(Cmd):
 
     def print_help(self, lines: Tuple[str, ...]) -> None:
         self.line('\n'.join(lines))
+
+    def clear_screen(self):
+        if platform.system() == 'Windows' and platform.release() not in ('10', '11', 'post11'):
+            subprocess.run('cls', check=True)
+        else:
+            self.line("\033[H\033[2J", '')
 
     def run(self) -> None:
         try:

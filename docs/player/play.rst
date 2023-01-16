@@ -3,7 +3,7 @@ Playing a game
 
 Now that you're able to :doc:`run a game <run>` using a valid YATAGE world file, it can be played.
 
-When running a game, you will be first shown various information about the world being played on.
+When starting a game, you will be first shown various information about the world being played on.
 
 .. note::
 

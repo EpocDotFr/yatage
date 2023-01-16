@@ -7,7 +7,7 @@
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
 
 project = 'YATAGE'
-copyright = '2022, <a href="https://epoc.fr/">Epoc</a>'
+copyright = '2023, <a href="https://epoc.fr/">Epoc</a>'
 author = '<a href="https://epoc.fr/">Epoc</a>'
 release = '1.0.0'
 
