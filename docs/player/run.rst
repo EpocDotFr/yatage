@@ -48,32 +48,11 @@ This will add the following debug statements in-game:
   - Rooms identifier will be displayed next to all rooms names
   - Details will be displayed next to the exits' name (exit type, conditions, rooms identifiers / names, etc)
 
-In addition, the following new :ref:`actions <Actions>` are made available (for debug purposes only!):
-
-.. _action-spawn:
-
-``spawn <item>``
-  Spawn a new item identified by ``<item>`` into the player's inventory.
-
-  Example: ``spawn security card``
-
-.. _action-destroy:
-
-``destroy <item>``
-  Destroy item identified by ``<item>`` in player's inventory.
-
-  Example: ``destroy security card``
-
-.. _action-tp:
-
-``tp <room>``
-  Teleport the player to the room identified by ``<room>``.
-
-  Example: ``tp Building hall``
-
-Finally, debug mode will alter some of the game engine's behavior:
+In addition, debug mode will alter some of the game engine's behavior:
 
   - Used items will not be hidden in inventory. A ``[used]`` suffix will instead be appended to the items' name
+
+Finally, new :ref:`actions <actions-debug>` are made available.
 
 Automating actions
 ^^^^^^^^^^^^^^^^^^

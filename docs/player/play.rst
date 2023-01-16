@@ -17,19 +17,13 @@ Actions
 YATAGE implements the typical game loop of text adventure games (we'll not get into details here), it thus excepts you
 to type the action to perform next.
 
-The available actions are:
+General
+^^^^^^^
 
 .. _action-look:
 
 ``look``
   Examine the current room.
-
-.. _action-look-item:
-
-``look <item>``
-  Examine item ``<item>``. May be either an item in the current room or in the inventory.
-
-  Example: ``look security card``
 
 .. _action-go:
 
@@ -38,10 +32,32 @@ The available actions are:
 
   Examples: ``go entrance`` or ``entrance``
 
-.. _action-in:
+.. _action-inv:
 
 ``inv``
   List items currently in inventory.
+
+.. _action-help:
+
+``help``
+  Show help about all available actions.
+
+.. _action-help-action:
+
+``help <action>``
+  Show help about the specific action ``<action>``.
+
+  Example: ``help drop``
+
+Items
+^^^^^
+
+.. _action-look-item:
+
+``look <item>``
+  Examine item ``<item>``. May be either an item in the current room or in the inventory.
+
+  Example: ``look security card``
 
 .. _action-take:
 
@@ -64,21 +80,33 @@ The available actions are:
 
   Example: ``use security card``
 
-.. _action-help:
+.. _actions-debug:
 
-``help``
-  Show help about all available actions.
+Debug
+^^^^^
 
-.. _action-help-action:
+Those are available if debug mode is enabled (see :ref:`Debug mode`).
 
-``help <action>``
-  Show help about the specific action ``<action>``.
+.. _action-spawn:
 
-  Example: ``help drop``
+``spawn <item>``
+  Spawn a new item identified by ``<item>`` into the player's inventory.
 
-.. note::
+  Example: ``spawn security card``
 
-    Additional actions are available if debug mode is enabled (see :ref:`Debug mode`).
+.. _action-destroy:
+
+``destroy <item>``
+  Destroy item identified by ``<item>`` in player's inventory.
+
+  Example: ``destroy security card``
+
+.. _action-tp:
+
+``tp <room>``
+  Teleport the player to the room identified by ``<room>``.
+
+  Example: ``tp Building hall``
 
 Good luck! Remember you can :ref:`exit the game <Exiting the game>` anytime.
 
