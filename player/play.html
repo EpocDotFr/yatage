@@ -56,7 +56,12 @@
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="run.html">Running a game</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Playing a game</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#actions">Actions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#actions">Actions</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#general">General</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#items">Items</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#debug">Debug</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -104,7 +109,8 @@
   <section id="playing-a-game">
 <h1>Playing a game<a class="headerlink" href="#playing-a-game" title="Permalink to this heading">¶</a></h1>
 <p>Now that you’re able to <a class="reference internal" href="run.html"><span class="doc">run a game</span></a> using a valid YATAGE world file, it can be played.</p>
-<p>When starting a game, you will be first shown various information about the world being played on.</p>
+<p>When starting a game, you will be first shown various information about the world being played on (you can show it
+again later anytime using the <a class="reference internal" href="#action-intro"><span class="std std-ref">intro</span></a> action).</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>Extra information may be shown if debug mode is enabled (see <a class="reference internal" href="run.html#debug-mode"><span class="std std-ref">Debug mode</span></a>).</p>
@@ -114,14 +120,18 @@
 <h2>Actions<a class="headerlink" href="#actions" title="Permalink to this heading">¶</a></h2>
 <p>YATAGE implements the typical game loop of text adventure games (we’ll not get into details here), it thus excepts you
 to type the action to perform next.</p>
-<p>The available actions are:</p>
+<section id="general">
+<h3>General<a class="headerlink" href="#general" title="Permalink to this heading">¶</a></h3>
 <dl class="simple" id="action-look">
 <dt><code class="docutils literal notranslate"><span class="pre">look</span></code></dt><dd><p>Examine the current room.</p>
 </dd>
 </dl>
-<dl id="action-look-item">
-<dt><code class="docutils literal notranslate"><span class="pre">look</span> <span class="pre">&lt;item&gt;</span></code></dt><dd><p>Examine item <code class="docutils literal notranslate"><span class="pre">&lt;item&gt;</span></code>. May be either an item in the current room or in the inventory.</p>
-<p>Example: <code class="docutils literal notranslate"><span class="pre">look</span> <span class="pre">security</span> <span class="pre">card</span></code></p>
+<dl class="simple" id="action-intro">
+<dt><code class="docutils literal notranslate"><span class="pre">intro</span></code></dt><dd><p>Show the introductory text that is displayed when starting the game.</p>
+</dd>
+</dl>
+<dl class="simple" id="action-exit">
+<dt><code class="docutils literal notranslate"><span class="pre">exit</span></code></dt><dd><p>Exit the game.</p>
 </dd>
 </dl>
 <dl id="action-go">
@@ -129,8 +139,25 @@ to type the action to perform next.</p>
 <p>Examples: <code class="docutils literal notranslate"><span class="pre">go</span> <span class="pre">entrance</span></code> or <code class="docutils literal notranslate"><span class="pre">entrance</span></code></p>
 </dd>
 </dl>
-<dl class="simple" id="action-in">
+<dl class="simple" id="action-inv">
 <dt><code class="docutils literal notranslate"><span class="pre">inv</span></code></dt><dd><p>List items currently in inventory.</p>
+</dd>
+</dl>
+<dl class="simple" id="action-help">
+<dt><code class="docutils literal notranslate"><span class="pre">help</span></code></dt><dd><p>Show help about all available actions.</p>
+</dd>
+</dl>
+<dl id="action-help-action">
+<dt><code class="docutils literal notranslate"><span class="pre">help</span> <span class="pre">&lt;action&gt;</span></code></dt><dd><p>Show help about the specific action <code class="docutils literal notranslate"><span class="pre">&lt;action&gt;</span></code>.</p>
+<p>Example: <code class="docutils literal notranslate"><span class="pre">help</span> <span class="pre">drop</span></code></p>
+</dd>
+</dl>
+</section>
+<section id="items">
+<h3>Items<a class="headerlink" href="#items" title="Permalink to this heading">¶</a></h3>
+<dl id="action-look-item">
+<dt><code class="docutils literal notranslate"><span class="pre">look</span> <span class="pre">&lt;item&gt;</span></code></dt><dd><p>Examine item <code class="docutils literal notranslate"><span class="pre">&lt;item&gt;</span></code>. May be either an item in the current room or in the inventory.</p>
+<p>Example: <code class="docutils literal notranslate"><span class="pre">look</span> <span class="pre">security</span> <span class="pre">card</span></code></p>
 </dd>
 </dl>
 <dl id="action-take">
@@ -148,21 +175,28 @@ to type the action to perform next.</p>
 <p>Example: <code class="docutils literal notranslate"><span class="pre">use</span> <span class="pre">security</span> <span class="pre">card</span></code></p>
 </dd>
 </dl>
-<dl class="simple" id="action-help">
-<dt><code class="docutils literal notranslate"><span class="pre">help</span></code></dt><dd><p>Show help about all available actions.</p>
+</section>
+<section id="debug">
+<span id="actions-debug"></span><h3>Debug<a class="headerlink" href="#debug" title="Permalink to this heading">¶</a></h3>
+<p>Those are available if debug mode is enabled (see <a class="reference internal" href="run.html#debug-mode"><span class="std std-ref">Debug mode</span></a>).</p>
+<dl id="action-spawn">
+<dt><code class="docutils literal notranslate"><span class="pre">spawn</span> <span class="pre">&lt;item&gt;</span></code></dt><dd><p>Spawn a new item identified by <code class="docutils literal notranslate"><span class="pre">&lt;item&gt;</span></code> into the player’s inventory.</p>
+<p>Example: <code class="docutils literal notranslate"><span class="pre">spawn</span> <span class="pre">security</span> <span class="pre">card</span></code></p>
 </dd>
 </dl>
-<dl id="action-help-action">
-<dt><code class="docutils literal notranslate"><span class="pre">help</span> <span class="pre">&lt;action&gt;</span></code></dt><dd><p>Show help about the specific action <code class="docutils literal notranslate"><span class="pre">&lt;action&gt;</span></code>.</p>
-<p>Example: <code class="docutils literal notranslate"><span class="pre">help</span> <span class="pre">drop</span></code></p>
+<dl id="action-destroy">
+<dt><code class="docutils literal notranslate"><span class="pre">destroy</span> <span class="pre">&lt;item&gt;</span></code></dt><dd><p>Destroy item identified by <code class="docutils literal notranslate"><span class="pre">&lt;item&gt;</span></code> in player’s inventory.</p>
+<p>Example: <code class="docutils literal notranslate"><span class="pre">destroy</span> <span class="pre">security</span> <span class="pre">card</span></code></p>
 </dd>
 </dl>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>Additional actions are available if debug mode is enabled (see <a class="reference internal" href="run.html#debug-mode"><span class="std std-ref">Debug mode</span></a>).</p>
-</div>
+<dl id="action-tp">
+<dt><code class="docutils literal notranslate"><span class="pre">tp</span> <span class="pre">&lt;room&gt;</span></code></dt><dd><p>Teleport the player to the room identified by <code class="docutils literal notranslate"><span class="pre">&lt;room&gt;</span></code>.</p>
+<p>Example: <code class="docutils literal notranslate"><span class="pre">tp</span> <span class="pre">Building</span> <span class="pre">hall</span></code></p>
+</dd>
+</dl>
 <p>Good luck! Remember you can <a class="reference internal" href="run.html#exiting-the-game"><span class="std std-ref">exit the game</span></a> anytime.</p>
 <p>You’re now ready to <a class="reference internal" href="../creator/world.html"><span class="doc">create your own games</span></a>!</p>
+</section>
 </section>
 </section>
 

@@ -124,7 +124,7 @@ executable that must be used in order to run games.</p>
 world file.</p>
 <section id="exiting-the-game">
 <h3>Exiting the game<a class="headerlink" href="#exiting-the-game" title="Permalink to this heading">¶</a></h3>
-<p>You can exit the game anytime using either <kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Control</kbd>-<kbd class="kbd docutils literal notranslate">D</kbd></kbd> or <kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Control</kbd>-<kbd class="kbd docutils literal notranslate">C</kbd></kbd>.</p>
+<p>You can exit the game anytime using either <kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Control</kbd>-<kbd class="kbd docutils literal notranslate">D</kbd></kbd>, <kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Control</kbd>-<kbd class="kbd docutils literal notranslate">C</kbd></kbd>, or the <a class="reference internal" href="play.html#action-exit"><span class="std std-ref">exit</span></a> action.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>You will lose your progress as YATAGE does not allow to save game state (yet).</p>
@@ -149,28 +149,13 @@ playing normally, for example while creating a game. Use the <code class="docuti
 <li><p>Details will be displayed next to the exits’ name (exit type, conditions, rooms identifiers / names, etc)</p></li>
 </ul>
 </div></blockquote>
-<p>In addition, the following new <a class="reference internal" href="play.html#actions"><span class="std std-ref">actions</span></a> are made available (for debug purposes only!):</p>
-<dl id="action-spawn">
-<dt><code class="docutils literal notranslate"><span class="pre">spawn</span> <span class="pre">&lt;item&gt;</span></code></dt><dd><p>Spawn a new item identified by <code class="docutils literal notranslate"><span class="pre">&lt;item&gt;</span></code> into the player’s inventory.</p>
-<p>Example: <code class="docutils literal notranslate"><span class="pre">spawn</span> <span class="pre">security</span> <span class="pre">card</span></code></p>
-</dd>
-</dl>
-<dl id="action-destroy">
-<dt><code class="docutils literal notranslate"><span class="pre">destroy</span> <span class="pre">&lt;item&gt;</span></code></dt><dd><p>Destroy item identified by <code class="docutils literal notranslate"><span class="pre">&lt;item&gt;</span></code> in player’s inventory.</p>
-<p>Example: <code class="docutils literal notranslate"><span class="pre">destroy</span> <span class="pre">security</span> <span class="pre">card</span></code></p>
-</dd>
-</dl>
-<dl id="action-tp">
-<dt><code class="docutils literal notranslate"><span class="pre">tp</span> <span class="pre">&lt;room&gt;</span></code></dt><dd><p>Teleport the player to the room identified by <code class="docutils literal notranslate"><span class="pre">&lt;room&gt;</span></code>.</p>
-<p>Example: <code class="docutils literal notranslate"><span class="pre">tp</span> <span class="pre">Building</span> <span class="pre">hall</span></code></p>
-</dd>
-</dl>
-<p>Finally, debug mode will alter some of the game engine’s behavior:</p>
+<p>In addition, debug mode will alter some of the game engine’s behavior:</p>
 <blockquote>
 <div><ul class="simple">
 <li><p>Used items will not be hidden in inventory. A <code class="docutils literal notranslate"><span class="pre">[used]</span></code> suffix will instead be appended to the items’ name</p></li>
 </ul>
 </div></blockquote>
+<p>Finally, new <a class="reference internal" href="play.html#actions-debug"><span class="std std-ref">actions</span></a> are made available.</p>
 </section>
 <section id="automating-actions">
 <h3>Automating actions<a class="headerlink" href="#automating-actions" title="Permalink to this heading">¶</a></h3>
