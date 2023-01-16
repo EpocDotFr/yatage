@@ -150,6 +150,11 @@ class Item:
     used: bool = False
 
     def do_use(self) -> None:
+        if not self.definition.use:
+            self.definition.world.game.line('This item does not seem to be usable.')
+
+            return
+
         text = None
 
         if isinstance(self.definition.use, str):
