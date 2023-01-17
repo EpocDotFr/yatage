@@ -149,7 +149,7 @@ class Item:
     definition: ItemDefinition
     used: bool = False
 
-    def do_use(self) -> None:
+    def use(self) -> None:
         if not self.definition.use:
             self.definition.world.game.line('This item does not seem to be usable.')
 
@@ -169,10 +169,10 @@ class Item:
             self.definition.world.game.current_room = self.definition.use.teleport
 
             self.definition.world.game.line(
-                self.definition.world.game.current_room.do_look()
+                self.definition.world.game.current_room.look()
             )
 
-    def do_look(self) -> str:
+    def look(self) -> str:
         return self.definition.look
 
 

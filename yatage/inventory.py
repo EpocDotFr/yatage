@@ -8,7 +8,7 @@ class Inventory(UserList):
 
         self.game = game
 
-    def do_look(self) -> str:
+    def look(self) -> str:
         text = [
             'Your inventory:',
             '---------------',
@@ -43,21 +43,7 @@ class Inventory(UserList):
         if not item:
             return False
 
-        item.do_use()
-
-        return True
-
-    def take(self, item_identifier: str) -> bool:
-        item = self.game.current_room.get_item(item_identifier, 'alias_or_identifier')
-
-        if not item:
-            return False
-
-        self.append(
-            self.game.current_room.items.pop(
-                self.game.current_room.items.index(item)
-            )
-        )
+        item.use()
 
         return True
 

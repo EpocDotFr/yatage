@@ -48,7 +48,7 @@ class Room:
     items: List[Item] = dataclasses.field(default_factory=list)
     exits: Dict[str, Any] = dataclasses.field(default_factory=dict)  # TODO Typing
 
-    def do_look(self) -> str:
+    def look(self) -> str:
         name = str(self)
         header = '*' * len(name)
 
@@ -95,6 +95,20 @@ class Room:
 
     def get_item(self, item_identifier: str, attr: str = 'identifier') -> Optional[Item]:
         return yatage.utils.get_item(self.items, item_identifier, attr)
+
+    def take_item(self, item_identifier: str) -> bool:
+        item = self.get_item(item_identifier, 'alias_or_identifier')
+
+        if not item:
+            return False
+
+        self.world.game.inventory.append(
+            self.items.pop(
+                self.items.index(item)
+            )
+        )
+
+        return True
 
     def __str__(self) -> str:
         name = self.name_or_identifier

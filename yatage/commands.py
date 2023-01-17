@@ -44,11 +44,11 @@ class Commands(Loop):
             item = self.current_room.get_item(item_identifier) or self.inventory.get(item_identifier)
 
             if item:
-                self.line(item.do_look())
+                self.line(item.look())
             else:
                 self.line('You see no such item.')
         else:
-            self.line(self.current_room.do_look())
+            self.line(self.current_room.look())
 
         return
 
@@ -63,6 +63,8 @@ class Commands(Loop):
 
     def _intro(self, _: str) -> Optional[bool]:
         self.line(self.create_intro(False))
+
+        return
 
     def _intro_help(self) -> None:
         self.print_help((
@@ -87,7 +89,7 @@ class Commands(Loop):
             if isinstance(exit_data, Room):
                 self.current_room = exit_data
 
-                self.line(self.current_room.do_look())
+                self.line(self.current_room.look())
             elif isinstance(exit_data, GameOverExit):
                 self.line(exit_data.text)
 
@@ -99,7 +101,7 @@ class Commands(Loop):
                     self.current_room = exit_data.exit
 
                     self.line('')
-                    self.line(self.current_room.do_look())
+                    self.line(self.current_room.look())
         else:
             self.line('I don\'t understand; try \'help\' for instructions.')
 
@@ -113,7 +115,7 @@ class Commands(Loop):
         ))
 
     def _inv(self, _: str) -> Optional[bool]:
-        self.line(self.inventory.do_look())
+        self.line(self.inventory.look())
 
         return
 
@@ -123,7 +125,7 @@ class Commands(Loop):
         ))
 
     def _take(self, item_identifier: str) -> Optional[bool]:
-        if self.inventory.take(item_identifier):
+        if self.current_room.take_item(item_identifier):
             self.line('Taken.')
         else:
             self.line('You see no such item.')
@@ -203,7 +205,7 @@ class Commands(Loop):
 
         self.current_room = self.world.rooms.get(room_identifier)
 
-        self.line(self.current_room.do_look())
+        self.line(self.current_room.look())
 
         return
 

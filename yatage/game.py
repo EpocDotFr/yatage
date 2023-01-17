@@ -64,7 +64,7 @@ class Game(Commands):
         if include_current_room:
             text.extend((
                 '',
-                self.current_room.do_look(),
+                self.current_room.look(),
             ))
 
         return '\n'.join(text)
