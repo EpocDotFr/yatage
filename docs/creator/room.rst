@@ -55,7 +55,8 @@ name
 This attribute *should* be a one-line string and *should* be a few words long.
 
 A room's display name is, by default, its associated :ref:`reference <world-rooms>`. This behavior *may* be overridden by
-this attribute. If set, its value will be used everywhere the room's display name must be shown.
+this attribute. If set, its value will be used everywhere the room's display name must be shown. It is shown when the
+player enters a room, and when the player invokes the :ref:`action-look` action.
 
 .. _room-items:
 
@@ -71,9 +72,10 @@ items
 
         items: [security card, book]
 
-.. todo::
+The list of :ref:`world-items` available for pickup in the room.
 
-    Document.
+It is shown when the player enters a room, and when the player invokes the :ref:`action-look` action, just after
+:ref:`room-description`.
 
 .. _room-exits:
 
