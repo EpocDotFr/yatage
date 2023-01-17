@@ -161,7 +161,8 @@
 </div></blockquote>
 <p>This attribute <em>should</em> be a one-line string and <em>should</em> be a few words long.</p>
 <p>A room’s display name is, by default, its associated <a class="reference internal" href="world.html#world-rooms"><span class="std std-ref">reference</span></a>. This behavior <em>may</em> be overridden by
-this attribute. If set, its value will be used everywhere the room’s display name must be shown.</p>
+this attribute. If set, its value will be used everywhere the room’s display name must be shown. It is shown when the
+player enters a room, and when the player invokes the <a class="reference internal" href="../player/play.html#action-look"><span class="std std-ref">look</span></a> action.</p>
 </section>
 <section id="items">
 <span id="room-items"></span><h3>items<a class="headerlink" href="#items" title="Permalink to this heading">¶</a></h3>
@@ -177,10 +178,9 @@ this attribute. If set, its value will be used everywhere the room’s display n
 </li>
 </ul>
 </div></blockquote>
-<div class="admonition-todo admonition" id="id2">
-<p class="admonition-title">Todo</p>
-<p>Document.</p>
-</div>
+<p>The list of <a class="reference internal" href="world.html#world-items"><span class="std std-ref">items</span></a> available for pickup in the room.</p>
+<p>It is shown when the player enters a room, and when the player invokes the <a class="reference internal" href="../player/play.html#action-look"><span class="std std-ref">look</span></a> action, just after
+<a class="reference internal" href="#room-description"><span class="std std-ref">description</span></a>.</p>
 </section>
 <section id="exits">
 <span id="room-exits"></span><h3>exits<a class="headerlink" href="#exits" title="Permalink to this heading">¶</a></h3>
@@ -198,7 +198,7 @@ this attribute. If set, its value will be used everywhere the room’s display n
 </li>
 </ul>
 </div></blockquote>
-<div class="admonition-todo admonition" id="id3">
+<div class="admonition-todo admonition" id="id2">
 <p class="admonition-title">Todo</p>
 <p>Document.</p>
 </div>
@@ -206,7 +206,7 @@ this attribute. If set, its value will be used everywhere the room’s display n
 </section>
 <section id="exit-types">
 <h2>Exit types<a class="headerlink" href="#exit-types" title="Permalink to this heading">¶</a></h2>
-<div class="admonition-todo admonition" id="id4">
+<div class="admonition-todo admonition" id="id3">
 <p class="admonition-title">Todo</p>
 <p>Document.</p>
 </div>
