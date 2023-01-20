@@ -24,6 +24,21 @@ EXTRAS = {
     }
 }
 
+CLASSIFIERS = [
+    'Development Status :: 3 - Alpha',
+    'Environment :: Console',
+    'Operating System :: OS Independent',
+    'Programming Language :: Python',
+    'Programming Language :: Python :: 3.8',
+    'Topic :: Games/Entertainment',
+]
+
+PROJECT_URLS = {
+    'Documentation': 'https://epocdotfr.github.io/yatage/',
+    'Source': 'https://github.com/EpocDotFr/yatage',
+    'Tracker': 'https://github.com/EpocDotFr/yatage/issues',
+}
+
 here = os.path.abspath(os.path.dirname(__file__))
 
 try:
@@ -90,20 +105,9 @@ setup(
             'yatage = yatage.cli:cli',
         ]
     },
-    classifiers=[
-        'Development Status :: 3 - Alpha',
-        'Environment :: Console',
-        'Operating System :: OS Independent',
-        'Programming Language :: Python',
-        'Programming Language :: Python :: 3.8',
-        'Topic :: Games/Entertainment',
-    ],
+    classifiers=CLASSIFIERS,
     cmdclass={
         'upload': UploadCommand,
     },
-    project_urls={
-        'Documentation': 'https://epocdotfr.github.io/yatage/',
-        'Source': 'https://github.com/EpocDotFr/yatage',
-        'Tracker': 'https://github.com/EpocDotFr/yatage/issues',
-    }
+    project_urls=PROJECT_URLS
 )
