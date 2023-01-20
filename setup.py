@@ -10,7 +10,7 @@ DESCRIPTION = 'Yet Another Text Adventure Game Engine'
 URL = 'https://github.com/EpocDotFr/yatage'
 EMAIL = 'contact.nospam@epoc.nospam.fr'
 AUTHOR = 'Maxime "Epoc" G.'
-REQUIRES_PYTHON = '~=3.8'
+REQUIRES_PYTHON = '>=3.8'
 VERSION = '1.0.0'
 
 REQUIRED = [
@@ -31,6 +31,9 @@ CLASSIFIERS = [
     'Operating System :: OS Independent',
     'Programming Language :: Python',
     'Programming Language :: Python :: 3.8',
+    'Programming Language :: Python :: 3.9',
+    'Programming Language :: Python :: 3.10',
+    'Programming Language :: Python :: 3.11',
     'Topic :: Games/Entertainment',
 ]
 

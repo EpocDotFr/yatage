@@ -25,7 +25,7 @@ Here is a short example, which uses a small subset of the game engine's capabili
 Prerequisites
 -------------
 
-  - Python 3.8
+  - Python >= 3.8
 
 Installation
 ------------
