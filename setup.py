@@ -101,4 +101,9 @@ setup(
     cmdclass={
         'upload': UploadCommand,
     },
+    project_urls={
+        'Documentation': 'https://epocdotfr.github.io/yatage/',
+        'Source': 'https://github.com/EpocDotFr/yatage',
+        'Tracker': 'https://github.com/EpocDotFr/yatage/issues',
+    }
 )
