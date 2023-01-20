@@ -3,7 +3,7 @@ YATAGE documentation
 
 Welcome! This documentation is about YATAGE, Yet Another `Text Adventure Game <https://en.wikipedia.org/wiki/Interactive_fiction>`__ Engine.
 
-|pyversion| |pypiv| |pypil|
+|pyversion| |pypiv| |tests| |pypil|
 
 Text adventure games have been around for a lot of decades now, created back in an age when computer graphics were reduced
 to their simplest form: alphanumeric characters and symbols.
@@ -67,4 +67,5 @@ Credits
 
 .. |pyversion| image:: https://img.shields.io/pypi/pyversions/yatage.svg
 .. |pypiv| image:: https://img.shields.io/pypi/v/yatage.svg
+.. |tests| image:: https://github.com/EpocDotFr/yatage/actions/workflows/tests.yml/badge.svg
 .. |pypil| image:: https://img.shields.io/pypi/l/yatage.svg

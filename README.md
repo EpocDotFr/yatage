@@ -8,7 +8,7 @@
 
 Yet Another [Text Adventure Game](https://en.wikipedia.org/wiki/Interactive_fiction) Engine.
 
-![Python versions](https://img.shields.io/pypi/pyversions/yatage.svg) ![Version](https://img.shields.io/pypi/v/yatage.svg) ![License](https://img.shields.io/pypi/l/yatage.svg)
+![Python versions](https://img.shields.io/pypi/pyversions/yatage.svg) ![Version](https://img.shields.io/pypi/v/yatage.svg) ![Tests](https://github.com/EpocDotFr/yatage/actions/workflows/tests.yml/badge.svg) ![License](https://img.shields.io/pypi/l/yatage.svg)
 
 ## Documentation
 
@@ -20,6 +20,12 @@ Everything you need to know is located [here](https://epocdotfr.github.io/yatage
 
   1. Clone the repository
   2. From the root directory, run: `pip install -e .[dev]` on Linux or `pip install -e ".[dev]"` on Windows
+
+### Running tests
+
+From the root directory, run `pytest`. They will automatically be all discovered and ran.
+
+> **Note** Tests are very basic ATM.
 
 ### Building docs
 

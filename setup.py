@@ -21,6 +21,7 @@ EXTRAS = {
     'dev': {
         'Sphinx~=5.3',
         'twine~=4.0',
+        'pytest~=7.2',
     }
 }
 
