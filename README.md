@@ -16,16 +16,16 @@ Everything you need to know is located [here](https://epocdotfr.github.io/yatage
 
 ## Development
 
-**Getting source code, installing the package as well as its dev dependencies:**
+### Getting source code and installing the package with dev dependencies
 
   1. Clone the repository
   2. From the root directory, run: `pip install -e .[dev]` on Linux or `pip install -e ".[dev]"` on Windows
 
-**Building docs:**
+### Building docs
 
 From the `docs` directory, run `make.bat html` on Windows or `make html` on Linux. Generated docs will be located in `docs/_build/html`.
 
-**Publishing the package:**
+### Publishing the package
 
 From the root directory, run `python setup.py upload`. This will build the package, create a git tag and publish on PyPI.
 
