@@ -31,11 +31,13 @@ From the root directory, run `pytest`. They will automatically be all discovered
 
 From the `docs` directory, run `make.bat html` on Windows or `make html` on Linux. Generated docs will be located in `docs/_build/html`.
 
-### Publishing the package
+### Releasing the package
 
 From the root directory, run `python setup.py upload`. This will build the package, create a git tag and publish on PyPI.
 
-`VERSION` in `setup.py` and `release` in `docs/conf.py` must be updated beforehand.
+`VERSION` in `setup.py` and `release` in `docs/conf.py` must be updated beforehand. These should adhere to [Semantic Versioning](https://semver.org/spec/v2.0.0.html)
+
+An associated GitHub release must be created following the [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) format.
 
 ## Credits
 
