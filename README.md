@@ -6,9 +6,7 @@ Yet Another [Text Adventure Game](https://en.wikipedia.org/wiki/Interactive_fict
 
 ![Python versions](https://img.shields.io/pypi/pyversions/yatage.svg) ![Version](https://img.shields.io/pypi/v/yatage.svg) ![Tests](https://github.com/EpocDotFr/yatage/actions/workflows/tests.yml/badge.svg) ![License](https://img.shields.io/pypi/l/yatage.svg)
 
-## Documentation
-
-Everything you need to know is located [here](https://epocdotfr.github.io/yatage/).
+[PyPI](https://pypi.org/project/yatage/) - [Documentation](https://epocdotfr.github.io/yatage/) - [Source Code](https://github.com/EpocDotFr/yatage) - [Issue Tracker](https://github.com/EpocDotFr/yatage/issues) - [Roadmap](https://github.com/EpocDotFr/yatage/milestones) - [Changelog](https://github.com/EpocDotFr/yatage/releases)
 
 ## Development
 
