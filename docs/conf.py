@@ -3,13 +3,20 @@
 # For the full list of built-in configuration values, see the documentation:
 # https://www.sphinx-doc.org/en/master/usage/configuration.html
 
+import os
+
 # -- Project information -----------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
+
+about = {}
+
+with open(os.path.join('..', 'yatage', '__version__.py')) as f:
+    exec(f.read(), about)
 
 project = 'YATAGE'
 copyright = '2023, <a href="https://epoc.fr/">Epoc</a>'
 author = '<a href="https://epoc.fr/">Epoc</a>'
-release = '1.0.0b1'
+release = about['__version__']
 
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
