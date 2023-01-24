@@ -1,0 +1,59 @@
+%YAML 1.2
+---
+version: 1
+name: Short Example
+description: A short example game.
+author: Maxime "Epoc" G.
+start: Sidewalk
+rooms:
+    Sidewalk:
+        description: >-
+            You're on the sidewalk in front of a building's entrance,
+            a sign on top reads "Hendley Associates". Looks like access
+            is restricted by a security guard.
+
+
+            Someone in a hurry exiting the building bumps on you. As
+            he walks away, you see he dropped something on the sidewalk.
+        exits:
+            entrance:
+                items_conditions:
+                    has: [security card]
+                success:
+                    text: >-
+                        Security guard: "Did you forgot something,
+                        Mr. Clark?"
+                    exit: Building hall
+                failure:
+                    text: >-
+                        Security guard: "Sir, I cannot let you pass
+                        without security card."
+            catch up: Down the street
+        items: [security card]
+    Down the street:
+        description: >-
+            You run past the building, trying to catch up with this
+            stranger. There's a hot dog vendor, a press kiosk, some
+            people. But no sign of him.
+        exits:
+            back: Sidewalk
+    Building hall:
+        description: >-
+            You definitively shouldn't be there, but why not pretend
+            you're Mr. Clark?
+            
+            
+            There's lifts right there, let's see where it's leading.
+        exits:
+            outside: Sidewalk
+            lifts:
+                game_over: >-
+                    You have been busted by a security camera.
+items:
+    security card:
+        look: >-
+            It looks a lot like a credit card. On one side, it reads:
+
+                John Clark
+
+                Security Clearance Level I
