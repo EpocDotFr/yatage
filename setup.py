@@ -21,6 +21,7 @@ REQUIRED = [
 
 EXTRAS = {
     'dev': {
+        'wheel~=0.38',
         'Sphinx~=5.3',
         'twine~=4.0',
         'pytest~=7.2',
