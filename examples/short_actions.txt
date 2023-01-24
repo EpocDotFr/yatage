@@ -2,5 +2,7 @@
 # ignored, as well as empty lines.
 
 take security card # First action. Inline comments are allowed.
-entrance           # Second action.
+catch up
+back               # Third action.
+entrance
 lifts

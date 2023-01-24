@@ -84,7 +84,7 @@ class Commands(Loop):
             exit_data = self.current_room.exits.get(exit_)
 
             if isinstance(exit_data, ItemConditionedExit):
-                exit_data = exit_data.do_exit()
+                exit_data = exit_data.exit_()
 
             if isinstance(exit_data, Room):
                 self.current_room = exit_data

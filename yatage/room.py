@@ -10,7 +10,7 @@ class ItemConditionedExit:
     success: Any  # TODO Typing
     failure: Any  # TODO Typing
 
-    def do_exit(self):  # TODO Typing
+    def exit_(self):  # TODO Typing
         return self.success if self.conditions.are_met() else self.failure
 
     def __str__(self) -> str:

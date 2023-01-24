@@ -11,7 +11,7 @@ class ItemUse:
     mark_used: List[str] = dataclasses.field(default_factory=list)
     teleport: Optional[Any] = None  # TODO Typing
 
-    def do_use(self, item_instance) -> str:
+    def use(self, item_instance) -> str:  # TODO Typing
         for item_identifier in self.remove:
             self.world.game.inventory.destroy(
                 item_instance.definition.identifier if item_identifier == 'self' else item_identifier
@@ -39,13 +39,13 @@ class ItemConditionedUse:
     success: Union[str, ItemUse]
     failure: Union[str, ItemUse]
 
-    def do_use(self, item_instance) -> Optional[str]:  # TODO Typing
+    def use(self, item_instance) -> Optional[str]:  # TODO Typing
         result_attr = self.success if self.conditions.are_met() else self.failure
 
         if isinstance(result_attr, str):
             return result_attr
         elif isinstance(result_attr, ItemUse):
-            return result_attr.do_use(item_instance)
+            return result_attr.use(item_instance)
 
         return None
 
@@ -160,7 +160,7 @@ class Item:
         if isinstance(self.definition.use, str):
             text = self.definition.use
         elif isinstance(self.definition.use, (ItemUse, ItemConditionedUse)):
-            text = self.definition.use.do_use(self)
+            text = self.definition.use.use(self)
 
         if text:
             self.definition.world.game.line(text)
