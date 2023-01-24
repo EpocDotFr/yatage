@@ -1,3 +1,5 @@
+# Original setup.py template: https://github.com/kennethreitz/setup.py
+
 from shutil import rmtree
 import io
 import os
@@ -11,7 +13,7 @@ URL = 'https://github.com/EpocDotFr/yatage'
 EMAIL = 'contact.nospam@epoc.nospam.fr'
 AUTHOR = 'Maxime "Epoc" G.'
 REQUIRES_PYTHON = '>=3.8'
-VERSION = '1.0.0b1'
+VERSION = None # See yatage/__version__.py
 
 REQUIRED = [
     'pyyaml~=6.0',
@@ -51,10 +53,18 @@ try:
 except FileNotFoundError:
     long_description = DESCRIPTION
 
+about = {}
+
+if not VERSION:
+    project_slug = NAME.lower().replace("-", "_").replace(" ", "_")
+
+    with open(os.path.join(here, project_slug, '__version__.py')) as f:
+        exec(f.read(), about)
+else:
+    about['__version__'] = VERSION
+
 
 class UploadCommand(Command):
-    """Support setup.py upload."""
-
     description = 'Build and publish the package.'
     user_options = []
 
@@ -71,19 +81,19 @@ class UploadCommand(Command):
 
     def run(self):
         try:
-            self.status('Removing previous builds...')
+            self.status('Removing previous builds…')
             rmtree(os.path.join(here, 'dist'))
         except OSError:
             pass
 
-        self.status('Building Source and Wheel (universal) distribution...')
+        self.status('Building Source and Wheel (universal) distribution…')
         os.system('{0} setup.py sdist bdist_wheel --universal'.format(sys.executable))
 
-        self.status('Uploading the package to PyPI via Twine...')
+        self.status('Uploading the package to PyPI via Twine…')
         os.system('twine upload dist/*')
 
-        self.status('Pushing git tags...')
-        os.system('git tag v{0}'.format(VERSION))
+        self.status('Pushing git tags…')
+        os.system('git tag v{0}'.format(about['__version__']))
         os.system('git push --tags')
 
         sys.exit()
@@ -91,7 +101,7 @@ class UploadCommand(Command):
 
 setup(
     name=NAME,
-    version=VERSION,
+    version=about['__version__'],
     description=DESCRIPTION,
     long_description=long_description,
     long_description_content_type='text/markdown',
@@ -99,7 +109,7 @@ setup(
     author_email=EMAIL,
     python_requires=REQUIRES_PYTHON,
     url=URL,
-    packages=find_packages(),
+    packages=find_packages(exclude=["tests", "*.tests", "*.tests.*", "tests.*"]),
     install_requires=REQUIRED,
     extras_require=EXTRAS,
     include_package_data=True,

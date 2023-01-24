@@ -1,3 +1,4 @@
+from yatage.__version__ import __version__ as yatage_version
 from yatage.inventory import Inventory
 from yatage.commands import Commands
 from yatage.world import World
@@ -44,6 +45,7 @@ class Game(Commands):
         if self.debug:
             text.extend((
                 '',
+                f'YATAGE version: {yatage_version}',
                 f'World file version: {self.world.version}',
                 f'Rooms: {len(self.world.rooms)}',
                 f'Items: {len(self.world.items)}',
