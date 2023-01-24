@@ -17,10 +17,15 @@ YATAGE has been created to not worry about this step, reducing text adventure ga
 as less characters and symbols as possible in one file, in a structured fashion (`YAML <https://en.wikipedia.org/wiki/YAML>`__),
 to create a playable game.
 
+Example
+-------
+
 Here is a short example, which uses a small subset of the game engine's capabilities:
 
 .. literalinclude:: ../examples/short.yml
     :language: yaml
+
+:download:`Download <../examples/short.yml>` and :doc:`run <player/run>` this example after :ref:`installing <Installation>` YATAGE.
 
 Prerequisites
 -------------
