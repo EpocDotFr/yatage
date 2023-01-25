@@ -165,9 +165,17 @@ to type the action to perform next.</p>
 <p>Example: <code class="docutils literal notranslate"><span class="pre">take</span> <span class="pre">security</span> <span class="pre">card</span></code></p>
 </dd>
 </dl>
+<dl class="simple" id="action-take-all">
+<dt><code class="docutils literal notranslate"><span class="pre">take</span> <span class="pre">all</span></code></dt><dd><p>Take all items from the current room and put them into the inventory.</p>
+</dd>
+</dl>
 <dl id="action-drop">
 <dt><code class="docutils literal notranslate"><span class="pre">drop</span> <span class="pre">&lt;item&gt;</span></code></dt><dd><p>Remove the item <code class="docutils literal notranslate"><span class="pre">&lt;item&gt;</span></code> from the inventory and drop it into the current room.</p>
 <p>Example: <code class="docutils literal notranslate"><span class="pre">drop</span> <span class="pre">security</span> <span class="pre">card</span></code></p>
+</dd>
+</dl>
+<dl class="simple" id="action-drop-all">
+<dt><code class="docutils literal notranslate"><span class="pre">drop</span> <span class="pre">all</span></code></dt><dd><p>Remove all items from the inventory and drop them into the current room.</p>
 </dd>
 </dl>
 <dl id="action-use">
@@ -180,13 +188,17 @@ to type the action to perform next.</p>
 <span id="actions-debug"></span><h3>Debug<a class="headerlink" href="#debug" title="Permalink to this heading">¶</a></h3>
 <p>Those are available if debug mode is enabled (see <a class="reference internal" href="run.html#debug-mode"><span class="std std-ref">Debug mode</span></a>).</p>
 <dl id="action-spawn">
-<dt><code class="docutils literal notranslate"><span class="pre">spawn</span> <span class="pre">&lt;item&gt;</span></code></dt><dd><p>Spawn a new item identified by <code class="docutils literal notranslate"><span class="pre">&lt;item&gt;</span></code> into the player’s inventory.</p>
+<dt><code class="docutils literal notranslate"><span class="pre">spawn</span> <span class="pre">&lt;item&gt;</span></code></dt><dd><p>Spawn a new item identified by <code class="docutils literal notranslate"><span class="pre">&lt;item&gt;</span></code> into the inventory.</p>
 <p>Example: <code class="docutils literal notranslate"><span class="pre">spawn</span> <span class="pre">security</span> <span class="pre">card</span></code></p>
 </dd>
 </dl>
 <dl id="action-destroy">
-<dt><code class="docutils literal notranslate"><span class="pre">destroy</span> <span class="pre">&lt;item&gt;</span></code></dt><dd><p>Destroy item identified by <code class="docutils literal notranslate"><span class="pre">&lt;item&gt;</span></code> in player’s inventory.</p>
+<dt><code class="docutils literal notranslate"><span class="pre">destroy</span> <span class="pre">&lt;item&gt;</span></code></dt><dd><p>Destroy item identified by <code class="docutils literal notranslate"><span class="pre">&lt;item&gt;</span></code> in the inventory.</p>
 <p>Example: <code class="docutils literal notranslate"><span class="pre">destroy</span> <span class="pre">security</span> <span class="pre">card</span></code></p>
+</dd>
+</dl>
+<dl class="simple" id="action-destroy-all">
+<dt><code class="docutils literal notranslate"><span class="pre">destroy</span> <span class="pre">all</span></code></dt><dd><p>Destroy all items in the inventory.</p>
 </dd>
 </dl>
 <dl id="action-tp">
