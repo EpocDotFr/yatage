@@ -228,6 +228,9 @@ class World:
 
     def load_items(self, items_data: dict) -> None:
         for item_identifier, item_data in items_data.items():
+            if item_identifier == 'all':
+                raise WorldReadError('"all" cannot be used as an item name')
+
             look = item_data.get('look')
 
             if not look:

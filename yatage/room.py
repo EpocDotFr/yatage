@@ -97,18 +97,26 @@ class Room:
         return yatage.utils.get_item(self.items, item_identifier, attr)
 
     def take_item(self, item_identifier: str) -> bool:
-        item = self.get_item(item_identifier, 'alias_or_identifier')
+        if item_identifier == 'all':
+            if len(self.items) == 0:
+                return False
 
-        if not item:
-            return False
+            for index, _ in enumerate(self.items):
+                self.take_item_by_index(index)
+        else:
+            item = self.get_item(item_identifier, 'alias_or_identifier')
 
-        self.world.game.inventory.append(
-            self.items.pop(
-                self.items.index(item)
-            )
-        )
+            if not item:
+                return False
+
+            self.take_item_by_index(self.items.index(item))
 
         return True
+
+    def take_item_by_index(self, index: int) -> None:
+        self.world.game.inventory.append(
+            self.items.pop(index)
+        )
 
     def __str__(self) -> str:
         name = self.name_or_identifier

@@ -242,7 +242,7 @@ class Game(Cmd):
         self.print_help((
             'go <exit> or merely <exit>',
             '',
-            'Travel to the direction <exit>.',
+            '    Travel to the direction <exit>.',
         ))
 
     def _inventory(self, _: str) -> Optional[bool]:
@@ -277,7 +277,11 @@ class Game(Cmd):
         self.print_help((
             'take <item>',
             '',
-            'Take item <item> from the current room and put it into the inventory.',
+            '    Take item <item> from the current room and put it into the inventory.',
+            '',
+            'take all',
+            '',
+            '    Take all items from the current room and put them into the inventory.',
         ))
 
     def _drop(self, item_identifier: str) -> Optional[bool]:
@@ -292,7 +296,11 @@ class Game(Cmd):
         self.print_help((
             'drop <item>',
             '',
-            'Remove the item <item> from the inventory and drop it into the current room.',
+            '    Remove the item <item> from the inventory and drop it into the current room.',
+            '',
+            'drop all',
+            '',
+            '    Remove all items from the inventory and drop them into the current room.',
         ))
 
     def _use(self, item_identifier: str) -> Optional[bool]:
@@ -305,7 +313,7 @@ class Game(Cmd):
         self.print_help((
             'use <item>',
             '',
-            'Activate or apply item <item>. Item must be present in inventory.',
+            '    Activate or apply item <item>. Item must be present in inventory.',
         ))
 
     def _spawn(self, item_identifier: str) -> Optional[bool]:
@@ -320,7 +328,7 @@ class Game(Cmd):
         self.print_help((
             'spawn <item>',
             '',
-            'Debug: Spawn a new item identified by <item> into the player’s inventory.',
+            '    Debug: Spawn a new item identified by <item> into the inventory.',
         ))
 
     def _destroy(self, item_identifier: str) -> Optional[bool]:
@@ -335,7 +343,11 @@ class Game(Cmd):
         self.print_help((
             'destroy <item>',
             '',
-            'Debug: Destroy item identified by <item> in player’s inventory.',
+            '    Debug: Destroy item identified by <item> in the inventory.',
+            '',
+            'destroy all',
+            '',
+            '    Debug: Destroy all items in the inventory.',
         ))
 
     def _tp(self, room_identifier: str) -> Optional[bool]:
@@ -354,7 +366,7 @@ class Game(Cmd):
         self.print_help((
             'tp <room>',
             '',
-            'Debug: Teleport the player to the room identified by <room>.',
+            '    Debug: Teleport the player to the room identified by <room>.',
         ))
 
     def default(self, line: str) -> Optional[bool]:

@@ -48,26 +48,41 @@ class Inventory(UserList):
         return True
 
     def drop(self, item_identifier: str) -> bool:
-        item = self.get(item_identifier, 'alias_or_identifier')
+        if item_identifier == 'all':
+            if len(self) == 0:
+                return False
 
-        if not item:
-            return False
+            for index, _ in enumerate(self):
+                self.drop_by_index(index)
+        else:
+            item = self.get(item_identifier, 'alias_or_identifier')
 
-        self.game.current_room.items.append(
-            self.pop(
-                self.index(item)
-            )
-        )
+            if not item:
+                return False
+
+            self.drop_by_index(self.index(item))
 
         return True
 
+    def drop_by_index(self, index: int) -> None:
+        self.game.current_room.items.append(
+            self.pop(index)
+        )
+
     def destroy(self, item_identifier: str) -> bool:
-        item = self.get(item_identifier)
+        if item_identifier == 'all':
+            if len(self) == 0:
+                return False
 
-        if not item:
-            return False
+            for item in self:
+                self.remove(item)
+        else:
+            item = self.get(item_identifier)
 
-        self.remove(item)
+            if not item:
+                return False
+
+            self.remove(item)
 
         return True
 

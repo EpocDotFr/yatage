@@ -77,12 +77,22 @@ Items
 
   Example: ``take security card``
 
+.. _action-take-all:
+
+``take all``
+  Take all items from the current room and put them into the inventory.
+
 .. _action-drop:
 
 ``drop <item>``
   Remove the item ``<item>`` from the inventory and drop it into the current room.
 
   Example: ``drop security card``
+
+.. _action-drop-all:
+
+``drop all``
+  Remove all items from the inventory and drop them into the current room.
 
 .. _action-use:
 
@@ -101,16 +111,21 @@ Those are available if debug mode is enabled (see :ref:`Debug mode`).
 .. _action-spawn:
 
 ``spawn <item>``
-  Spawn a new item identified by ``<item>`` into the player's inventory.
+  Spawn a new item identified by ``<item>`` into the inventory.
 
   Example: ``spawn security card``
 
 .. _action-destroy:
 
 ``destroy <item>``
-  Destroy item identified by ``<item>`` in player's inventory.
+  Destroy item identified by ``<item>`` in the inventory.
 
   Example: ``destroy security card``
+
+.. _action-destroy-all:
+
+``destroy all``
+  Destroy all items in the inventory.
 
 .. _action-tp:
 
