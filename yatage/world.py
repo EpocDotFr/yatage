@@ -150,7 +150,7 @@ class World:
 
             for exit_name, exit_data in exits_data.items():
                 try:
-                    if exit_name in self.game.commands + self.game.debug_commands:
+                    if exit_name in self.game.all_commands:
                         raise WorldReadError('Exit name is conflicting with action of the same name')
 
                     exit_ = self.load_room_exit_room_or_game_over_or_text(exit_data) or self.load_room_item_conditioned_exit(exit_data)

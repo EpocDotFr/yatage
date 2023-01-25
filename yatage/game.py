@@ -29,7 +29,9 @@ class Game(Cmd):
 
     # YATAGE commands attributes ##############################################
 
-    commands: List[str] = [
+    commands: List[str] = []
+
+    regular_commands: List[str] = [
         'look',
         'intro',
         'exit',
@@ -46,6 +48,8 @@ class Game(Cmd):
         'tp',
     ]
 
+    all_commands: List[str] = []
+
     def __init__(self, world_filename: str, actions_filename: Optional[str] = None, debug: bool = False) -> None:
         super().__init__()
 
@@ -59,9 +63,8 @@ class Game(Cmd):
         self.current_room = self.world.start
         self.inventory = Inventory(self)
         self.intro = self.create_intro()
-
-        if self.debug:
-            self.commands.extend(self.debug_commands)
+        self.all_commands = self.regular_commands + self.debug_commands
+        self.commands = self.all_commands if self.debug else self.regular_commands
 
         self.register_commands()
 
