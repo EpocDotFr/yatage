@@ -44,6 +44,7 @@ playing normally, for example while creating a game. Use the ``--debug`` flag:
 
 This will add the following debug statements in-game:
 
+  - Current YATAGE version
   - World file version, number of rooms and number of items will be displayed before world's description
   - Rooms identifier will be displayed next to all rooms names
   - Details will be displayed next to the exits' name (exit type, conditions, rooms identifiers / names, etc)
