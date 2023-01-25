@@ -45,7 +45,7 @@ General
 
 .. _action-inv:
 
-``inv``
+``inventory`` or ``inv``
   List items currently in inventory.
 
 .. _action-help:

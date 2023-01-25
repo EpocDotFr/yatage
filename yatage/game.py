@@ -36,6 +36,7 @@ class Game(Cmd):
         'intro',
         'exit',
         'go',
+        'inventory',
         'inv',
         'take',
         'drop',
@@ -244,14 +245,24 @@ class Game(Cmd):
             'Travel to the direction <exit>.',
         ))
 
-    def _inv(self, _: str) -> Optional[bool]:
+    def _inventory(self, _: str) -> Optional[bool]:
         self.line(self.inventory.look())
+
+        return
+
+    def _inventory_help(self) -> None:
+        self.print_help((
+            'List items currently in inventory.',
+        ))
+
+    def _inv(self, _: str) -> Optional[bool]:
+        self._inventory(_)
 
         return
 
     def _inv_help(self) -> None:
         self.print_help((
-            'List items currently in inventory.',
+            'Alias for "inventory".',
         ))
 
     def _take(self, item_identifier: str) -> Optional[bool]:
