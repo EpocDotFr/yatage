@@ -40,6 +40,12 @@ class Game(Cmd):
         'use',
     ]
 
+    debug_commands: List[str] = [
+        'spawn',
+        'destroy',
+        'tp',
+    ]
+
     def __init__(self, world_filename: str, actions_filename: Optional[str] = None, debug: bool = False) -> None:
         super().__init__()
 
@@ -55,11 +61,7 @@ class Game(Cmd):
         self.intro = self.create_intro()
 
         if self.debug:
-            self.commands.extend([
-                'spawn',
-                'destroy',
-                'tp',
-            ])
+            self.commands.extend(self.debug_commands)
 
         self.register_commands()
 
