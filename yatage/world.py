@@ -10,7 +10,7 @@ import io
 
 @dataclasses.dataclass
 class World:
-    game: Any  # TODO Typing
+    game: Any
     version: int
     name: str
     start: Optional[Room] = None
@@ -31,9 +31,9 @@ class World:
         return cls.read(game, fp)
 
     @classmethod
-    def read(cls, game, fp) -> World:  # TODO Typing
+    def read(cls, game, fp) -> World:
         try:
-            world_data = yaml.safe_load(fp)  # TODO Move to stream-based loading?
+            world_data = yaml.safe_load(fp)
         except yaml.YAMLError as e:
             raise WorldReadError(f'Could not parse world file: {e}') from e
 

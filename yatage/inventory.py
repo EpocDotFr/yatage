@@ -3,7 +3,7 @@ import yatage.utils
 
 
 class Inventory(UserList):
-    def __init__(self, game) -> None:  # TODO Typing
+    def __init__(self, game) -> None:
         super().__init__()
 
         self.game = game
@@ -31,7 +31,7 @@ class Inventory(UserList):
 
         return '\n'.join(text)
 
-    def get(self, item_identifier: str, attr: str = 'identifier'):  # TODO Typing
+    def get(self, item_identifier: str, attr: str = 'identifier'):
         return yatage.utils.get_item(self, item_identifier, attr)
 
     def has(self, item_identifier: str) -> bool:
