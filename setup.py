@@ -13,7 +13,7 @@ URL = 'https://github.com/EpocDotFr/yatage'
 EMAIL = 'contact.nospam@epoc.nospam.fr'
 AUTHOR = 'Maxime "Epoc" G.'
 REQUIRES_PYTHON = '>=3.8'
-VERSION = None # Pulled from yatage/__version__.py
+VERSION = None  # Pulled from yatage/__version__.py
 
 REQUIRED = [
     'pyyaml~=6.0',

@@ -1,4 +1,4 @@
-from yatage.room import GameOverExit, TextExit, ItemConditionedExit, Room
+from yatage.room import GameOverExit, TextExit, ItemConditionedExit
 from yatage.__version__ import __version__ as yatage_version
 from typing import Tuple, List, Optional
 from yatage.inventory import Inventory
