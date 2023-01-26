@@ -1,4 +1,4 @@
-from marshmallow import Schema, fields, validate, EXCLUDE
+from marshmallow import Schema, fields, validate, validates_schema, ValidationError, EXCLUDE
 from yatage.world import World
 
 
@@ -8,7 +8,7 @@ class BaseSchema(Schema):
 
 
 class RoomSchema(BaseSchema):
-    # items = fields.List(fields.Dict())
+    items = fields.List(fields.Str())  # TODO Validate items are existing
     description = fields.String(required=True)
     name = fields.String()
 
@@ -53,8 +53,20 @@ class ItemUseSchema(BaseSchema):
 class WorldSchema(BaseSchema):
     version = fields.Integer(required=True, strict=True, validate=validate.OneOf(World.SUPPORTED_VERSIONS))
     name = fields.String(required=True)
-    start = fields.String(required=True)  # TODO Validate corresponding room is existing
+    start = fields.String(required=True)
     description = fields.String()
     author = fields.String()
-    items = fields.Dict(keys=fields.Str(), values=fields.Nested(ItemSchema))  # TODO Validate keys can't be "all"
+    items = fields.Dict(keys=fields.Str(validate=validate.NoneOf(('all',))), values=fields.Nested(ItemSchema))
     rooms = fields.Dict(keys=fields.Str(), values=fields.Nested(RoomSchema), required=True, validate=validate.Length(min=1))
+
+    @validates_schema
+    def validate_schema(self, data: dict, **kwargs):
+        errors = {}
+
+        if data.get('start') not in data.get('rooms', {}):
+            errors['start'] = [
+                'Room not found'
+            ]
+
+        if errors:
+            raise ValidationError(errors)
