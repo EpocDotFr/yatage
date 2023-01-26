@@ -72,7 +72,7 @@ class World:
         author = world_data.get('author')
 
         if author and not isinstance(author, str):
-            raise WorldReadError('Top level "description" must be a string')
+            raise WorldReadError('Top level "author" must be a string')
 
         ret.author = author
 

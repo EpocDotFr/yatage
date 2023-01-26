@@ -17,6 +17,7 @@ VERSION = None  # Pulled from yatage/__version__.py
 
 REQUIRED = [
     'pyyaml~=6.0',
+    'marshmallow~=3.19',
 ]
 
 EXTRAS = {
