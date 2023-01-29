@@ -8,7 +8,7 @@ class BaseSchema(Schema):
 
 
 class RoomSchema(BaseSchema):
-    items = fields.List(fields.Str())  # TODO Validate items are existing
+    items = fields.List(fields.String())  # TODO Validate items are existing
     description = fields.String(required=True)
     name = fields.String()
 
@@ -28,6 +28,16 @@ class ItemConditionedExitSchema(BaseSchema):
 class ItemSchema(BaseSchema):
     look = fields.String(required=True)
     alias = fields.String()  # TODO Validate it's not already used
+    use = fields.Method(deserialize='deserialize_use')
+
+    def deserialize_use(self, value):
+        if isinstance(value, str):
+            return fields.String()
+        elif isinstance(value, dict):
+            if 'text' in value:
+                return fields.Nested(ItemUseSchema)
+            elif 'items_conditions' in value or 'room_conditions' in value:
+                return fields.Nested(ItemConditionedUseSchema)
 
 
 class ItemDefinitionSchema(BaseSchema):
@@ -47,7 +57,11 @@ class ItemConditionedUseSchema(BaseSchema):
 
 
 class ItemUseSchema(BaseSchema):
-    pass
+    text = fields.String(required=True)
+    remove = fields.List(fields.String())  # TODO Validate items are existing
+    spawn = fields.List(fields.String())  # TODO Validate items are existing
+    mark_used = fields.List(fields.String())  # TODO Validate items are existing
+    teleport = fields.String()  # TODO Validate room is existing
 
 
 class WorldSchema(BaseSchema):
@@ -56,8 +70,8 @@ class WorldSchema(BaseSchema):
     start = fields.String(required=True)
     description = fields.String()
     author = fields.String()
-    items = fields.Dict(keys=fields.Str(validate=validate.NoneOf(('all',))), values=fields.Nested(ItemSchema))
-    rooms = fields.Dict(keys=fields.Str(), values=fields.Nested(RoomSchema), required=True, validate=validate.Length(min=1))
+    items = fields.Dict(keys=fields.String(validate=validate.NoneOf(('all',))), values=fields.Nested(ItemSchema))
+    rooms = fields.Dict(keys=fields.String(), values=fields.Nested(RoomSchema), required=True, validate=validate.Length(min=1))
 
     @validates_schema
     def validate_schema(self, data: dict, **kwargs):
@@ -65,7 +79,7 @@ class WorldSchema(BaseSchema):
 
         if data.get('start') not in data.get('rooms', {}):
             errors['start'] = [
-                'Room not found'
+                'Room not found',
             ]
 
         if errors:
