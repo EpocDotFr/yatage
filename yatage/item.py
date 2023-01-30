@@ -4,14 +4,14 @@ import dataclasses
 
 @dataclasses.dataclass
 class ItemUse:
-    world: Any  # TODO Typing
+    world: Any
     text: str
     remove: List[str] = dataclasses.field(default_factory=list)
     spawn: List[str] = dataclasses.field(default_factory=list)
     mark_used: List[str] = dataclasses.field(default_factory=list)
-    teleport: Optional[Any] = None  # TODO Typing
+    teleport: Optional[Any] = None
 
-    def use(self, item_instance) -> str:  # TODO Typing
+    def use(self, item_instance) -> str:
         for item_identifier in self.remove:
             self.world.game.inventory.destroy(
                 item_instance.definition.identifier if item_identifier == 'self' else item_identifier
@@ -35,11 +35,11 @@ class ItemUse:
 
 @dataclasses.dataclass
 class ItemConditionedUse:
-    conditions: Any  # TODO Typing
+    conditions: Any
     success: Union[str, ItemUse]
     failure: Union[str, ItemUse]
 
-    def use(self, item_instance) -> Optional[str]:  # TODO Typing
+    def use(self, item_instance) -> Optional[str]:
         result_attr = self.success if self.conditions.are_met() else self.failure
 
         if isinstance(result_attr, str):
@@ -52,7 +52,7 @@ class ItemConditionedUse:
 
 @dataclasses.dataclass
 class RoomConditions:
-    world: Any  # TODO Typing
+    world: Any
     in_: List[str] = dataclasses.field(default_factory=list)
     not_in: List[str] = dataclasses.field(default_factory=list)
 
@@ -83,7 +83,7 @@ class RoomConditions:
 
 @dataclasses.dataclass
 class ItemConditions:
-    world: Any  # TODO Typing
+    world: Any
     has: List[str] = dataclasses.field(default_factory=list)
     has_not: List[str] = dataclasses.field(default_factory=list)
     has_used: List[str] = dataclasses.field(default_factory=list)
@@ -130,13 +130,13 @@ class ItemConditions:
 
 @dataclasses.dataclass
 class ItemDefinition:
-    world: Any  # TODO Typing
+    world: Any
     identifier: str
     look: str
     use: Optional[Union[str, ItemUse, ItemConditionedUse]] = None
     alias: Optional[str] = None
 
-    def create_item(self):  # TODO Typing
+    def create_item(self):
         return Item(self)
 
     @property

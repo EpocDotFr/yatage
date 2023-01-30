@@ -6,11 +6,11 @@ import dataclasses
 
 @dataclasses.dataclass
 class ItemConditionedExit:
-    conditions: Any  # TODO Typing
-    success: Any  # TODO Typing
-    failure: Any  # TODO Typing
+    conditions: Any
+    success: Any
+    failure: Any
 
-    def exit_(self):  # TODO Typing
+    def exit_(self):
         return self.success if self.conditions.are_met() else self.failure
 
     def __str__(self) -> str:
@@ -28,7 +28,7 @@ class GameOverExit:
 @dataclasses.dataclass
 class TextExit:
     text: str
-    exit: Optional[Any] = None  # TODO Typing
+    exit: Optional[Any] = None
 
     def __str__(self) -> str:
         text = 'Text'
@@ -41,12 +41,12 @@ class TextExit:
 
 @dataclasses.dataclass
 class Room:
-    world: Any  # TODO Typing
+    world: Any
     identifier: str
     description: str
     name: Optional[str] = None
     items: List[Item] = dataclasses.field(default_factory=list)
-    exits: Dict[str, Any] = dataclasses.field(default_factory=dict)  # TODO Typing
+    exits: Dict[str, Any] = dataclasses.field(default_factory=dict)
 
     def look(self) -> str:
         name = str(self)
