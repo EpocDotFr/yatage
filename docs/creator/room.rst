@@ -15,23 +15,22 @@ The following section details how a room *must* be structured, following the YAM
 Room structure
 --------------
 
-At the very least, a room *must* contain:
-
-  - A :ref:`room-description`
+At the very least, a room *must* contain a :ref:`room-description`.
 
 .. _room-description:
 
 description
 ^^^^^^^^^^^
 
-  - Type: string
-  - Required: **yes**
-  - Format: none
-  - Example:
-
-    .. code-block:: yaml
-
-        description: You're on the sidewalk.
++--------------+-------------------+--------------+
+| Type: string | Required: **yes** | Format: none |
++--------------+-------------------+--------------+
+| Example:                                        |
+|                                                 |
+| .. code-block:: yaml                            |
+|                                                 |
+|     description: You're on the sidewalk.        |
++-------------------------------------------------+
 
 This attribute *must* be a multiline or one-line string of any size describing the room and its content.
 
@@ -43,14 +42,15 @@ It is shown when the player enters a room, and when the player invokes the :ref:
 name
 ^^^^
 
-  - Type: string
-  - Required: no
-  - Format: none
-  - Example:
-
-    .. code-block:: yaml
-
-        name: Building hall
++--------------+--------------+--------------+
+| Type: string | Required: no | Format: none |
++--------------+--------------+--------------+
+| Example:                                   |
+|                                            |
+| .. code-block:: yaml                       |
+|                                            |
+|     name: Building hall                    |
++--------------------------------------------+
 
 This attribute *should* be a one-line string and *should* be a few words long.
 
@@ -63,14 +63,15 @@ player enters a room, and when the player invokes the :ref:`action-look` action.
 items
 ^^^^^
 
-  - Type: array
-  - Required: no
-  - Format: array of items references
-  - Example:
-
-    .. code-block:: yaml
-
-        items: [security card, book]
++-------------+--------------+-----------------------------------+
+| Type: array | Required: no | Format: array of items references |
++-------------+--------------+-----------------------------------+
+| Example:                                                       |
+|                                                                |
+| .. code-block:: yaml                                           |
+|                                                                |
+|     items: [security card, book]                               |
++----------------------------------------------------------------+
 
 The list of :ref:`world-items` available for pickup in the room.
 
@@ -82,16 +83,17 @@ It is shown when the player enters a room, and when the player invokes the :ref:
 exits
 ^^^^^
 
-  - Type: mapping
-  - Required: no
-  - Format: string => ``exit``
-  - Example:
-
-    .. code-block:: yaml
-
-        exits:
-            back: Sidewalk
-            pursue: Down the street
++---------------+--------------+----------------------------+
+| Type: mapping | Required: no | Format: string => ``exit`` |
++---------------+--------------+----------------------------+
+| Example:                                                  |
+|                                                           |
+| .. code-block:: yaml                                      |
+|                                                           |
+|     exits:                                                |
+|         back: Sidewalk                                    |
+|         pursue: Down the street                           |
++-----------------------------------------------------------+
 
 .. todo::
 
