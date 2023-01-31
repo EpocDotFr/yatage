@@ -135,79 +135,87 @@ file (<code class="docutils literal notranslate"><span class="pre">*.yml</span><
 </div></blockquote>
 <section id="version">
 <span id="world-version"></span><h3>version<a class="headerlink" href="#version" title="Permalink to this heading">¶</a></h3>
-<blockquote>
-<div><ul>
-<li><p>Type: integer</p></li>
-<li><p>Required: <strong>yes</strong></p></li>
-<li><p>Allowed values: <code class="docutils literal notranslate"><span class="pre">1</span></code></p></li>
-<li><p>Example:</p>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p>Type: integer</p></td>
+<td><p>Required: <strong>yes</strong></p></td>
+<td><p>Allowed values: <code class="docutils literal notranslate"><span class="pre">1</span></code></p></td>
+</tr>
+<tr class="row-even"><td colspan="3"><p>Example:</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span>
 </pre></div>
 </div>
-</li>
-</ul>
-</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
 <p>Although not used yet (at least in the earliest releases of YATAGE), this attribute tells which version the world file
 has been written in.</p>
 <p>It will allow to handle future – inevitable – breaking changes of the world file’s structure.</p>
 </section>
 <section id="name">
 <span id="world-name"></span><h3>name<a class="headerlink" href="#name" title="Permalink to this heading">¶</a></h3>
-<blockquote>
-<div><ul>
-<li><p>Type: string</p></li>
-<li><p>Required: <strong>yes</strong></p></li>
-<li><p>Format: none</p></li>
-<li><p>Example:</p>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p>Type: string</p></td>
+<td><p>Required: <strong>yes</strong></p></td>
+<td><p>Format: none</p></td>
+</tr>
+<tr class="row-even"><td colspan="3"><p>Example:</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">My awesome game</span>
 </pre></div>
 </div>
-</li>
-</ul>
-</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
 <p>This attribute <em>should</em> be a one-line string and <em>should</em> be a few words long. It <em>may</em> be your world’s name, your hero’s
 name, your game’s name, etc.</p>
 <p>It is shown emphasized when running a game at the very beginning, or when using the <a class="reference internal" href="../player/play.html#action-intro"><span class="std std-ref">intro</span></a> action.</p>
 </section>
 <section id="start">
 <span id="world-start"></span><h3>start<a class="headerlink" href="#start" title="Permalink to this heading">¶</a></h3>
-<blockquote>
-<div><ul>
-<li><p>Type: string</p></li>
-<li><p>Required: <strong>yes</strong></p></li>
-<li><p>Format: room reference</p></li>
-<li><p>Example:</p>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p>Type: string</p></td>
+<td><p>Required: <strong>yes</strong></p></td>
+<td><p>Format: room reference</p></td>
+</tr>
+<tr class="row-even"><td colspan="3"><p>Example:</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">start</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Down the street</span>
 <span class="nt">rooms</span><span class="p">:</span>
 <span class="w">    </span><span class="nt">Down the street</span><span class="p">:</span>
 <span class="w">        </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">You&#39;re on the sidewalk.</span>
 </pre></div>
 </div>
-</li>
-</ul>
-</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
 <p>This attribute is a reference to the starting room of the game, in other words the room where the player will start
 playing.</p>
 <p>See also <a class="reference internal" href="#world-rooms"><span class="std std-ref">rooms</span></a>.</p>
 </section>
 <section id="rooms">
 <span id="world-rooms"></span><h3>rooms<a class="headerlink" href="#rooms" title="Permalink to this heading">¶</a></h3>
-<blockquote>
-<div><ul>
-<li><p>Type: mapping</p></li>
-<li><p>Required: <strong>yes</strong></p></li>
-<li><p>Format: string =&gt; <a class="reference internal" href="room.html#room-structure"><span class="std std-ref">room</span></a></p></li>
-<li><p>Minimum count: 1</p></li>
-<li><p>Example:</p>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p>Type: mapping</p></td>
+<td><p>Required: <strong>yes</strong></p></td>
+<td><p>Format: string =&gt; <a class="reference internal" href="room.html#room-structure"><span class="std std-ref">room</span></a></p></td>
+<td><p>Minimum count: 1</p></td>
+</tr>
+<tr class="row-even"><td colspan="4"><p>Example:</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">start</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Down the street</span>
 <span class="nt">rooms</span><span class="p">:</span>
 <span class="w">    </span><span class="nt">Down the street</span><span class="p">:</span>
 <span class="w">        </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">You&#39;re on the sidewalk.</span>
 </pre></div>
 </div>
-</li>
-</ul>
-</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
 <p>This attribute holds all the world’s rooms definition. It is a mapping between rooms references (a string) and a
 <a class="reference internal" href="room.html#room-structure"><span class="std std-ref">room</span></a> structure.</p>
 <p>References <em>must</em> obviously be unique. References are used as the in-game rooms name unless the rooms’s <a class="reference internal" href="room.html#room-name"><span class="std std-ref">name</span></a>
@@ -217,18 +225,20 @@ action. At least one well-formed room <em>must</em> be defined and referenced by
 </section>
 <section id="description">
 <span id="world-description"></span><h3>description<a class="headerlink" href="#description" title="Permalink to this heading">¶</a></h3>
-<blockquote>
-<div><ul>
-<li><p>Type: string</p></li>
-<li><p>Required: no</p></li>
-<li><p>Format: none</p></li>
-<li><p>Example:</p>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p>Type: string</p></td>
+<td><p>Required: no</p></td>
+<td><p>Format: none</p></td>
+</tr>
+<tr class="row-even"><td colspan="3"><p>Example:</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">A short example game.</span>
 </pre></div>
 </div>
-</li>
-</ul>
-</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
 <p>This attribute <em>may</em> be a multiline string of any size describing this world, which <em>may</em> be used as an introduction to
 the game.</p>
 <p>It is shown when running a game at the very beginning (or when using the <a class="reference internal" href="../player/play.html#action-intro"><span class="std std-ref">intro</span></a> action), just after
@@ -236,38 +246,42 @@ the game.</p>
 </section>
 <section id="author">
 <span id="world-author"></span><h3>author<a class="headerlink" href="#author" title="Permalink to this heading">¶</a></h3>
-<blockquote>
-<div><ul>
-<li><p>Type: string</p></li>
-<li><p>Required: no</p></li>
-<li><p>Format: none</p></li>
-<li><p>Example:</p>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p>Type: string</p></td>
+<td><p>Required: no</p></td>
+<td><p>Format: none</p></td>
+</tr>
+<tr class="row-even"><td colspan="3"><p>Example:</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">author</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Maxime &quot;Epoc&quot; G. (https://epoc.fr/)</span>
 </pre></div>
 </div>
-</li>
-</ul>
-</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
 <p>This attribute <em>should</em> be a single-line string containing any information about the author(s) of this world.</p>
 <p>It is shown when running a game at the very beginning (or when using the <a class="reference internal" href="../player/play.html#action-intro"><span class="std std-ref">intro</span></a> action), just after
 <a class="reference internal" href="#world-name"><span class="std std-ref">name</span></a> and before <a class="reference internal" href="#world-description"><span class="std std-ref">description</span></a> (if set).</p>
 </section>
 <section id="items">
 <span id="world-items"></span><h3>items<a class="headerlink" href="#items" title="Permalink to this heading">¶</a></h3>
-<blockquote>
-<div><ul>
-<li><p>Type: mapping</p></li>
-<li><p>Required: no</p></li>
-<li><p>Format: string =&gt; <a class="reference internal" href="item.html#item-structure"><span class="std std-ref">item</span></a></p></li>
-<li><p>Example:</p>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p>Type: mapping</p></td>
+<td><p>Required: no</p></td>
+<td><p>Format: string =&gt; <a class="reference internal" href="item.html#item-structure"><span class="std std-ref">item</span></a></p></td>
+</tr>
+<tr class="row-even"><td colspan="3"><p>Example:</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">items</span><span class="p">:</span>
 <span class="w">    </span><span class="nt">security card</span><span class="p">:</span>
 <span class="w">        </span><span class="nt">look</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">It looks a lot like a credit card.</span>
 </pre></div>
 </div>
-</li>
-</ul>
-</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
 <p>This attribute holds all the world’s items definition. It is a mapping between items references (a string) and an
 <a class="reference internal" href="item.html#item-structure"><span class="std std-ref">item</span></a> structure.</p>
 <p>References <em>must</em> obviously be unique. References are used as the in-game items name unless the item’s <code class="docutils literal notranslate"><span class="pre">alias</span></code> has

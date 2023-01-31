@@ -1,0 +1,473 @@
+%YAML 1.2
+---
+version: 1
+name: Synacor Challenge
+description: |-
+    Note
+    ----
+
+    This is a (almost) 1:1 reimplementation of the Synacor Challenge text adventure game originally created by Eric Wastl able to be ran by YATAGE. You can find the original game here: https://challenge.synacor.com/.
+    You however have to implement the virtual machine needed to run it by yourself, or use my implementation: https://github.com/EpocDotFr/synacor-challenge
+
+    As mentioned above, some parts have indeed not been implemented here because it's outside of the scope of YATAGE, or because exactly replicating the Synacor Challenge behavior would be tricky. Notes (like this one) will be displayed to give further indication when such case is encountered.
+
+    ----
+
+    Welcome to the Synacor Challenge!
+    Please record your progress by putting codes like this one into the challenge website: KDfTwYgxhJKC
+
+    Executing self-test...
+
+    self-test complete, all tests pass
+    The self-test completion code is: teJavuPYnIJs
+author: Eric Wastl (http://was.tl/), Maxime "Epoc" G. (https://epoc.fr/)
+start: Foothills
+rooms:
+    # Foothills
+    Foothills:
+        description: You find yourself standing at the base of an enormous mountain. At its base to the north, there is a massive doorway. A sign nearby reads "Keep out! Definitely no treasure within!"
+        exits:
+            doorway: Dark cave
+            south: Foothills South
+        items: [tablet]
+    Foothills South:
+        name: Foothills
+        description: As you begin to leave, you feel the urge for adventure pulling you back...
+        exits:
+            north: Foothills
+    # Dark cave
+    Dark cave:
+        description: This seems to be the mouth of a deep cave. As you peer north into the darkness, you think you hear the echoes of bats deeper within.
+        exits:
+            north: Dark cave narrow
+            south: Foothills
+    Dark cave narrow:
+        name: Dark cave
+        description: The cave is somewhat narrow here, and the light from the doorway to the south is quite dim.
+        exits:
+            north: Dark cave chasm
+            south: Dark cave
+    Dark cave chasm:
+        name: Dark cave
+        description: The cave acoustics dramatically change as you find yourself at a legde above a large chasm. There is barely enough light here to notice a rope bridge leading out into the dark emptiness.
+        exits:
+            bridge: Rope bridge
+            south: Dark cave narrow
+    # Rope bridge
+    Rope bridge:
+        description: This rope bridge creaks as you walk along it. You aren't sure how old it is, or whether it can even support your weight.
+        exits:
+            continue: Falling through the air!
+            back: Dark cave chasm
+    Falling through the air!:
+        description: As you continue along the bridge, it snaps! You try to grab the bridge, but it evades your grasp in the darkness. You are plummeting quickly downward into the chasm...
+        exits:
+            down: Moss cavern
+    # Moss cavern
+    Moss cavern:
+        description: You are standing in a large cavern full of bioluminescent moss. It must have broken your fall! The cavern extends to the east and west; at the west end, you think you see a passage leading out of the cavern.
+        exits:
+            west: Moss cavern to passage
+            east: Moss cavern to lantern
+    Moss cavern to lantern:
+        name: Moss cavern
+        description: You are standing in a large cavern full of bioluminescent moss. The cavern extends to the west.
+        items: [empty lantern]
+        exits:
+            west: Moss cavern
+    Moss cavern to passage:
+        name: Moss cavern
+        description: You are standing in a large cavern full of bioluminescent moss. The cavern extends to the east. There is a crevise in the rocks which opens into a passage.
+        exits:
+            east: Moss cavern
+            passage: Passage
+    # Passage
+    Passage:
+        description: |-
+            You are in a crevise on the west wall of the moss cavern. A dark passage leads further west. There is a ladder here which leads down into a smaller, moss-filled cavern below.
+
+            Note
+            ----
+
+            Use the item that you're supposed to use BEFORE going into darkness (see introduction note).
+
+            ----
+        exits:
+            cavern: Moss cavern to passage
+            ladder: Twisty passages
+            darkness:
+                items_conditions:
+                    has: [lit lantern]
+                success: Passage lantern
+                failure: Passage no lantern
+    Passage no lantern:
+        name: Passage
+        description: It is pitch black. You are likely to be eaten by a grue.
+        exits:
+            continue: Fumbling around in the darkness
+            back: Passage
+    # Twisty passages
+    Twisty passages:
+        description: You are in a maze of twisty little passages, all dimly lit by more bioluminescent moss. There is a ladder here leading up.
+        exits:
+            ladder: Passage
+            north: Twisty passages 1
+            south: Twisty passages 2
+            east: Twisty passages grue 1
+            west: Twisty passages 4
+    Twisty passages 1:
+        name: Twisty passages
+        description: You are in a twisty maze of little passages, all alike.
+        exits:
+            north: Twisty passages 2
+            south: Twisty passages
+            west: Twisty passages 1
+    Twisty passages 2:
+        name: Twisty passages
+        description: You are in a maze of little twisty passages, all alike.
+        exits:
+            north: Twisty passages
+            south: Twisty passages 1
+            east: Twisty passages 2
+    Twisty passages 3:
+        name: Twisty passages
+        description: You are in a maze of alike twisty passages, all little.
+        exits:
+            north: Twisty passages
+            east: Twisty passages 1
+            south: Twisty passages 3
+    Twisty passages 4:
+        name: Twisty passages
+        description: You are in a little maze of twisty passages, all alike.
+        exits:
+            north: Twisty passages 4
+            south: Twisty passages grue 2
+            east: Twisty passages
+    Twisty passages grue 1:
+        name: Twisty passages
+        description: |-
+            You are in a maze of alike little passages, all twisty.
+
+            The passage to the east looks very dark; you think you hear a Grue.
+        exits:
+            north: Twisty passages 3
+            south: Twisty passages grue 1
+            west: Twisty passages
+            east:
+                items_conditions:
+                    has: [lit lantern]
+                success: Twisty passages 1
+                failure: Fumbling around in the darkness
+    Twisty passages grue 2:
+        name: Twisty passages
+        description: |-
+            You are in a twisty alike of little passages, all maze.
+
+            The east passage appears very dark; you feel likely to be eaten by a Grue.
+        exits:
+            north:
+                text: |-
+                    Chiseled on the wall of one of the passageways, you see:
+
+                        jgDYBUhWlqLC
+
+                    You take note of this and keep walking.
+                exit: Twisty passages can
+            south: Twisty passages 1
+            west: Twisty passages 2
+            east:
+                items_conditions:
+                    has: [lit lantern]
+                success: Twisty passages 1
+                failure: Fumbling around in the darkness
+    Twisty passages can:
+        name: Twisty passages
+        description: You are in a maze of twisty little passages, all alike.
+        exits:
+            west: Twisty passages
+        items: [can]
+    # Lost in darkness
+    Fumbling around in the darkness:
+        description: Without a source of light, you have become hopelessly lost and are fumbling around in the darkness.
+        exits:
+            forward: Fumbling around in the darkness growling
+            back: Fumbling around in the darkness growling
+    Fumbling around in the darkness growling:
+        description: You can't seem to find your way. However, you do think you hear low growling in the distance.
+        exits:
+            run: Panicked and lost
+            investigate: Panicked and lost
+    Panicked and lost:
+        description: The growling is getting louder. Did I mention there are Grues down here?
+        exits:
+            run:
+                game_over: You have been eaten by a grue.
+            wait:
+                game_over: You have been eaten by a grue.
+            hide:
+                game_over: You have been eaten by a grue.
+    # Dark passage
+    Passage lantern:
+        name: Passage
+        description: You feel that your light source is more than sufficient to keep grues away.
+        exits:
+            continue: Dark passage
+            back: Passage
+    Dark passage:
+        description: You are in a narrow passage. There is darkness to the west, but you can barely see a glowing opening to the east.
+        exits:
+            west: Dark passage 2
+            east: Passage lantern
+    Dark passage 2:
+        name: Dark passage
+        description: You are in a dark, narrow passage.
+        exits:
+            west: Dark passage 3
+            east: Dark passage
+    Dark passage 3:
+        name: Dark passage
+        description: You are in a dark, narrow passage.
+        exits:
+            west: Dark passage end
+            east: Dark passage 2
+    Dark passage end:
+        name: Dark passage
+        description: You are in a dark, narrow passage. To the west, you spot some vegetation where the passage expands.
+        exits:
+            east: Dark passage 3
+            west: Ruins
+    # Ruins
+    Ruins:
+        description: You stand in a large cavern with a huge ruin to the north, overgrown by plant life. There is a large stone archway to the north acting as the doorway to the ruined complex. A crevice in the rock to the east leads to an alarmingly dark passageway.
+        exits:
+            east: Dark passage end
+            north: Ruins red coin
+    Ruins red coin:
+        name: Ruins
+        description: You are in the once-opulent foyer of a massive ruined complex. There is a door to the south leading to the overgrowth outside and stairs to the north which lead into a larger hall.
+        items: [red coin]
+        exits:
+            north: Ruins central hall
+            south: Ruins
+    Ruins central hall:
+        name: Ruins
+        description: |-
+            You stand in the massive central hall of these ruins. The walls are crumbling, and vegetation has clearly taken over. Rooms are attached in all directions. There is a strange monument in the center of the hall with circular slots and unusual symbols. It reads:
+
+            _ + _ * _^2 + _^3 - _ = 399
+
+            Note
+            ----
+
+            Usage order doesn't matter (see introduction note).
+
+            ----
+        exits:
+            north:
+                items_conditions:
+                    has_used: [blue coin, red coin, shiny coin, concave coin, corroded coin]
+                success: Ruins teleporter
+                failure:
+                    text: That door is locked.
+            south: Ruins red coin
+            east: Ruins concave coin
+            west: Ruins blue coin
+    Ruins concave coin:
+        name: Ruins
+        description: You stand in what seems to have once been a dining hall; broken tables and pottery are scattered everywhere. A staircase here leads down.
+        items: [concave coin]
+        exits:
+            down: Ruins corroded coin
+            west: Ruins central hall
+    Ruins corroded coin:
+        name: Ruins
+        description: This seems to be a kitchen; there are brick stoves and shelves along the wall. Everything here has fallen into disrepair.
+        items: [corroded coin]
+        exits:
+            up: Ruins concave coin
+    Ruins blue coin:
+        name: Ruins
+        description: You find yourself in what was once the living quarters for the complex. Many smaller rooms which once had walls to divide them now lay in disarray. There is a staircase up here.
+        items: [blue coin]
+        exits:
+            up: Ruins shiny coin
+            east: Ruins central hall
+    Ruins shiny coin:
+        name: Ruins
+        description: This was long ago a lavish throne room. Dried-up fountains and crumbling statues line the walls, and the carved stone throne in the center of the room is falling apart.
+        items: [shiny coin]
+        exits:
+            down: Ruins blue coin
+    Ruins teleporter:
+        name: Ruins
+        description: Because it has been so well-protected, this room hardly shows signs of decay. The walls are covered in elaborate murals and decorated with precious metals and stones.
+        items: [teleporter]
+        exits:
+            south: Ruins central hall
+    # Synacor HQs
+    Synacor Headquarters:
+        description: You stand in the lobby of what appears to be a really fun place to work! Sadly, there doesn't seem to be anyone around at the moment, so you make a note to call them later. The bookshelf here looks like it might have something interesting in it, though.
+        items: [business card, strange book]
+        exits:
+            outside: Synacor Headquarters outside
+    Synacor Headquarters outside:
+        name: Synacor Headquarters
+        description: It's a warm, sunny day! While the breeze from Lake Erie is certainly refreshing, you don't see anything here that will help you with your quest.
+        exits:
+            inside: Synacor Headquarters
+    # Beach
+    Beach:
+        description: TODO
+items:
+    tablet:
+        look: The tablet seems appropriate for use as a writing surface but is unfortunately blank. Perhaps you should USE it as a writing surface...
+        use: You find yourself writing "tNXeWMvrJskW" on the tablet. Perhaps it's some kind of code?
+    can:
+        look: This can is full of high-quality lantern oil.
+        use:
+            items_conditions:
+                has: [empty lantern]
+            success:
+                text: You fill your lantern with oil. It seems to cheer up!
+                remove: [self, empty lantern]
+                spawn: [lantern]
+            failure: You'll have to find something to put the oil into first.
+    empty lantern:
+        look: The lantern seems to have quite a bit of wear but appears otherwise functional. It is, however, sad that it is out of oil.
+        use: You aren't sure how to use that.
+    lantern:
+        look: The lantern seems to have quite a bit of wear but appears otherwise functional. It is off but happily full of oil.
+        use:
+            text: You light your lantern.
+            remove: [self]
+            spawn: [lit lantern]
+    lit lantern:
+        look: The lantern seems to have quite a bit of wear. It is lit and producing a bright light.
+        use:
+            text: You douse your lantern.
+            remove: [self]
+            spawn: [lantern]
+    blue coin:
+        look: This coin is made of a blue metal. It has nine dots on one side.
+        use:
+            room_conditions:
+                in: [Ruins central hall]
+            success:
+                text: You place the blue coin into the leftmost open slot.
+                mark_used: [self]
+            failure: You're not sure what to do with the coin.
+    red coin:
+        look: This coin is made of a red metal. It has two dots on one side.
+        use:
+            room_conditions:
+                in: [Ruins central hall]
+            success:
+                text: You place the red coin into the leftmost open slot.
+                mark_used: [self]
+            failure: You're not sure what to do with the coin.
+    shiny coin:
+        look: This coin is somehow still quite shiny. It has a pentagon on one side.
+        use:
+            room_conditions:
+                in: [Ruins central hall]
+            success:
+                text: You place the shiny coin into the leftmost open slot.
+                mark_used: [self]
+            failure: You're not sure what to do with the coin.
+    concave coin:
+        look: This coin is slightly rounded, almost like a tiny bowl. It has seven dots on one side.
+        use:
+            room_conditions:
+                in: [Ruins central hall]
+            success:
+                text: You place the concave coin into the leftmost open slot.
+                mark_used: [self]
+            failure: You're not sure what to do with the coin.
+    corroded coin:
+        look: This coin is somewhat corroded. It has a triangle on one side.
+        use:
+            room_conditions:
+                in: [Ruins central hall]
+            success:
+                text: You place the corroded coin into the leftmost open slot.
+                mark_used: [self]
+            failure: You're not sure what to do with the coin.
+    teleporter:
+        look: This small device has a button on it and reads "teleporter" on the side.
+        use:
+            text: |-
+                You activate the teleporter! As you spiral through time and space, you think you see a pattern in the stars...
+
+                    jKPupWlItgvk
+
+                After a few moments, you find yourself back on solid ground and a little disoriented.
+            remove: [self]
+            spawn: [teleporter2]
+            teleport: Synacor Headquarters
+    teleporter2:
+        alias: teleporter
+        look: This small device has a button on it and reads "teleporter" on the side.
+        use:
+            text: |-
+                You wake up on a sandy beach with a slight headache. The last thing you remember is activating that teleporter... but now you can't find it anywhere in your pack. Someone seems to have drawn a message in the sand here:
+
+                    lVfSqITLZkYK
+
+                It begins to rain. The message washes away. You take a deep breath and feel firmly grounded in reality as the effects of the teleportation wear off.
+            remove: [self]
+            teleport: Beach
+    business card:
+        look: This business card has "synacor.com" printed in red on one side.
+    strange book:
+        look: |-
+            The cover of this book subtly swirls with colors. It is titled "A Brief Introduction to Interdimensional Physics". It reads:
+
+            Recent advances in interdimensional physics have produced fascinating
+            predictions about the fundamentals of our universe! For example,
+            interdimensional physics seems to predict that the universe is, at its root, a
+            purely mathematical construct, and that all events are caused by the
+            interactions between eight pockets of energy called "registers".
+            Furthermore, it seems that while the lower registers primarily control mundane
+            things like sound and light, the highest register (the so-called "eighth
+            register") is used to control interdimensional events such as teleportation.
+
+            A hypothetical such teleportation device would need to have have exactly two
+            destinations. One destination would be used when the eighth register is at its
+            minimum energy level - this would be the default operation assuming the user
+            has no way to control the eighth register. In this situation, the teleporter
+            should send the user to a preconfigured safe location as a default.
+
+            The second destination, however, is predicted to require a very specific
+            energy level in the eighth register. The teleporter must take great care to
+            confirm that this energy level is exactly correct before teleporting its user!
+            If it is even slightly off, the user would (probably) arrive at the correct
+            location, but would briefly experience anomalies in the fabric of reality
+            itself - this is, of course, not recommended. Any teleporter would need to test
+            the energy level in the eighth register and abort teleportation if it is not
+            exactly correct.
+
+            This required precision implies that the confirmation mechanism would be very
+            computationally expensive. While this would likely not be an issue for large-
+            scale teleporters, a hypothetical hand-held teleporter would take billions of
+            years to compute the result and confirm that the eighth register is correct.
+
+            If you find yourself trapped in an alternate dimension with nothing but a
+            hand-held teleporter, you will need to extract the confirmation algorithm,
+            reimplement it on more powerful hardware, and optimize it. This should, at the
+            very least, allow you to determine the value of the eighth register which would
+            have been accepted by the teleporter's confirmation mechanism.
+
+            Then, set the eighth register to this value, activate the teleporter, and
+            bypass the confirmation mechanism. If the eighth register is set correctly, no
+            anomalies should be experienced, but beware - if it is set incorrectly, the
+            now-bypassed confirmation mechanism will not protect you!
+
+            Of course, since teleportation is impossible, this is all totally ridiculous.
+
+            Note
+            ----
+
+            After using the teleporter once, just use it a second time instead of solving this unimplemented challenge
+            (see introduction note).
+
+            ----

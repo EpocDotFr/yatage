@@ -121,44 +121,43 @@
 <p>The following section details how a room <em>must</em> be structured, following the YAML format.</p>
 <section id="room-structure">
 <span id="id1"></span><h2>Room structure<a class="headerlink" href="#room-structure" title="Permalink to this heading">¶</a></h2>
-<p>At the very least, a room <em>must</em> contain:</p>
-<blockquote>
-<div><ul class="simple">
-<li><p>A <a class="reference internal" href="#room-description"><span class="std std-ref">description</span></a></p></li>
-</ul>
-</div></blockquote>
+<p>At the very least, a room <em>must</em> contain a <a class="reference internal" href="#room-description"><span class="std std-ref">description</span></a>.</p>
 <section id="description">
 <span id="room-description"></span><h3>description<a class="headerlink" href="#description" title="Permalink to this heading">¶</a></h3>
-<blockquote>
-<div><ul>
-<li><p>Type: string</p></li>
-<li><p>Required: <strong>yes</strong></p></li>
-<li><p>Format: none</p></li>
-<li><p>Example:</p>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p>Type: string</p></td>
+<td><p>Required: <strong>yes</strong></p></td>
+<td><p>Format: none</p></td>
+</tr>
+<tr class="row-even"><td colspan="3"><p>Example:</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">You&#39;re on the sidewalk.</span>
 </pre></div>
 </div>
-</li>
-</ul>
-</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
 <p>This attribute <em>must</em> be a multiline or one-line string of any size describing the room and its content.</p>
 <p>It is shown when the player enters a room, and when the player invokes the <a class="reference internal" href="../player/play.html#action-look"><span class="std std-ref">look</span></a> action, just after
 <a class="reference internal" href="#room-name"><span class="std std-ref">name</span></a> (if set) or otherwise just after the room’s <a class="reference internal" href="world.html#world-rooms"><span class="std std-ref">reference</span></a>.</p>
 </section>
 <section id="name">
 <span id="room-name"></span><h3>name<a class="headerlink" href="#name" title="Permalink to this heading">¶</a></h3>
-<blockquote>
-<div><ul>
-<li><p>Type: string</p></li>
-<li><p>Required: no</p></li>
-<li><p>Format: none</p></li>
-<li><p>Example:</p>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p>Type: string</p></td>
+<td><p>Required: no</p></td>
+<td><p>Format: none</p></td>
+</tr>
+<tr class="row-even"><td colspan="3"><p>Example:</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Building hall</span>
 </pre></div>
 </div>
-</li>
-</ul>
-</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
 <p>This attribute <em>should</em> be a one-line string and <em>should</em> be a few words long.</p>
 <p>A room’s display name is, by default, its associated <a class="reference internal" href="world.html#world-rooms"><span class="std std-ref">reference</span></a>. This behavior <em>may</em> be overridden by
 this attribute. If set, its value will be used everywhere the room’s display name must be shown. It is shown when the
@@ -166,38 +165,42 @@ player enters a room, and when the player invokes the <a class="reference intern
 </section>
 <section id="items">
 <span id="room-items"></span><h3>items<a class="headerlink" href="#items" title="Permalink to this heading">¶</a></h3>
-<blockquote>
-<div><ul>
-<li><p>Type: array</p></li>
-<li><p>Required: no</p></li>
-<li><p>Format: array of items references</p></li>
-<li><p>Example:</p>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p>Type: array</p></td>
+<td><p>Required: no</p></td>
+<td><p>Format: array of items references</p></td>
+</tr>
+<tr class="row-even"><td colspan="3"><p>Example:</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">items</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">security card</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">book</span><span class="p p-Indicator">]</span>
 </pre></div>
 </div>
-</li>
-</ul>
-</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
 <p>The list of <a class="reference internal" href="world.html#world-items"><span class="std std-ref">items</span></a> available for pickup in the room.</p>
 <p>It is shown when the player enters a room, and when the player invokes the <a class="reference internal" href="../player/play.html#action-look"><span class="std std-ref">look</span></a> action, just after
 <a class="reference internal" href="#room-description"><span class="std std-ref">description</span></a>.</p>
 </section>
 <section id="exits">
 <span id="room-exits"></span><h3>exits<a class="headerlink" href="#exits" title="Permalink to this heading">¶</a></h3>
-<blockquote>
-<div><ul>
-<li><p>Type: mapping</p></li>
-<li><p>Required: no</p></li>
-<li><p>Format: string =&gt; <code class="docutils literal notranslate"><span class="pre">exit</span></code></p></li>
-<li><p>Example:</p>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p>Type: mapping</p></td>
+<td><p>Required: no</p></td>
+<td><p>Format: string =&gt; <code class="docutils literal notranslate"><span class="pre">exit</span></code></p></td>
+</tr>
+<tr class="row-even"><td colspan="3"><p>Example:</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">exits</span><span class="p">:</span>
 <span class="w">    </span><span class="nt">back</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Sidewalk</span>
 <span class="w">    </span><span class="nt">pursue</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Down the street</span>
 </pre></div>
 </div>
-</li>
-</ul>
-</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
 <div class="admonition-todo admonition" id="id2">
 <p class="admonition-title">Todo</p>
 <p>Document.</p>
