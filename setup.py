@@ -44,6 +44,7 @@ PROJECT_URLS = {
     'Documentation': 'https://epocdotfr.github.io/yatage/',
     'Source': 'https://github.com/EpocDotFr/yatage',
     'Tracker': 'https://github.com/EpocDotFr/yatage/issues',
+    'Changelog': 'https://github.com/EpocDotFr/yatage/releases',
 }
 
 here = os.path.abspath(os.path.dirname(__file__))
